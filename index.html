@@ -62,11 +62,45 @@ h1{
 .card p{
   color:#94a3b8;
 }
+   .header{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+.header p{
+  color:#94a3b8;
+  margin-top:10px;
+  font-size:18px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  width:5px;
+  height:100%;
+  background:#38bdf8;
+}
+
+.update{
+  margin-top:15px;
+  color:#64748b;
+  font-size:14px;
+}
  </style>
 </head>
 <body>
 
-<h1>DZD Market</h1>
+<header class="header">
+  <h1>DZD Market</h1>
+  <p>Suivi des prix en Algérie 🇩🇿</p>
+</header>
 
 <div id="prix"></div>
 
@@ -101,6 +135,8 @@ data.forEach(item => {
   ${Number(item.prix).toLocaleString()} DZD
 </div>
       <p>📌 ${item.source}</p>
+<p>👥 Confirmé par ${item.confirme_par}</p>
+<div class="update">🕒 Mise à jour récente</div>
     </div>
   `;
 
