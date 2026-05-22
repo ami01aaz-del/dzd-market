@@ -127,6 +127,17 @@ h1{
 .form button:hover{
   opacity:0.8;
 }
+   #search{
+  width:100%;
+  padding:15px;
+  margin-bottom:25px;
+  border:none;
+  border-radius:15px;
+  background:#0f172a;
+  color:white;
+  font-size:16px;
+  border:1px solid #1e293b;
+}
  </style>
 </head>
 <body>
@@ -135,7 +146,12 @@ h1{
   <h1>DZD Market</h1>
   <p>Suivi des prix en Algérie 🇩🇿</p>
 </header>
-
+<input 
+  type="text" 
+  id="search"
+  placeholder="🔎 Rechercher..."
+  onkeyup="searchPrices()"
+/>
 <div id="prix"></div>
 <div class="form">
 
@@ -215,6 +231,26 @@ async function addPrice(){
   alert("Prix ajouté ✅");
 
   loadPrices();
+
+}
+  function searchPrices(){
+
+  const value = document
+    .getElementById("search")
+    .value
+    .toLowerCase();
+
+  const cards = document.querySelectorAll(".card");
+
+  cards.forEach(card => {
+
+    if(card.innerText.toLowerCase().includes(value)){
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+
+  });
 
 }
 loadPrices();
