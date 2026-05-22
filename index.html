@@ -39,35 +39,36 @@
 
 <div id="prices"></div>
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co/rest/v1/";
-const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
+<script>
+const supabaseUrl = "ضع هنا رابط Supabase";
+const supabaseKey = "ضع هنا المفتاح public";
 
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 async function loadPrices() {
 
   const { data, error } = await client
-    .from('prices')
+    .from('prix')
     .select('*');
 
-  if(error){
+  if (error) {
     console.log(error);
     return;
   }
 
-  const container = document.getElementById("prices");
+  const recipient = document.getElementById("prix");
 
-  container.innerHTML = "";
+  recipient.innerHTML = "";
 
   data.forEach(item => {
 
-    container.innerHTML += `
+    recipient.innerHTML += `
       <div class="card">
-        <h2>${item.name}</h2>
-        <div class="price">${item.price} DZD</div>
-        <p>✅ Confirmé par ${item.confirmations} utilisateurs</p>
+        <h2>${item.devise}</h2>
+        <div class="prix">${item.prix} DZD</div>
+        <p>✅ ${item.source}</p>
       </div>
     `;
 
@@ -76,8 +77,4 @@ async function loadPrices() {
 }
 
 loadPrices();
-
 </script>
-
-</body>
-</html>
