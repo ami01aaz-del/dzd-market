@@ -184,6 +184,7 @@ async function loadPrices() {
   const { data, error } = await client
     .from('prix')
     .select('*');
+  .order('id', { ascending: false });
   if (error) {
     console.log(error);
     return;
