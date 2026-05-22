@@ -183,7 +183,7 @@ const client = createClient(supabaseUrl, supabaseKey);
 async function loadPrices() {
   const { data, error } = await client
     .from('prix')
-    .select('*');
+    .select('*')
   .order('id', { ascending: false });
   if (error) {
     console.log(error);
