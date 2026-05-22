@@ -49,7 +49,7 @@ const { createClient } = supabase;
 const client = createClient(supabaseUrl, supabaseKey);
 
 async function loadPrices() {
-
+alert("JavaScript works");
   const { data, error } = await client
     .from('prix')
     .select('*');
