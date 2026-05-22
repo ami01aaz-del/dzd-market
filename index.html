@@ -45,7 +45,8 @@
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
 const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
 
-const client = supabase.createClient(supabaseUrl, supabaseKey);
+const { createClient } = supabase;
+const client = createClient(supabaseUrl, supabaseKey);
 
 async function loadPrices() {
 
