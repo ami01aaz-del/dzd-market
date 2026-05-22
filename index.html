@@ -219,7 +219,9 @@ data.forEach(item => {
 </div>
       <p>📌 ${item.source}</p>
 <p>👥 Confirmé par ${item.confirme_par}</p>
-<div class="update">🕒 Mise à jour récente</div>
+<div class="update">
+🕒 ${new Date(item.created_at).toLocaleDateString()}
+</div>
     </div>
   `;
 
