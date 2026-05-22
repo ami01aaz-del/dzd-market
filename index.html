@@ -93,6 +93,40 @@ h1{
   color:#64748b;
   font-size:14px;
 }
+   .form{
+  margin-top:40px;
+  background:#0f172a;
+  padding:20px;
+  border-radius:20px;
+  border:1px solid #1e293b;
+}
+
+.form input{
+  width:100%;
+  padding:15px;
+  margin-bottom:15px;
+  border:none;
+  border-radius:10px;
+  background:#1e293b;
+  color:white;
+  font-size:16px;
+}
+
+.form button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:#38bdf8;
+  color:white;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.form button:hover{
+  opacity:0.8;
+}
  </style>
 </head>
 <body>
@@ -103,7 +137,17 @@ h1{
 </header>
 
 <div id="prix"></div>
+<div class="form">
 
+  <input type="text" id="devise" placeholder="Nom du produit ou devise">
+
+  <input type="number" id="prixInput" placeholder="Prix en DZD">
+
+  <input type="text" id="source" placeholder="Source">
+
+  <button onclick="addPrice()">Ajouter</button>
+
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -143,7 +187,36 @@ data.forEach(item => {
 });
 
 }
+async function addPrice(){
 
+  const devise = document.getElementById("devise").value;
+
+  const prix = document.getElementById("prixInput").value;
+
+  const source = document.getElementById("source").value;
+
+  const { error } = await client
+    .from('prix')
+    .insert([
+      {
+        devise,
+        prix,
+        source,
+        confirme_par: 1
+      }
+    ]);
+
+  if(error){
+    alert("Erreur");
+    console.log(error);
+    return;
+  }
+
+  alert("Prix ajouté ✅");
+
+  loadPrices();
+
+}
 loadPrices();
 </script>
 </body>
