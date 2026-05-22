@@ -1,80 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DZD Market</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
   <style>
     body{
-      margin:0;
-      font-family:Arial;
       background:#0f172a;
       color:white;
-      text-align:center;
-    }
-
-    header{
-      padding:30px;
-      background:#111827;
-      font-size:32px;
-      font-weight:bold;
-      color:#22c55e;
-    }
-
-    .container{
+      font-family:Arial;
       padding:20px;
+    }
+
+    h1{
+      text-align:center;
+      color:#38bdf8;
     }
 
     .card{
       background:#1e293b;
       padding:20px;
-      margin:15px auto;
-      max-width:350px;
+      margin-top:20px;
       border-radius:15px;
-      box-shadow:0 0 10px rgba(0,0,0,0.3);
     }
 
     .price{
       font-size:28px;
-      margin-top:10px;
       color:#22c55e;
-    }
-
-    .confirm{
-      margin-top:10px;
-      color:#94a3b8;
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  DZD Market
-</header>
+<h1>DZD Market</h1>
 
-<div class="container">
+<div id="prices"></div>
 
-  <div class="card">
-    <h2>EUR / DZD</h2>
-    <div class="price">280 DZD</div>
-    <div class="confirm">✅ Confirmed by 15 users</div>
-  </div>
+<script>
 
-  <div class="card">
-    <h2>USD / DZD</h2>
-    <div class="price">255 DZD</div>
-    <div class="confirm">✅ Confirmed by 10 users</div>
-  </div>
+const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co/rest/v1/";
+const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
 
-  <div class="card">
-    <h2>Gold 24K</h2>
-    <div class="price">14500 DZD</div>
-    <div class="confirm">✅ Confirmed by 5 users</div>
-  </div>
+const client = supabase.createClient(supabaseUrl, supabaseKey);
 
-</div>
+async function loadPrices() {
+
+  const { data, error } = await client
+    .from('prices')
+    .select('*');
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  const container = document.getElementById("prices");
+
+  container.innerHTML = "";
+
+  data.forEach(item => {
+
+    container.innerHTML += `
+      <div class="card">
+        <h2>${item.name}</h2>
+        <div class="price">${item.price} DZD</div>
+        <p>✅ Confirmé par ${item.confirmations} utilisateurs</p>
+      </div>
+    `;
+
+  });
+
+}
+
+loadPrices();
+
+</script>
 
 </body>
 </html>
