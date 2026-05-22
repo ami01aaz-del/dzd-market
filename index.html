@@ -62,15 +62,13 @@ async function loadPrices() {
 
   recipient.innerHTML = "";
 
-  data.forEach(item => {
-
-    recipient.innerHTML += `
-      <div class="card">
-        <h2>${item.devise}</h2>
-        <div class="price">${item.prix} DZD</div>
-        <p>✅ ${item.source}</p>
-      </div>
-    `;
+data.forEach(item => {
+  recipient.innerHTML += `
+    <div class="card">
+      <pre>${JSON.stringify(item, null, 2)}</pre>
+    </div>
+  `;
+});
 
   });
 
