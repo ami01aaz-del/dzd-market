@@ -49,12 +49,9 @@ const { createClient } = supabase;
 const client = createClient(supabaseUrl, supabaseKey);
 
 async function loadPrices() {
-alert("JavaScript works");
   const { data, error } = await client
     .from('prix')
     .select('*');
-alert(JSON.stringify(data));
-alert(JSON.stringify(error));
   if (error) {
     console.log(error);
     return;
@@ -65,11 +62,15 @@ alert(JSON.stringify(error));
   recipient.innerHTML = "";
 
 data.forEach(item => {
+
   recipient.innerHTML += `
     <div class="card">
-      <pre>${JSON.stringify(item, null, 2)}</pre>
+      <h2>${item.devise}</h2>
+      <div class="price">${item.prix} DZD</div>
+      <p>📌 ${item.source}</p>
     </div>
   `;
+
 });
 
 }
