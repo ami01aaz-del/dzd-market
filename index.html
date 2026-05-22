@@ -7,31 +7,63 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-  <style>
-    body{
-      background:#0f172a;
-      color:white;
-      font-family:Arial;
-      padding:20px;
-    }
+ <style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    h1{
-      text-align:center;
-      color:#38bdf8;
-    }
+body{
+  background:#020617;
+  color:white;
+  font-family:Arial, sans-serif;
+  padding:20px;
+}
 
-    .card{
-      background:#1e293b;
-      padding:20px;
-      margin-top:20px;
-      border-radius:15px;
-    }
+h1{
+  text-align:center;
+  color:#38bdf8;
+  margin-bottom:30px;
+  font-size:38px;
+}
 
-    .price{
-      font-size:28px;
-      color:#22c55e;
-    }
-  </style>
+#prix{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:#0f172a;
+  border:1px solid #1e293b;
+  padding:20px;
+  border-radius:20px;
+  transition:0.3s;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#38bdf8;
+}
+
+.card h2{
+  color:#e2e8f0;
+  margin-bottom:15px;
+}
+
+.price{
+  font-size:32px;
+  color:#22c55e;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#94a3b8;
+}
+ </style>
 </head>
 <body>
 
