@@ -194,6 +194,18 @@ async function loadPrices() {
 
   recipient.innerHTML = "";
 
+const priority = ["EUR/DZD", "USD/DZD"];
+
+data.sort((a, b) => {
+
+  const aPriority = priority.includes(a.devise) ? 0 : 1;
+
+  const bPriority = priority.includes(b.devise) ? 0 : 1;
+
+  return aPriority - bPriority;
+
+});
+
 data.forEach(item => {
 
   recipient.innerHTML += `
