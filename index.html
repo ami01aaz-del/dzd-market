@@ -170,6 +170,15 @@ h1{
   text-align:center;
   font-weight:bold;
 }
+   .new{
+  margin-top:10px;
+  background:#06b6d4;
+  color:white;
+  padding:8px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+   }
    
  </style>
 </head>
@@ -253,6 +262,10 @@ ${item.confirme_par >= 5 ? `
 <button onclick="confirmPrice(${item.id}, ${item.confirme_par})">
 👍 Confirmer
 </button>
+
+${Date.now() - new Date(item.created_at) < 172800000 ? `
+<div class="new">🆕 Nouveau</div>
+` : ""}
 
 <div class="update">
 🕒 ${new Date(item.created_at).toLocaleDateString()}
