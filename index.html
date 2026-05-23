@@ -161,6 +161,16 @@ h1{
 .card button:hover{
   opacity:0.8;
 }
+   .trend{
+  margin-top:10px;
+  background:#f97316;
+  color:white;
+  padding:8px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+}
+   
  </style>
 </head>
 <body>
@@ -235,6 +245,10 @@ data.forEach(item => {
 </div>
       <p>📌 ${item.source}</p>
 <p>👥 Confirmé par ${item.confirme_par}</p>
+
+${item.confirme_par >= 5 ? `
+<div class="trend">🔥 Tendance</div>
+` : ""}
 
 <button onclick="confirmPrice(${item.id}, ${item.confirme_par})">
 👍 Confirmer
