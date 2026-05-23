@@ -280,6 +280,15 @@ h1{
   }
 
 }
+   .main-rate{
+  margin-top:10px;
+  background:#eab308;
+  color:black;
+  padding:8px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+   }
    
  </style>
 </head>
@@ -387,6 +396,11 @@ data.forEach(item => {
       <img src="${item.image}" class="image">
       
       <h2>${item.devise}</h2>
+
+      ${item.devise === "EUR/DZD" || item.devise === "USD/DZD" ? `
+<div class="main-rate">⭐ Taux principal</div>
+` : ""}
+
       <div class="price">
   ${Number(item.prix).toLocaleString()} DZD
 </div>
