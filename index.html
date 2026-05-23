@@ -676,18 +676,18 @@ updateRates();
   async function updateRates(){
 
   const res = await fetch("https://open.er-api.com/v6/latest/EUR");
-  const data = await res.json();
+const data = await res.json();
 
-  const eurToDzd = data.rates.DZD;
+const eurToDzd = data.rates.DZD;
 
-  const usdRes = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=DZD");
-  const usdData = await usdRes.json();
+const usdRes = await fetch("https://open.er-api.com/v6/latest/USD");
+const usdData = await usdRes.json();
 
-  const usdToDzd = usdData.rates.DZD;
+const usdToDzd = usdData.rates.DZD;
 
-  document.getElementById("stats").innerHTML += `
-<br>💱 EUR: ${eurToDzd}
-<br>💱 USD: ${usdToDzd}
+document.getElementById("live-rates").innerHTML = `
+💱 EUR: ${eurToDzd}<br>
+💱 USD: ${usdToDzd}
 `;
 
     }
