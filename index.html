@@ -298,6 +298,22 @@ h1{
   color:#ef4444;
   font-weight:bold;
 }
+   .rates{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.rates span{
+  flex:1;
+  background:#111827;
+  padding:10px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:bold;
+}
    
  </style>
 </head>
@@ -405,6 +421,16 @@ data.forEach(item => {
       <img src="${item.image}" class="image">
       
       <h2>${item.devise}</h2>
+      
+      ${item.achat ? `
+<div class="rates">
+
+  <span>💵 Achat: ${item.achat}</span>
+
+  <span>💸 Vente: ${item.vente}</span>
+
+</div>
+` : ""}
 
       ${item.devise === "EUR/DZD" || item.devise === "USD/DZD" ? `
 <div class="main-rate">⭐ Taux principal</div>
