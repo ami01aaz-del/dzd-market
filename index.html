@@ -320,6 +320,11 @@ h1{
   font-size:16px;
   font-weight:bold;
    }
+   .old-price{
+  margin-top:8px;
+  color:#94a3b8;
+  font-size:14px;
+   }
    
  </style>
 </head>
@@ -468,6 +473,12 @@ data.forEach(item => {
       <div class="price">
   ${Number(item.prix).toLocaleString()} DZD
 </div>
+${item.ancien_prix ? `
+<div class="old-price">
+Ancien : ${item.ancien_prix} DZD
+</div>
+` : ""}
+
 <p>🏷️ ${item.category}</p>
 <p>📌 ${item.source}</p>
 
