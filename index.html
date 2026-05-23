@@ -407,8 +407,28 @@ async function loadPrices() {
   document.getElementById("loading").style.display = "none";
   document.getElementById("stats").innerHTML =
 `📊 ${data.length} Prix suivis en direct`;
-  document.getElementById("market-update").innerHTML =
-"🟢 Dernière mise à jour du Square : aujourd’hui";
+  const latest = data[0];
+
+const minutes = Math.floor(
+  (Date.now() - new Date(latest.created_at)) / 60000
+);
+
+let timeText = "";
+
+if(minutes < 60){
+
+  timeText = `il y a ${minutes} min`;
+
+} else {
+
+  const hours = Math.floor(minutes / 60);
+
+  timeText = `il y a ${hours} h`;
+
+}
+
+document.getElementById("market-update").innerHTML =
+`🟢 Dernière mise à jour du Square : ${timeText}`;
 
 const priority = ["EUR/DZD", "USD/DZD"];
 
