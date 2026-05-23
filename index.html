@@ -625,10 +625,20 @@ const eurToDzd = Math.round(data.rates.DZD || 0);
 
 const usdToDzd = Math.round(usdData.rates.DZD || 0);
 
-    document.getElementById("live-rates").innerHTML = `
-    💱 EUR: ${eurToDzd}<br>
-    💱 USD: ${usdToDzd}
-    `;
+    const live = document.getElementById("live-rates");
+
+if(live){
+
+  live.innerHTML = `
+  💱 EUR: ${eurToDzd}<br>
+  💱 USD: ${usdToDzd}
+  `;
+
+} else {
+
+  alert("live-rates not found");
+
+}
 
   } catch(error){
 
