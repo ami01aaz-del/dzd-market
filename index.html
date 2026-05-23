@@ -331,6 +331,12 @@ h1{
   font-weight:bold;
   font-size:16px;
    }
+   #live-rates{
+  margin-top:10px;
+  color:#38bdf8;
+  font-weight:bold;
+  font-size:16px;
+}
    
  </style>
 </head>
@@ -342,6 +348,7 @@ h1{
   <div id="stats"></div>
   <div id="market-update"></div>
   <div id="top-devise"></div>
+  <div id="live-rates"></div>
 </header>
 <input 
   type="text" 
@@ -603,6 +610,34 @@ async function addPrice(){
     
 localStorage.setItem("confirmed_" + id, true);
     
+    async function updateRates(){
+
+  try{
+
+    const res = await fetch("https://api.exchangerate.host/latest?base=EUR&symbols=DZD");
+    const data = await res.json();
+
+    const eurToDzd = data.rates.DZD;
+
+    const usdRes = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=DZD");
+    const usdData = await usdRes.json();
+
+    const usdToDzd = usdData.rates.DZD;
+
+    document.getElementById("live-rates").innerHTML = `
+    💱 EUR: ${eurToDzd}<br>
+    💱 USD: ${usdToDzd}
+    `;
+
+  } catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+updateRates();
   loadPrices();
     
 
