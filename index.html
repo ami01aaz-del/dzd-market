@@ -627,6 +627,23 @@ localStorage.setItem("confirmed_" + id, true);
   });
 
   }
+  async function updateRates(){
+
+  const res = await fetch("https://api.exchangerate.host/latest?base=EUR&symbols=DZD");
+  const data = await res.json();
+
+  const eurToDzd = data.rates.DZD;
+
+  const usdRes = await fetch("https://api.exchangerate.host/latest?base=USD&symbols=DZD");
+  const usdData = await usdRes.json();
+
+  const usdToDzd = usdData.rates.DZD;
+
+  console.log("EUR:", eurToDzd);
+  console.log("USD:", usdToDzd);
+
+    }
+  updateRates();
   
 loadPrices();
 </script>
