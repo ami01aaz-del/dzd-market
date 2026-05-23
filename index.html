@@ -300,6 +300,13 @@ async function addPrice(){
 
 }
   async function confirmPrice(id, current){
+    
+    if(localStorage.getItem("confirmed_" + id)){
+
+  alert("Déjà confirmé ✅");
+  return;
+
+}
 
   const { error } = await client
     .from('prix')
@@ -313,9 +320,18 @@ async function addPrice(){
     return;
   }
 
+  if(error){
+    console.log(error);
+    return;
+  }
+    
+localStorage.setItem("confirmed_" + id, true);
+    
   loadPrices();
+    
 
 }
+  
 loadPrices();
 </script>
 </body>
