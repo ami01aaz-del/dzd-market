@@ -208,6 +208,17 @@ h1{
   <input type="number" id="prixInput" placeholder="Prix en DZD">
 
   <input type="text" id="source" placeholder="Source">
+  <select id="category">
+
+  <option value="Devises">💵 Devises</option>
+
+  <option value="Or">🪙 Or</option>
+
+  <option value="Électronique">📱 Électronique</option>
+
+  <option value="Gaming">🎮 Gaming</option>
+
+  </select>
 
   <button onclick="addPrice()">Ajouter</button>
 
@@ -260,6 +271,7 @@ data.forEach(item => {
       <div class="price">
   ${Number(item.prix).toLocaleString()} DZD
 </div>
+<p>🏷️ ${item.category}</p>
       <p>📌 ${item.source}</p>
 <p>👥 Confirmé par ${item.confirme_par}</p>
 
@@ -291,6 +303,7 @@ async function addPrice(){
   const prix = document.getElementById("prixInput").value;
 
   const source = document.getElementById("source").value;
+  const category = document.getElementById("category").value;
 
   const { error } = await client
     .from('prix')
@@ -299,6 +312,7 @@ async function addPrice(){
         devise,
         prix,
         source,
+        category,
         confirme_par: 1
       }
     ]);
