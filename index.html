@@ -639,8 +639,10 @@ localStorage.setItem("confirmed_" + id, true);
 
   const usdToDzd = usdData.rates.DZD;
 
-  console.log("EUR:", eurToDzd);
-  console.log("USD:", usdToDzd);
+  document.getElementById("stats").innerHTML += `
+<br>💱 EUR: ${eurToDzd}
+<br>💱 USD: ${usdToDzd}
+`;
 
     }
   updateRates();
