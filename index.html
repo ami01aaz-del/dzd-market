@@ -776,34 +776,33 @@ loadPrices();
   });
 
   }
-  async function updateRates(){
+ async function updateRates(){
 
-  const res = await fetch("https://open.er-api.com/v6/latest/EUR");
-const eurData = await res.json();
+  try {
 
-const eurToDzd = Math.round(eurData.rates.DZD);
+    const res = await fetch("https://open.er-api.com/v6/latest/EUR");
+    const eurData = await res.json();
 
-const usdRes = await fetch("https://open.er-api.com/v6/latest/USD");
-const usdData = await usdRes.json();
+    const eurToDzd = Math.round(eurData.rates.DZD);
 
-const usdToDzd = Math.round(usdData.rates.DZD);
+    const usdRes = await fetch("https://open.er-api.com/v6/latest/USD");
+    const usdData = await usdRes.json();
 
+    const usdToDzd = Math.round(usdData.rates.DZD);
 
-document.getElementById("top-trends").innerHTML =
-"🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
+    const { data: squareRates, error } = await client
+      .from("square_rates")
+      .select("*");
 
-const { data: squareRates, error: squareError } = await client
-  .from("square_rates")
-  .select("*");
+    const eurSquare = squareRates[0]?.eur || 0;
+    const usdSquare = squareRates[0]?.usd || 0;
 
-const eurSquare = squareRates[0]?.eur || 0;
-const usdSquare = squareRates[0]?.usd || 0;
+    document.getElementById("top-trends").innerHTML =
+    "🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
 
-const live = document.getElementById("live-rates");
+    const live = document.getElementById("live-rates");
 
-live.style.color = "#22c55e";
-
-live.innerHTML = `
+    live.innerHTML = `
 💱 EUR officiel: ${eurToDzd}<br>
 💱 EUR square: ${eurSquare}<br><br>
 
@@ -811,14 +810,14 @@ live.innerHTML = `
 💱 USD square: ${usdSquare}
 `;
 
+    document.getElementById("live-update").innerHTML =
+    "🟢 Mise à jour maintenant";
 
-setTimeout(() => {
+  } catch(err) {
 
-  live.style.color = "#38bdf8";
-  document.getElementById("live-update").innerHTML =
-"🟢 Mise à jour maintenant";
+    console.log(err);
 
-}, 500);
+  }
 
 }
 
