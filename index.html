@@ -332,6 +332,7 @@ h1{
   font-size:16px;
    }
    #live-rates{
+     transition:0.4s;
   margin-top:10px;
   color:#38bdf8;
   font-weight:bold;
@@ -685,16 +686,28 @@ const usdData = await usdRes.json();
 
 const usdToDzd = Math.round(usdData.rates.DZD);
 
-document.getElementById("live-rates").innerHTML = `
+
+const live = document.getElementById("live-rates");
+
+live.style.color = "#22c55e";
+
+live.innerHTML = `
 💱 EUR: ${eurToDzd}<br>
 💱 USD: ${usdToDzd}
 `;
 
-    }
+setTimeout(() => {
+
+  live.style.color = "#38bdf8";
+
+}, 500);
+
+}
+
   updateRates();
   
 loadPrices();
-  setInterval(updateRates, 60000);
+setInterval(updateRates, 60000);
 </script>
 </body>
 </html>
