@@ -821,7 +821,9 @@ loadPrices();
 
 }
 
+  window.onload = () => {
   updateRates();
+};
   
 loadPrices();
 setInterval(updateRates, 60000);
