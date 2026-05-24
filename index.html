@@ -338,6 +338,12 @@ h1{
   font-weight:bold;
   font-size:16px;
 }
+#live-update{
+  margin-top:8px;
+  color:#22c55e;
+  font-size:14px;
+  font-weight:bold;
+}
    
  </style>
 </head>
@@ -350,6 +356,7 @@ h1{
   <div id="market-update"></div>
   <div id="top-devise"></div>
   <div id="live-rates"></div>
+  <div id="live-update"></div>
 </header>
 <input 
   type="text" 
@@ -699,6 +706,8 @@ live.innerHTML = `
 setTimeout(() => {
 
   live.style.color = "#38bdf8";
+  document.getElementById("live-update").innerHTML =
+"🟢 Mise à jour maintenant";
 
 }, 500);
 
