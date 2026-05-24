@@ -617,30 +617,11 @@ async function addPrice(){
   }
     
 localStorage.setItem("confirmed_" + id, true);
-    
-    async function updateRates(){
-
-  try{
-
-    const res = await fetch("https://api.exchangerate.host/latest?base=EUR&symbols=DZD");
-    const data = await res.json();
-
-const eurToDzd = Math.round(data.rates.DZD || 0);
-
-
-    const usdRes = await fetch("https://open.er-api.com/v6/latest/USD");
-    const usdData = await usdRes.json();
-
-const usdToDzd = Math.round(usdData.rates.DZD || 0);
-
-    const live = document.getElementById("live-rates");
-
-
-updateRates();
-  loadPrices();
-    
+loadPrices();
 
 }
+    
+
   function filterCategory(category){
 
   const cards = document.querySelectorAll(".card");
@@ -679,8 +660,8 @@ const live = document.getElementById("live-rates");
 live.style.color = "#22c55e";
 
 live.innerHTML = `
-💱 EUR: ${eurToDzd}<br>
-💱 USD: ${usdToDzd}
+💱 EUR: ${eurToDzd}📈<br>
+💱 USD: ${usdToDzd}📉
 `;
 
 setTimeout(() => {
