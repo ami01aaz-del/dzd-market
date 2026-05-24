@@ -678,12 +678,12 @@ updateRates();
   const res = await fetch("https://open.er-api.com/v6/latest/EUR");
 const data = await res.json();
 
-const eurToDzd = data.rates.DZD;
+const eurToDzd = Math.round(data.rates.DZD);
 
 const usdRes = await fetch("https://open.er-api.com/v6/latest/USD");
 const usdData = await usdRes.json();
 
-const usdToDzd = usdData.rates.DZD;
+const usdToDzd = Math.round(usdData.rates.DZD);
 
 document.getElementById("live-rates").innerHTML = `
 💱 EUR: ${eurToDzd}<br>
