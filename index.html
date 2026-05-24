@@ -351,6 +351,12 @@ h1{
   margin-top:20px;
   box-shadow:0 0 20px rgba(56,189,248,0.15);
 }
+#top-trends{
+  margin-top:15px;
+  color:#f97316;
+  font-weight:bold;
+  font-size:16px;
+}
    
  </style>
 </head>
@@ -362,6 +368,7 @@ h1{
   <div id="stats"></div>
   <div id="market-update"></div>
   <div id="top-devise"></div>
+  <div id="top-trends"></div>
   <div id="live-rates"></div>
   <div id="live-update"></div>
 </header>
@@ -618,6 +625,8 @@ async function addPrice(){
 
   alert("Prix ajouté ✅");
 
+document.getElementById("top-trends").innerHTML =
+"🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
   loadPrices();
 
 }
