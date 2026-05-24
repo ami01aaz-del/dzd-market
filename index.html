@@ -792,14 +792,12 @@ const usdToDzd = Math.round(usdData.rates.DZD);
 document.getElementById("top-trends").innerHTML =
 "🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
 
-const { data: squareData, error: squareError } = await client
+const { data, error } = await client
   .from("square_rates")
-  .select("*")
-  .limit(1)
-  .single();
+  .select("*");
 
-const eurSquare = squareData?.eur || 0;
-const usdSquare = squareData?.usd || 0;
+const eurSquare = data[0].eur;
+const usdSquare = data[0].usd;
 
 const live = document.getElementById("live-rates");
 
