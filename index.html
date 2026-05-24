@@ -625,8 +625,6 @@ async function addPrice(){
 
   alert("Prix ajouté ✅");
 
-document.getElementById("top-trends").innerHTML =
-"🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
   loadPrices();
 
 }
@@ -714,6 +712,8 @@ const usdData = await usdRes.json();
 
 const usdToDzd = Math.round(usdData.rates.DZD);
 
+document.getElementById("top-trends").innerHTML =
+"🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
 
 const live = document.getElementById("live-rates");
 
