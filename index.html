@@ -821,14 +821,15 @@ loadPrices();
 
 }
 
-  window.onload = () => {
-  setTimeout(() => {
+window.onload = () => {
+
+  loadPrices();
+
   updateRates();
-}, 2000);
+
+  setInterval(updateRates, 60000);
+
 };
-  
-loadPrices();
-setInterval(updateRates, 60000);
 
 async function convert(){
 
