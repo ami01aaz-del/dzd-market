@@ -407,6 +407,25 @@ body.light {
   font-weight:bold;
   color:#22c55e;
 }
+.dashboard{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:15px;
+  margin-top:20px;
+}
+
+.card{
+  background:#0f172a;
+  padding:15px;
+  border-radius:15px;
+  color:white;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+.card h3{
+  margin-bottom:10px;
+  color:#38bdf8;
+}
    
  </style>
 </head>
@@ -423,6 +442,24 @@ body.light {
   <div id="live-rates"></div>
   <div id="live-update"></div>
 </header>
+<div class="dashboard">
+
+  <div class="card">
+    <h3>💱 EUR / DZD</h3>
+    <p id="eur-box">---</p>
+  </div>
+
+  <div class="card">
+    <h3>💱 USD / DZD</h3>
+    <p id="usd-box">---</p>
+  </div>
+
+  <div class="card">
+    <h3>🔄 Convertisseur</h3>
+    <p>Utilisez la section en bas</p>
+  </div>
+
+</div>
 <div class="converter">
   <h2>💱 Convertisseur de devises</h2>
 
@@ -788,6 +825,9 @@ live.innerHTML = `
 💱 EUR: ${eurToDzd}&nbsp;📈<br>
 💱 USD: ${usdToDzd}&nbsp;📉
 `;
+
+document.getElementById("eur-box").innerText = eurToDzd;
+document.getElementById("usd-box").innerText = usdToDzd;
 
 setTimeout(() => {
 
