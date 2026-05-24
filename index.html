@@ -694,6 +694,7 @@ document.getElementById("live-rates").innerHTML = `
   updateRates();
   
 loadPrices();
+  setInterval(updateRates, 60000);
 </script>
 </body>
 </html>
