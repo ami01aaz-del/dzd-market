@@ -794,8 +794,13 @@ loadPrices();
       .from("square_rates")
       .select("*");
 
-    const eurSquare = squareRates[0]?.eur || 0;
-    const usdSquare = squareRates[0]?.usd || 0;
+    let eurSquare = 0;
+let usdSquare = 0;
+
+if(squareRates && squareRates.length > 0){
+  eurSquare = squareRates[0].eur;
+  usdSquare = squareRates[0].usd;
+}
 
     document.getElementById("top-trends").innerHTML =
     "🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
