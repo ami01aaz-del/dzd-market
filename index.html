@@ -344,6 +344,13 @@ h1{
   font-size:14px;
   font-weight:bold;
 }
+.chart-container{
+  background:#0f172a;
+  padding:20px;
+  border-radius:20px;
+  margin-top:20px;
+  box-shadow:0 0 20px rgba(56,189,248,0.15);
+}
    
  </style>
 </head>
@@ -387,7 +394,9 @@ h1{
 </div>
 
 <div id="prix"></div>
-<canvas id="priceChart"></canvas>
+<div class="chart-container">
+  <canvas id="priceChart"></canvas>
+</div>
 <div class="form">
 
   <input type="text" id="devise" placeholder="Nom du produit ou devise">
