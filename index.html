@@ -779,9 +779,9 @@ loadPrices();
   async function updateRates(){
 
   const res = await fetch("https://open.er-api.com/v6/latest/EUR");
-const data = await res.json();
+const eurData = await res.json();
 
-const eurToDzd = Math.round(data.rates.DZD);
+const eurToDzd = Math.round(eurData.rates.DZD);
 
 const usdRes = await fetch("https://open.er-api.com/v6/latest/USD");
 const usdData = await usdRes.json();
