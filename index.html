@@ -387,6 +387,7 @@ h1{
 </div>
 
 <div id="prix"></div>
+<canvas id="priceChart"></canvas>
 <div class="form">
 
   <input type="text" id="devise" placeholder="Nom du produit ou devise">
@@ -410,6 +411,7 @@ h1{
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
@@ -474,6 +476,22 @@ data.sort((a, b) => {
 
   return aPriority - bPriority;
 
+});
+const labels = data.map(item => item.devise);
+
+const prices = data.map(item => item.prix);
+
+const ctx = document.getElementById('priceChart');
+
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: labels,
+    datasets: [{
+      label: 'Prix en DZD',
+      data: prices
+    }]
+  }
 });
 
 data.forEach(item => {
