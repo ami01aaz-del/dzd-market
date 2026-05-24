@@ -635,29 +635,6 @@ const usdToDzd = Math.round(usdData.rates.DZD || 0);
 
     const live = document.getElementById("live-rates");
 
-if(live){
-
-  live.innerHTML = `
-💱 EUR: ${eurToDzd} TEST<br>
-💱 USD: ${usdToDzd} TEST
-`;
-
-setTimeout(() => {
-
-  live.style.color = "#38bdf8";
-
-}, 500);
-}
-
-
-
-  } catch(error){
-
-    console.log(error);
-
-  }
-
-}
 
 updateRates();
   loadPrices();
