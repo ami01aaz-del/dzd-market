@@ -16,6 +16,7 @@ input{
   margin:10px;
   border-radius:10px;
   border:none;
+  width:200px;
 }
 button{
   padding:10px 20px;
@@ -23,6 +24,7 @@ button{
   border:none;
   border-radius:10px;
   cursor:pointer;
+  color:white;
 }
 </style>
 </head>
@@ -32,24 +34,26 @@ button{
 <h1>🔐 Admin Panel</h1>
 
 <p>EUR Square Price</p>
-<input id="eur" type="number" placeholder="EUR DZD">
+<input id="eur" type="number" placeholder="Enter EUR DZD">
 
 <p>USD Square Price</p>
-<input id="usd" type="number" placeholder="USD DZD">
+<input id="usd" type="number" placeholder="Enter USD DZD">
 
-<br>
+<br><br>
 
 <button onclick="savePrices()">💾 Save</button>
 
 <script>
 function savePrices(){
+
   const eur = document.getElementById("eur").value;
   const usd = document.getElementById("usd").value;
 
   localStorage.setItem("eur_square", eur);
   localStorage.setItem("usd_square", usd);
 
-  alert("Prices updated successfully 🔥");
+  alert("Saved successfully 🔥");
+
 }
 </script>
 
