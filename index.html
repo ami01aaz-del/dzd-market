@@ -489,8 +489,32 @@ new Chart(ctx, {
     labels: labels,
     datasets: [{
       label: 'Prix en DZD',
-      data: prices
+      data: prices,
+      borderWidth: 3,
+      tension: 0.4
     }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: "white"
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "white"
+        }
+      },
+      y: {
+        ticks: {
+          color: "white"
+        }
+      }
+    }
   }
 });
 
