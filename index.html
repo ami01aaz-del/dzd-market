@@ -642,7 +642,11 @@ if(live){
 💱 USD: ${usdToDzd} 📉
 `;
 
-} else {
+setTimeout(() => {
+
+  live.style.color = "#38bdf8";
+
+}, 500);
 
   alert("live-rates not found");
 
