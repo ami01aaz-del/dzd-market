@@ -778,6 +778,9 @@ const usdData = await usdRes.json();
 
 const usdToDzd = Math.round(usdData.rates.DZD);
 
+const eurSquare = 282;
+const usdSquare = 240;
+
 document.getElementById("top-trends").innerHTML =
 "🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
 
@@ -786,8 +789,11 @@ const live = document.getElementById("live-rates");
 live.style.color = "#22c55e";
 
 live.innerHTML = `
-💱 EUR: ${eurToDzd}&nbsp;📈<br>
-💱 USD: ${usdToDzd}&nbsp;📉
+💱 EUR officiel: ${eurToDzd}<br>
+💱 EUR square: ${eurSquare}<br><br>
+
+💱 USD officiel: ${usdToDzd}<br>
+💱 USD square: ${usdSquare}
 `;
 
 
