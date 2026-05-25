@@ -12,16 +12,31 @@
 <priority>0.5</priority>
 </url>
 
-  <url>
-    <loc>https://dzdmarket.vercel.app/usd-dzd.html</loc>
-  </url>
+<url>
+<loc>https://dzdmarket.vercel.app/privacy.html</loc>
+<priority>0.3</priority>
+</url>
 
-  <url>
-    <loc>https://dzdmarket.vercel.app/eur-dzd.html</loc>
-  </url>
+<url>
+<loc>https://dzdmarket.vercel.app/terms.html</loc>
+<priority>0.3</priority>
+</url>
 
-  <url>
-    <loc>https://dzdmarket.vercel.app/marche-noir-algerie.html</loc>
-  </url>
+<url>
+<loc>https://dzdmarket.vercel.app/contact.html</loc>
+<priority>0.3</priority>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/usd-dzd.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/eur-dzd.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/marche-noir-algerie.html</loc>
+</url>
 
 </urlset>
