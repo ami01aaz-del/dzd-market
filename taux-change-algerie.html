@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 
 <meta charset="UTF-8">
@@ -47,6 +48,15 @@ font-weight:bold;
 margin-top:10px;
 }
 
+a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+li{
+margin-bottom:10px;
+}
+
 </style>
 
 </head>
@@ -81,30 +91,6 @@ Chargement...
 </div>
 
 </div>
-
-</div>
-
-<script>
-
-async function loadRates(){
-
-const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
-const eurData = await eur.json();
-
-const usd = await fetch("https://open.er-api.com/v6/latest/USD");
-const usdData = await usd.json();
-
-document.getElementById("eur").innerHTML =
-Math.round(eurData.rates.DZD) + " DZD";
-
-document.getElementById("usd").innerHTML =
-Math.round(usdData.rates.DZD) + " DZD";
-
-}
-
-loadRates();
-
-</script>
 
 <div class="card">
 
@@ -170,5 +156,32 @@ Dollar Square Algérie
 
 </div>
 
+</div>
+
+<script>
+
+async function loadRates(){
+
+const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
+
+const eurData = await eur.json();
+
+const usd = await fetch("https://open.er-api.com/v6/latest/USD");
+
+const usdData = await usd.json();
+
+document.getElementById("eur").innerHTML =
+Math.round(eurData.rates.DZD) + " DZD";
+
+document.getElementById("usd").innerHTML =
+Math.round(usdData.rates.DZD) + " DZD";
+
+}
+
+loadRates();
+
+</script>
+
 </body>
+
 </html>
