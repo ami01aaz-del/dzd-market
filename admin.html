@@ -43,18 +43,58 @@ button{
 
 <button onclick="savePrices()">💾 Save</button>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-function savePrices(){
+
+const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
+
+const supabaseKey = "ضع هنا نفس المفتاح الموجود في index";
+
+const { createClient } = supabase;
+
+const client = createClient(supabaseUrl, supabaseKey);
+
+async function savePrices(){
 
   const eur = document.getElementById("eur").value;
+
   const usd = document.getElementById("usd").value;
 
-  localStorage.setItem("eur_square", eur);
-  localStorage.setItem("usd_square", usd);
+  const { data: userData } = await client.auth.getUser();
 
-  alert("Saved successfully 🔥");
+  if(!userData.user){
+
+    alert("❌ Please login first");
+
+    window.location.href = "/login.html";
+
+    return;
+
+  }
+
+  const { error } = await client
+    .from("square_rates")
+    .update({
+      eur: eur,
+      usd: usd
+    })
+    .eq("id", 1);
+
+  if(error){
+
+    console.log(error);
+
+    alert("Erreur");
+
+    return;
+
+  }
+
+  alert("✅ Prices updated");
 
 }
+
 </script>
 
 </body>
