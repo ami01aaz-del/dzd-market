@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prix Euro Algérie Aujourd’hui - EUR DZD en temps réel</title>
+
+<meta name="description" content="Consultez le prix de l’Euro en Algérie aujourd’hui en temps réel. Taux EUR/DZD au square et marché noir algérien.">
+
+<meta name="keywords" content="prix euro algérie, euro dzd aujourd’hui, euro square algérie, marché noir algérie euro">
+
+<meta name="author" content="DZD Market">
+
+<style>
+
+body{
+  background:#020617;
+  color:white;
+  font-family:Arial,sans-serif;
+  padding:25px;
+  line-height:1.8;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
+h1{
+  color:#38bdf8;
+  margin-bottom:20px;
+  font-size:38px;
+}
+
+.card{
+  background:#0f172a;
+  padding:25px;
+  border-radius:20px;
+  margin-top:20px;
+  border:1px solid #1e293b;
+}
+
+.price{
+  font-size:45px;
+  color:#22c55e;
+  font-weight:bold;
+  margin-top:15px;
+}
+
+.info{
+  color:#94a3b8;
+  margin-top:15px;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💶 Prix Euro Algérie Aujourd’hui</h1>
+
+<p>
+Consultez le prix de l’Euro en Algérie en temps réel.
+Suivi du taux EUR/DZD au marché noir et au square algérien.
+</p>
+
+<div class="card">
+
+<h2>📈 Prix actuel de l’Euro</h2>
+
+<div class="price" id="price">
+Chargement...
+</div>
+
+<div class="info">
+Mise à jour automatique du taux EUR/DZD.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📊 Marché noir Algérie</h2>
+
+<p>
+Le marché noir des devises en Algérie évolue chaque jour selon l’offre et la demande.
+Le prix de l’Euro reste l’un des taux les plus recherchés en Algérie.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🔎 Recherches populaires</h2>
+
+<ul>
+<li>Prix euro Algérie aujourd’hui</li>
+<li>EUR DZD square</li>
+<li>Euro marché noir Algérie</li>
+<li>Taux euro dinar algérien</li>
+</ul>
+
+</div>
+
+<p style="margin-top:40px;">
+⬅️ <a href="/">Retour à DZD Market</a>
+</p>
+
+</div>
+
+<script>
+
+async function loadEuro(){
+
+  try{
+
+    const res = await fetch("https://open.er-api.com/v6/latest/EUR");
+
+    const data = await res.json();
+
+    document.getElementById("price").innerHTML =
+    Math.round(data.rates.DZD) + " DZD";
+
+  }catch(err){
+
+    document.getElementById("price").innerHTML =
+    "Erreur";
+
+  }
+
+}
+
+loadEuro();
+
+</script>
+
+</body>
+</html>
