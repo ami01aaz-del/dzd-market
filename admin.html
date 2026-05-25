@@ -45,6 +45,34 @@ button{
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
+
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjbW5nem9tcHlvanVmZmVwc3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzOTM2MDYsImV4cCI6MjA5NDk2OTYwNn0.15SBxqm0g2odZgSJi_iJlhTVGn7R3uuP2xH0-kV-Afg";
+
+const { createClient } = supabase;
+
+const client = createClient(supabaseUrl, supabaseKey);
+
+async function checkAuth(){
+
+  const { data } = await client.auth.getUser();
+
+  if(!data.user){
+
+    window.location.href = "/login.html";
+
+  }
+
+}
+
+checkAuth();
+
+</script>
+  
 <script>
 
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
