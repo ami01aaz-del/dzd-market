@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>سعر اليورو في الجزائر اليوم - EUR DZD</title>
+
+<meta name="description" content="تعرف على سعر اليورو في الجزائر اليوم لحظة بلحظة، أسعار EUR/DZD في السوق السوداء والسكوار الجزائري.">
+
+<meta name="keywords" content="سعر اليورو في الجزائر, اليورو اليوم, سعر اليورو السكوار, EUR DZD الجزائر">
+
+<style>
+
+body{
+background:#020617;
+color:white;
+font-family:Arial,sans-serif;
+padding:25px;
+line-height:2;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+h1{
+color:#38bdf8;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.card{
+background:#0f172a;
+padding:25px;
+border-radius:20px;
+margin-top:20px;
+border:1px solid #1e293b;
+}
+
+.price{
+font-size:45px;
+color:#22c55e;
+font-weight:bold;
+margin-top:15px;
+}
+
+.info{
+color:#94a3b8;
+margin-top:15px;
+}
+
+a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💶 سعر اليورو في الجزائر اليوم</h1>
+
+<p>
+تابع سعر اليورو في الجزائر لحظة بلحظة،
+مع تحديث مباشر لسعر EUR/DZD في السوق السوداء والسكوار الجزائري.
+</p>
+
+<div class="card">
+
+<h2>📈 سعر اليورو الآن</h2>
+
+<div class="price" id="price">
+جاري التحميل...
+</div>
+
+<div class="info">
+يتم تحديث السعر تلقائيًا.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📊 السوق السوداء في الجزائر</h2>
+
+<p>
+يعتبر اليورو من أكثر العملات تداولًا في السوق السوداء الجزائرية،
+ويختلف السعر حسب العرض والطلب في السكوار.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🔎 عمليات بحث شائعة</h2>
+
+<ul>
+<li>سعر اليورو في الجزائر اليوم</li>
+<li>سعر اليورو السكوار</li>
+<li>EUR DZD الجزائر</li>
+<li>سعر اليورو السوق السوداء</li>
+</ul>
+
+</div>
+
+<p style="margin-top:40px;">
+⬅️ <a href="/">العودة إلى DZD Market</a>
+</p>
+
+</div>
+
+<script>
+
+async function loadEuro(){
+
+try{
+
+const res = await fetch("https://open.er-api.com/v6/latest/EUR");
+
+const data = await res.json();
+
+document.getElementById("price").innerHTML =
+Math.round(data.rates.DZD) + " دج";
+
+}catch(err){
+
+document.getElementById("price").innerHTML =
+"خطأ";
+
+}
+
+}
+
+loadEuro();
+
+</script>
+
+</body>
+</html>
