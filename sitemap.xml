@@ -22,6 +22,8 @@
 <priority>0.3</priority>
 </url>
 
+<!-- French SEO Pages -->
+
 <url>
 <loc>https://dzdmarket.vercel.app/usd-dzd.html</loc>
 </url>
@@ -34,36 +36,58 @@
 <loc>https://dzdmarket.vercel.app/marche-noir-algerie.html</loc>
 </url>
 
-  <url>
-  <loc>https://dzdmarket.vercel.app/prix-euro-algerie.html</loc>
-</url>
-
-  <url>
-  <loc>https://dzdmarket.vercel.app/prix-dollar-algerie.html</loc>
-</url>
-
-  <url>
-  <loc>https://dzdmarket.vercel.app/euro-square-algerie.html</loc>
-</url>
-
-  <url>
-  <loc>https://dzdmarket.vercel.app/taux-change-algerie.html</loc>
+<url>
+<loc>https://dzdmarket.vercel.app/prix-euro-algerie.html</loc>
 </url>
 
 <url>
-  <loc>https://dzdmarket.vercel.app/devise-algerie.html</loc>
+<loc>https://dzdmarket.vercel.app/prix-dollar-algerie.html</loc>
 </url>
 
 <url>
-  <loc>https://dzdmarket.vercel.app/prix-euro-square.html</loc>
+<loc>https://dzdmarket.vercel.app/euro-square-algerie.html</loc>
 </url>
 
 <url>
-  <loc>https://dzdmarket.vercel.app/dollar-square-algerie.html</loc>
+<loc>https://dzdmarket.vercel.app/taux-change-algerie.html</loc>
 </url>
 
-  <url>
-  <loc>https://dzdmarket.vercel.app/saar-euro-algerie.html</loc>
+<url>
+<loc>https://dzdmarket.vercel.app/devise-algerie.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/prix-euro-square.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/dollar-square-algerie.html</loc>
+</url>
+
+<!-- Arabic SEO Pages -->
+
+<url>
+<loc>https://dzdmarket.vercel.app/saar-euro-algerie.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/saar-dollar-algerie.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/souk-noir-algerie.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/asaar-omlat-algerie.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/saar-euro-square.html</loc>
+</url>
+
+<url>
+<loc>https://dzdmarket.vercel.app/saar-dollar-square.html</loc>
 </url>
 
 </urlset>
