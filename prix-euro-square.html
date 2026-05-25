@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Prix Euro Square - Algérie aujourd’hui</title>
+
+<meta name="description" content="Prix de l’Euro au Square algérien aujourd’hui en temps réel.">
+
+<meta name="keywords" content="prix euro square, euro square algérie, eur dzd square">
+
+<style>
+
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+padding:25px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+.price{
+font-size:45px;
+color:#22c55e;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>💶 Prix Euro Square Algérie</h1>
+
+<p>
+Suivi du prix de l’Euro au Square en Algérie.
+</p>
+
+<div class="price" id="price">
+Chargement...
+</div>
+
+<script>
+
+async function load(){
+
+const res = await fetch("https://open.er-api.com/v6/latest/EUR");
+
+const data = await res.json();
+
+document.getElementById("price").innerHTML =
+Math.round(data.rates.DZD) + " DZD";
+
+}
+
+load();
+
+</script>
+
+</body>
+</html>
