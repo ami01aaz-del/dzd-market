@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://project-sa2dx.vercel.app/sitemap.xml
