@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prix Dollar Algérie Aujourd’hui - USD DZD en temps réel</title>
+
+<meta name="description" content="Consultez le prix du Dollar en Algérie aujourd’hui en temps réel. Taux USD/DZD au square et marché noir algérien.">
+
+<meta name="keywords" content="prix dollar algérie, usd dzd aujourd’hui, dollar square algérie, marché noir algérie dollar">
+
+<style>
+
+body{
+  background:#020617;
+  color:white;
+  font-family:Arial,sans-serif;
+  padding:25px;
+  line-height:1.8;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+}
+
+h1{
+  color:#38bdf8;
+  margin-bottom:20px;
+  font-size:38px;
+}
+
+.card{
+  background:#0f172a;
+  padding:25px;
+  border-radius:20px;
+  margin-top:20px;
+  border:1px solid #1e293b;
+}
+
+.price{
+  font-size:45px;
+  color:#22c55e;
+  font-weight:bold;
+  margin-top:15px;
+}
+
+.info{
+  color:#94a3b8;
+  margin-top:15px;
+}
+
+a{
+  color:#38bdf8;
+  text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💵 Prix Dollar Algérie Aujourd’hui</h1>
+
+<p>
+Consultez le prix du Dollar en Algérie en temps réel.
+Suivi du taux USD/DZD au marché noir et au square algérien.
+</p>
+
+<div class="card">
+
+<h2>📈 Prix actuel du Dollar</h2>
+
+<div class="price" id="price">
+Chargement...
+</div>
+
+<div class="info">
+Mise à jour automatique du taux USD/DZD.
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>📊 Marché noir Algérie</h2>
+
+<p>
+Le prix du Dollar en Algérie varie chaque jour selon le marché noir et les échanges au square.
+Le Dollar américain reste une devise très recherchée en Algérie.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>🔎 Recherches populaires</h2>
+
+<ul>
+<li>Prix dollar Algérie aujourd’hui</li>
+<li>USD DZD square</li>
+<li>Dollar marché noir Algérie</li>
+<li>Taux dollar dinar algérien</li>
+</ul>
+
+</div>
+
+<p style="margin-top:40px;">
+⬅️ <a href="/">Retour à DZD Market</a>
+</p>
+
+</div>
+
+<script>
+
+async function loadDollar(){
+
+  try{
+
+    const res = await fetch("https://open.er-api.com/v6/latest/USD");
+
+    const data = await res.json();
+
+    document.getElementById("price").innerHTML =
+    Math.round(data.rates.DZD) + " DZD";
+
+  }catch(err){
+
+    document.getElementById("price").innerHTML =
+    "Erreur";
+
+  }
+
+}
+
+loadDollar();
+
+</script>
+
+</body>
+</html>
