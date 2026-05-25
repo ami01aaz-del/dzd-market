@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Marché Noir Algérie - Prix en temps réel</title>
+
+<meta name="description" content="Suivi du marché noir en Algérie : Euro, Dollar, et prix du square en temps réel.">
+<meta name="keywords" content="marché noir algérie, square algérie, prix algérie, euro dollar algérie">
+
+<style>
+body{background:#0f172a;color:white;font-family:Arial;padding:30px;}
+h1{color:#38bdf8;}
+.box{background:#111827;padding:20px;border-radius:15px;margin-top:20px;}
+.price{font-size:30px;color:#22c55e;}
+</style>
+</head>
+
+<body>
+
+<h1>📊 Marché Noir Algérie</h1>
+
+<p>Les prix les plus suivis en Algérie en temps réel.</p>
+
+<div class="box">
+  <h2>💶 Euro</h2>
+  <div class="price" id="eur">Chargement...</div>
+</div>
+
+<div class="box">
+  <h2>💵 Dollar</h2>
+  <div class="price" id="usd">Chargement...</div>
+</div>
+
+<script>
+
+async function load(){
+
+  const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
+  const eurData = await eur.json();
+
+  const usd = await fetch("https://open.er-api.com/v6/latest/USD");
+  const usdData = await usd.json();
+
+  document.getElementById("eur").innerText = eurData.rates.DZD + " DZD";
+  document.getElementById("usd").innerText = usdData.rates.DZD + " DZD";
+
+}
+
+load();
+
+</script>
+
+</body>
+</html>
