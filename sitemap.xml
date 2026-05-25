@@ -8,11 +8,6 @@
 </url>
 
 <url>
-<loc>https://dzdmarket.vercel.app/login.html</loc>
-<priority>0.5</priority>
-</url>
-
-<url>
 <loc>https://dzdmarket.vercel.app/privacy.html</loc>
 <priority>0.3</priority>
 </url>
