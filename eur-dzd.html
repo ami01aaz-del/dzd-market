@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Euro DZD - Prix Euro en Algérie marché noir</title>
+
+<meta name="description" content="Prix de l'Euro en Algérie en temps réel. Suivi du taux EUR/DZD au marché noir et square.">
+<meta name="keywords" content="euro dzd, prix euro algérie, euro marché noir algérie, square euro dzd">
+
+<style>
+body{background:#0f172a;color:white;font-family:Arial;padding:30px;}
+h1{color:#38bdf8;}
+.price{font-size:40px;color:#22c55e;margin-top:20px;}
+</style>
+</head>
+
+<body>
+
+<h1>💶 Euro / DZD en temps réel</h1>
+
+<p>Suivi du prix de l'euro en Algérie (marché noir & square).</p>
+
+<div class="price">Chargement...</div>
+
+<script>
+async function load(){
+  const res = await fetch("https://open.er-api.com/v6/latest/EUR");
+  const data = await res.json();
+  document.querySelector(".price").innerText =
+    data.rates.DZD + " DZD";
+}
+load();
+</script>
+
+</body>
+</html>
