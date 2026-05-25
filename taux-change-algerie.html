@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Taux de Change Algérie - Devises en temps réel</title>
+
+<meta name="description" content="Consultez les taux de change en Algérie en temps réel : Euro, Dollar et devises du marché noir algérien.">
+
+<meta name="keywords" content="taux de change algérie, devise algérie, euro dzd, dollar dzd, marché noir algérie">
+
+<style>
+
+body{
+background:#020617;
+color:white;
+font-family:Arial,sans-serif;
+padding:25px;
+line-height:1.8;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+h1{
+color:#38bdf8;
+font-size:38px;
+margin-bottom:20px;
+}
+
+.card{
+background:#0f172a;
+padding:25px;
+border-radius:20px;
+margin-top:20px;
+border:1px solid #1e293b;
+}
+
+.price{
+font-size:35px;
+color:#22c55e;
+font-weight:bold;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💱 Taux de Change Algérie</h1>
+
+<p>
+Suivez les taux de change des devises en Algérie en temps réel.
+Euro, Dollar et marché noir algérien.
+</p>
+
+<div class="card">
+
+<h2>💶 Euro / DZD</h2>
+
+<div class="price" id="eur">
+Chargement...
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>💵 Dollar / DZD</h2>
+
+<div class="price" id="usd">
+Chargement...
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+async function loadRates(){
+
+const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
+const eurData = await eur.json();
+
+const usd = await fetch("https://open.er-api.com/v6/latest/USD");
+const usdData = await usd.json();
+
+document.getElementById("eur").innerHTML =
+Math.round(eurData.rates.DZD) + " DZD";
+
+document.getElementById("usd").innerHTML =
+Math.round(usdData.rates.DZD) + " DZD";
+
+}
+
+loadRates();
+
+</script>
+
+</
