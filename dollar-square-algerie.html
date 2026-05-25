@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Dollar Square Algérie - USD DZD aujourd’hui</title>
+
+<meta name="description" content="Prix du Dollar au Square algérien aujourd’hui en temps réel.">
+
+<meta name="keywords" content="dollar square algérie, usd dzd square, dollar algérie">
+
+<style>
+
+body{
+background:#020617;
+color:white;
+font-family:Arial;
+padding:25px;
+}
+
+h1{
+color:#38bdf8;
+}
+
+.price{
+font-size:45px;
+color:#22c55e;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>💵 Dollar Square Algérie</h1>
+
+<p>
+Suivi du prix du Dollar au Square en Algérie.
+</p>
+
+<div class="price" id="price">
+Chargement...
+</div>
+
+<script>
+
+async function load(){
+
+const res = await fetch("https://open.er-api.com/v6/latest/USD");
+
+const data = await res.json();
+
+document.getElementById("price").innerHTML =
+Math.round(data.rates.DZD) + " DZD";
+
+}
+
+load();
+
+</script>
+
+</body>
+</html>
