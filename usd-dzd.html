@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Dollar DZD - Prix USD en Algérie marché noir</title>
+
+<meta name="description" content="Prix du Dollar en Algérie en temps réel. Suivi USD/DZD au marché noir et square.">
+<meta name="keywords" content="dollar dzd, prix dollar algérie, usd marché noir algérie, square usd dzd">
+
+<style>
+body{background:#0f172a;color:white;font-family:Arial;padding:30px;}
+h1{color:#38bdf8;}
+.price{font-size:40px;color:#22c55e;margin-top:20px;}
+</style>
+</head>
+
+<body>
+
+<h1>💵 Dollar / DZD en temps réel</h1>
+
+<p>Suivi du prix du dollar en Algérie (marché noir & square).</p>
+
+<div class="price">Chargement...</div>
+
+<script>
+async function load(){
+  const res = await fetch("https://open.er-api.com/v6/latest/USD");
+  const data = await res.json();
+  document.querySelector(".price").innerText =
+    data.rates.DZD + " DZD";
+}
+load();
+</script>
+
+</body>
+</html>
