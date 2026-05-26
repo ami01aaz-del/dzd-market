@@ -1,534 +1,168 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>DZD Market - Prix du marché algérien en temps réel</title>
+<title>DZD Market - Marché Algérien</title>
 
-<meta name="description" content="Suivez les prix du marché algérien en temps réel : devises, téléphones, gaming et or.">
+<meta name="description" content="DZD Market - Suivi des prix en Algérie : devises, produits, or, gaming et marché noir.">
 
 <style>
-
-*{
+body{
 margin:0;
-padding:0;
-box-sizing:border-box;
+font-family:Arial,sans-serif;
+background:#0b1220;
+color:white;
 }
 
-body{
-background:#020617;
-color:white;
-font-family:Arial,sans-serif;
-line-height:1.6;
-padding:18px;
+header{
+padding:20px;
+text-align:center;
+background:#0f172a;
+border-bottom:1px solid #1e293b;
+}
+
+h1{
+margin:0;
+color:#38bdf8;
 }
 
 .container{
-max-width:1200px;
+max-width:1000px;
 margin:auto;
+padding:20px;
 }
 
-.hero{
-background:linear-gradient(135deg,#0f172a,#111827);
-padding:28px;
-border-radius:28px;
+.section{
+margin-top:25px;
+background:#0f172a;
+padding:15px;
+border-radius:12px;
 border:1px solid #1e293b;
-margin-bottom:30px;
 }
 
-.hero h1{
-font-size:42px;
-color:#38bdf8;
+.title{
+font-size:20px;
 margin-bottom:10px;
+color:#22c55e;
 }
 
-.hero p{
-color:#cbd5e1;
-margin-top:10px;
-}
-
-.badges{
-display:flex;
-flex-wrap:wrap;
+.grid{
+display:grid;
+grid-template-columns:1fr;
 gap:10px;
-margin-top:20px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+padding:10px;
+background:#111827;
+border-radius:8px;
+}
+
+.small{
+font-size:13px;
+opacity:0.7;
 }
 
 .badge{
-background:#111827;
-padding:10px 15px;
-border-radius:999px;
-border:1px solid #1e293b;
-font-size:14px;
+font-size:12px;
+padding:2px 6px;
+border-radius:6px;
+background:#1f2937;
 }
 
-.info-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:15px;
-margin-top:25px;
-}
-
-.info-box{
-background:#0f172a;
-padding:18px;
-border-radius:18px;
-border:1px solid #1e293b;
-}
-
-.info-box h3{
-color:#38bdf8;
-margin-bottom:10px;
-}
-
-.section-title{
-font-size:30px;
-margin:35px 0 18px;
-color:#38bdf8;
-}
-
-.cards{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:18px;
-}
-
-.card{
-background:#0f172a;
-border:1px solid #1e293b;
-border-radius:22px;
-padding:18px;
-transition:0.3s;
-cursor:pointer;
-}
-
-.card:hover{
-transform:translateY(-3px);
-border-color:#38bdf8;
-}
-
-.card-top{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:12px;
-}
-
-.card h3{
-font-size:22px;
-}
-
-.tag{
-background:#111827;
-padding:6px 12px;
-border-radius:999px;
-font-size:13px;
-}
-
-.price{
-font-size:32px;
-font-weight:bold;
-color:#22c55e;
-margin:12px 0;
-}
-
-.change-up{
-color:#22c55e;
-font-weight:bold;
-}
-
-.change-down{
-color:#ef4444;
-font-weight:bold;
-}
-
-.details{
-display:none;
-margin-top:15px;
-padding-top:15px;
-border-top:1px solid #1e293b;
-}
-
-.card.active .details{
-display:block;
-}
-
-.details p{
-margin-bottom:8px;
-color:#cbd5e1;
-}
-
-.trending{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-margin-top:25px;
-}
-
-.trend{
-background:#111827;
-padding:12px 18px;
-border-radius:999px;
-border:1px solid #1e293b;
-}
-
-.add-box{
-background:#0f172a;
-padding:25px;
-border-radius:24px;
-border:1px solid #1e293b;
-margin-top:40px;
-}
-
-.add-box h2{
-margin-bottom:15px;
-color:#38bdf8;
-}
-
-.add-box input,
-.add-box select{
-width:100%;
-padding:14px;
-margin-top:12px;
-border:none;
-border-radius:14px;
-background:#111827;
-color:white;
-}
-
-.add-box button{
-width:100%;
-padding:15px;
-margin-top:15px;
-border:none;
-border-radius:14px;
-background:#38bdf8;
-color:#020617;
-font-weight:bold;
-font-size:16px;
-cursor:pointer;
-}
+.green{color:#22c55e;}
+.red{color:#ef4444;}
+.blue{color:#38bdf8;}
 
 footer{
-margin-top:50px;
 text-align:center;
-color:#94a3b8;
-}
-
-footer a{
-color:#38bdf8;
-text-decoration:none;
-margin:0 10px;
-}
-
-@media(max-width:768px){
-
-.hero h1{
-font-size:32px;
-}
-
-.section-title{
-font-size:24px;
-}
-
-.price{
-font-size:26px;
-}
-
+padding:20px;
+font-size:12px;
+opacity:0.6;
 }
 
 </style>
-
 </head>
 
 <body>
 
+<header>
+<h1>🇩🇿 DZD Market</h1>
+<p class="small">Marché algérien - Prix en temps réel</p>
+</header>
+
 <div class="container">
 
-<div class="hero">
+<!-- DEVISES -->
+<div class="section">
+<div class="title">💱 Devises (Square + Officiel)</div>
 
-<h1>DZD Market 🇩🇿</h1>
+<div class="grid">
 
-<p>
-Tous les prix du marché algérien en temps réel.
-</p>
-
-<p>
-💱 Devises • 📱 Téléphones • 🎮 Gaming • 🪙 Or • 🔥 Marché Noir
-</p>
-
-<div class="badges">
-
-<div class="badge">📊 Prix en direct</div>
-<div class="badge">👥 Communauté active</div>
-<div class="badge">👍 Confirmations</div>
-<div class="badge">🔄 API temps réel</div>
-
+<div class="row">
+<span>EUR/DZD</span>
+<span class="green">Square: 280 | Officiel: 155</span>
 </div>
 
-<div class="info-grid">
-
-<div class="info-box">
-<h3>👥 Ajouter des prix</h3>
-<p>
-Les utilisateurs peuvent ajouter les prix du marché algérien.
-</p>
+<div class="row">
+<span>USD/DZD</span>
+<span class="green">Square: 240 | Officiel: 133</span>
 </div>
 
-<div class="info-box">
-<h3>👍 Confirmations</h3>
-<p>
-La communauté confirme les prix pour améliorer la fiabilité.
-</p>
+</div>
 </div>
 
-<div class="info-box">
-<h3>🌍 Taux officiels</h3>
-<p>
-EUR et USD sont mis à jour automatiquement via API.
-</p>
+<!-- PRODUCTS -->
+<div class="section">
+<div class="title">🛒 Produits du marché</div>
+
+<div class="row">
+<span>📱 iPhone 15</span>
+<span class="blue">320 000 DZD</span>
+</div>
+
+<div class="row">
+<span>🎮 PS5</span>
+<span class="blue">125 000 DZD</span>
+</div>
+
+<div class="row">
+<span>🪙 Or 24K</span>
+<span class="blue">14 500 DZD</span>
 </div>
 
 </div>
 
-<div class="trending">
+<!-- FEATURES -->
+<div class="section">
+<div class="title">🔥 Marché Live</div>
 
-<div class="trend">🔥 EUR/DZD</div>
-<div class="trend">📱 iPhone 15</div>
-<div class="trend">🎮 PS5</div>
-<div class="trend">🪙 Or 24K</div>
+<div class="row">
+<span>👥 Confirmations</span>
+<span class="badge">Active</span>
+</div>
 
+<div class="row">
+<span>🔄 API temps réel</span>
+<span class="badge">ON</span>
+</div>
+
+<div class="row">
+<span>📊 Tendance</span>
+<span class="red">Mix</span>
 </div>
 
 </div>
-
-<h2 class="section-title">💱 Devises</h2>
-
-<div class="cards">
-
-<div class="card" onclick="toggleCard(this)">
-
-<div class="card-top">
-<h3>💶 EUR/DZD</h3>
-<span class="tag">Square</span>
-</div>
-
-<div class="price">280 DZD</div>
-
-<p>🌍 Officiel : <span id="eur-price">Chargement...</span></p>
-
-<p class="change-up">📈 +2 DZD</p>
-
-<div class="details">
-
-<p>💵 Achat : 261 DZD</p>
-<p>💸 Vente : 263 DZD</p>
-<p>👥 Confirmé par 5 utilisateurs</p>
-<p>🕒 Mise à jour aujourd’hui</p>
-
-</div>
-
-</div>
-
-<div class="card" onclick="toggleCard(this)">
-
-<div class="card-top">
-<h3>💵 USD/DZD</h3>
-<span class="tag">Square</span>
-</div>
-
-<div class="price">240 DZD</div>
-
-<p>🌍 Officiel : <span id="usd-price">Chargement...</span></p>
-
-<p class="change-down">📉 -1 DZD</p>
-
-<div class="details">
-
-<p>💵 Achat : 239 DZD</p>
-<p>💸 Vente : 241 DZD</p>
-<p>👥 Confirmé par 4 utilisateurs</p>
-<p>🕒 Mise à jour aujourd’hui</p>
-
-</div>
-
-</div>
-
-</div>
-
-<h2 class="section-title">📱 Électronique</h2>
-
-<div class="cards">
-
-<div class="card" onclick="toggleCard(this)">
-
-<h3>📱 iPhone 15</h3>
-
-<div class="price">320 000 DZD</div>
-
-<p class="change-up">📈 +5000 DZD</p>
-
-<div class="details">
-
-<p>📌 Source : Ouedkniss</p>
-<p>👥 Confirmé par 3 utilisateurs</p>
-
-</div>
-
-</div>
-
-<div class="card" onclick="toggleCard(this)">
-
-<h3>📱 Samsung S24 Ultra</h3>
-
-<div class="price">285 000 DZD</div>
-
-<div class="details">
-
-<p>📌 Source : Ouedkniss</p>
-<p>👥 Confirmé par 2 utilisateurs</p>
-
-</div>
-
-</div>
-
-</div>
-
-<h2 class="section-title">🎮 Gaming</h2>
-
-<div class="cards">
-
-<div class="card" onclick="toggleCard(this)">
-
-<h3>🎮 PS5</h3>
-
-<div class="price">125 000 DZD</div>
-
-<p class="change-down">📉 -3000 DZD</p>
-
-<div class="details">
-
-<p>📌 Source : Magasins locaux</p>
-<p>👥 Confirmé par 3 utilisateurs</p>
-
-</div>
-
-</div>
-
-<div class="card" onclick="toggleCard(this)">
-
-<h3>🖥️ RTX 4060</h3>
-
-<div class="price">78 000 DZD</div>
-
-<div class="details">
-
-<p>📌 Source : Ouedkniss</p>
-<p>👥 Confirmé par 2 utilisateurs</p>
-
-</div>
-
-</div>
-
-</div>
-
-<h2 class="section-title">🪙 Or</h2>
-
-<div class="cards">
-
-<div class="card" onclick="toggleCard(this)">
-
-<h3>🪙 Or 24K</h3>
-
-<div class="price">14 500 DZD</div>
-
-<p class="change-up">📈 +500 DZD</p>
-
-<div class="details">
-
-<p>📌 Source : Bijouteries</p>
-<p>👥 Confirmé par 4 utilisateurs</p>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="add-box">
-
-<h2>➕ Ajouter un prix</h2>
-
-<p>
-Ajoutez un prix et aidez la communauté algérienne.
-</p>
-
-<input type="text" placeholder="Nom du produit ou devise">
-
-<input type="number" placeholder="Prix en DZD">
-
-<select>
-<option>💵 Devises</option>
-<option>📱 Électronique</option>
-<option>🎮 Gaming</option>
-<option>🪙 Or</option>
-</select>
-
-<button>Ajouter</button>
 
 </div>
 
 <footer>
-
-<p>
-© 2026 DZD Market
-</p>
-
-<div style="margin-top:10px;">
-
-<a href="/privacy.html">Privacy</a>
-<a href="/terms.html">Terms</a>
-<a href="/contact.html">Contact</a>
-
-</div>
-
+© 2026 DZD Market - Algeria Market Prices
 </footer>
 
-</div>
-
-<script>
-
-function toggleCard(card){
-
-card.classList.toggle("active");
-
-}
-
-async function loadRates(){
-
-const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
-
-const eurData = await eur.json();
-
-const usd = await fetch("https://open.er-api.com/v6/latest/USD");
-
-const usdData = await usd.json();
-
-document.getElementById("eur-price").innerHTML =
-Math.round(eurData.rates.DZD) + " DZD";
-
-document.getElementById("usd-price").innerHTML =
-Math.round(usdData.rates.DZD) + " DZD";
-
-}
-
-loadRates();
-
-</script>
-
 </body>
-
 </html>
