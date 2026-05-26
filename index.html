@@ -112,15 +112,14 @@ opacity:0.6;
 
 <div class="row">
 <span>EUR/DZD</span>
-<span class="green">
-Square: 280 | Officiel: 155
+<span class="green" id="eur-rate">
+Chargement...
 </span>
 </div>
 
 <div class="row">
-<span>USD/DZD</span>
-<span class="green">
-Square: 240 | Officiel: 133
+<span class="green" id="usd-rate">
+Chargement...
 </span>
 </div>
 
@@ -192,6 +191,46 @@ Square: 240 | Officiel: 133
 <footer>
 © 2026 DZD Market - Algeria Market Prices
 </footer>
+
+<script>
+
+async function loadRates(){
+
+try{
+
+const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
+const eurData = await eur.json();
+
+const usd = await fetch("https://open.er-api.com/v6/latest/USD");
+const usdData = await usd.json();
+
+const eurOfficial = Math.round(eurData.rates.DZD);
+const usdOfficial = Math.round(usdData.rates.DZD);
+
+const eurSquare = eurOfficial + 125;
+const usdSquare = usdOfficial + 107;
+
+document.getElementById("eur-rate").innerHTML =
+`Square: ${eurSquare} | Officiel: ${eurOfficial}`;
+
+document.getElementById("usd-rate").innerHTML =
+`Square: ${usdSquare} | Officiel: ${usdOfficial}`;
+
+}catch(error){
+
+document.getElementById("eur-rate").innerHTML =
+"Erreur API";
+
+document.getElementById("usd-rate").innerHTML =
+"Erreur API";
+
+}
+
+}
+
+loadRates();
+
+</script>
 
 </body>
 </html>
