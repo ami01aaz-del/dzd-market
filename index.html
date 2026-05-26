@@ -127,12 +127,46 @@ Chargement...
 
 </div>
 
-<p class="small">
-💰 100 EUR = 28 000 DZD
-</p>
+<div style="margin-top:15px;">
 
-<p class="small">
-💰 100 USD = 24 000 DZD
+<p class="small">💰 Convertisseur DZD</p>
+
+<input
+id="amount"
+type="number"
+value="100"
+placeholder="Montant"
+style="
+width:100%;
+padding:10px;
+margin-top:8px;
+border:none;
+border-radius:8px;
+background:#111827;
+color:white;
+"
+/>
+
+<select
+id="currency"
+style="
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#111827;
+color:white;
+"
+>
+
+<option value="eur">EUR</option>
+<option value="usd">USD</option>
+
+</select>
+
+<p class="small" id="conversion-result" style="margin-top:10px;">
+28 000 DZD
 </p>
 
 </div>
@@ -209,8 +243,8 @@ const usdData = await usd.json();
 const eurOfficial = Math.round(eurData.rates.DZD);
 const usdOfficial = Math.round(usdData.rates.DZD);
 
-const eurSquare = eurOfficial + 125;
-const usdSquare = usdOfficial + 107;
+window.eurSquare = eurOfficial + 125;
+window.usdSquare = usdOfficial + 107;
 
 document.getElementById("eur-rate").innerHTML =
 `Square: ${eurSquare} | Officiel: ${eurOfficial}`;
@@ -231,6 +265,33 @@ document.getElementById("usd-rate").innerHTML =
 }
 
 loadRates();
+
+function updateConverter(){
+
+const amount =
+parseFloat(document.getElementById("amount").value);
+
+const currency =
+document.getElementById("currency").value;
+
+let result = 0;
+
+if(currency === "eur"){
+result = amount * eurSquare;
+}else{
+result = amount * usdSquare;
+}
+
+document.getElementById("conversion-result").innerHTML =
+result.toLocaleString() + " DZD";
+
+}
+
+document.getElementById("amount")
+.addEventListener("input", updateConverter);
+
+document.getElementById("currency")
+.addEventListener("change", updateConverter);
 
 </script>
 
