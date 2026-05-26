@@ -188,27 +188,65 @@ color:white;
 
 </div>
 
+<!-- 🪙 GOLD -->
+<div class="section">
+
+<div class="title">
+🪙 Or 24K
 </div>
 
-<!-- 🪙 Gold Section -->
-<h2 class="section-title">🪙 Or 24K</h2>
-
-<div class="cards">
+<p class="small">
+🕒 Mise à jour automatique
+</p>
 
 <div class="row">
   <span>Gold 24K (1g)</span>
-  <span class="green">Marché Or</span>
+  <span class="green" id="gold-local">
+    Chargement...
+  </span>
 </div>
 
 <div class="row">
   <span>Prix international</span>
-  <span class="green" id="gold-rate">Chargement...</span>
+  <span class="blue" id="gold-rate">
+    Chargement...
+  </span>
 </div>
 
 <div class="row">
   <span>100g Gold</span>
-  <span class="green">Auto calcul</span>
+  <span class="green" id="gold-100g">
+    Auto calcul
+  </span>
 </div>
+
+<p class="small" style="margin-top:15px;">
+⚖️ Calculateur Gold
+</p>
+
+<input
+id="goldAmount"
+type="number"
+placeholder="Grammes"
+style="
+width:100%;
+padding:10px;
+margin-top:8px;
+border:none;
+border-radius:8px;
+background:#162033;
+font-size:18px;
+color:white;
+"
+/>
+
+<p
+id="goldResult"
+class="small"
+style="margin-top:12px;font-size:22px;color:#22c55e;"
+>
+0 DZD
+</p>
 
 </div>
 
@@ -331,6 +369,40 @@ document.getElementById("amount")
 
 document.getElementById("currency")
 .addEventListener("change", updateConverter);
+
+// GOLD PRICE
+
+const goldPriceGram = 14500;
+
+document.getElementById("gold-local").innerHTML =
+goldPriceGram + " DZD";
+
+document.getElementById("gold-rate").innerHTML =
+"107 USD";
+
+document.getElementById("gold-100g").innerHTML =
+(100 * goldPriceGram).toLocaleString() + " DZD";
+
+function updateGold(){
+
+const grams =
+parseFloat(document.getElementById("goldAmount").value);
+
+if(isNaN(grams)){
+document.getElementById("goldResult").innerHTML =
+"0 DZD";
+return;
+}
+
+const result = grams * goldPriceGram;
+
+document.getElementById("goldResult").innerHTML =
+result.toLocaleString() + " DZD";
+
+}
+
+document.getElementById("goldAmount")
+.addEventListener("input", updateGold);
 
 </script>
 
