@@ -1,903 +1,534 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <link rel="icon" href="icon-new.png">
-  <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0f172a">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="google-site-verification" content="AzDh6SCK3muM4Z_47jzNBCCyXoez64CmcoPoa0-Gioo" />
-  <meta name="description" content="Suivi en temps réel des prix en Algérie : Euro, Dollar, marché noir et conversion DZD.">
-<meta name="keywords" content="DZD Market, euro algérie, dollar algérie, prix marché noir, square algérie, taux change dzd">
 
-<meta name="author" content="DZD Market">
-<meta property="og:title" content="DZD Market">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta property="og:description" content="Prix du marché noir en Algérie en temps réel">
+<title>DZD Market - Prix du marché algérien en temps réel</title>
 
-<meta property="og:image" content="https://dzdmarket.vercel.app/icon-new.png">
+<meta name="description" content="Suivez les prix du marché algérien en temps réel : devises, téléphones, gaming et or.">
 
-<meta property="og:type" content="website">
-  <title>DZD Market - Prix Euro Dollar et Marché Noir en Algérie</title>
+<style>
 
-
- <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
-  background:#020617;
-  color:white;
-  font-family:Arial, sans-serif;
-  padding:20px;
-  background:
-radial-gradient(circle at top,#0f172a,#020617);
+background:#020617;
+color:white;
+font-family:Arial,sans-serif;
+line-height:1.6;
+padding:18px;
 }
 
-h1{
-  text-align:center;
-  color:#38bdf8;
-  margin-bottom:30px;
-  font-size:38px;
+.container{
+max-width:1200px;
+margin:auto;
 }
 
-#prix{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+.hero{
+background:linear-gradient(135deg,#0f172a,#111827);
+padding:28px;
+border-radius:28px;
+border:1px solid #1e293b;
+margin-bottom:30px;
+}
+
+.hero h1{
+font-size:42px;
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+.hero p{
+color:#cbd5e1;
+margin-top:10px;
+}
+
+.badges{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+margin-top:20px;
+}
+
+.badge{
+background:#111827;
+padding:10px 15px;
+border-radius:999px;
+border:1px solid #1e293b;
+font-size:14px;
+}
+
+.info-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:15px;
+margin-top:25px;
+}
+
+.info-box{
+background:#0f172a;
+padding:18px;
+border-radius:18px;
+border:1px solid #1e293b;
+}
+
+.info-box h3{
+color:#38bdf8;
+margin-bottom:10px;
+}
+
+.section-title{
+font-size:30px;
+margin:35px 0 18px;
+color:#38bdf8;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:18px;
 }
 
 .card{
-  background:#0f172a;
-  border:1px solid #1e293b;
-  padding:20px;
-  border-radius:20px;
-  transition:0.3s;
-  box-shadow:
-0 0 15px rgba(0,0,0,0.3),
-0 0 25px rgba(56,189,248,0.08);
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:22px;
+padding:18px;
+transition:0.3s;
+cursor:pointer;
 }
 
 .card:hover{
-  transform:translateY(-5px);
-  border-color:#38bdf8;
-  box-shadow:
-0 0 25px rgba(56,189,248,0.25),
-0 0 50px rgba(56,189,248,0.12);
+transform:translateY(-3px);
+border-color:#38bdf8;
 }
 
-.card h2{
-  color:#e2e8f0;
-  margin-bottom:15px;
+.card-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:12px;
+}
+
+.card h3{
+font-size:22px;
+}
+
+.tag{
+background:#111827;
+padding:6px 12px;
+border-radius:999px;
+font-size:13px;
 }
 
 .price{
-  font-size:32px;
-  color:#22c55e;
-  font-weight:bold;
-  margin-bottom:10px;
+font-size:32px;
+font-weight:bold;
+color:#22c55e;
+margin:12px 0;
 }
 
-.card p{
-  color:#94a3b8;
-}
-   .header{
-  text-align:center;
-  margin-bottom:40px;
+.change-up{
+color:#22c55e;
+font-weight:bold;
 }
 
-.header p{
-  color:#94a3b8;
-  margin-top:10px;
-  font-size:18px;
+.change-down{
+color:#ef4444;
+font-weight:bold;
 }
 
-.card{
-  position:relative;
-  overflow:hidden;
+.details{
+display:none;
+margin-top:15px;
+padding-top:15px;
+border-top:1px solid #1e293b;
 }
 
-.card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  width:5px;
-  height:100%;
-  background:#38bdf8;
+.card.active .details{
+display:block;
 }
 
-.update{
-  margin-top:15px;
-  color:#64748b;
-  font-size:14px;
-}
-   .form{
-  margin-top:40px;
-  background:#0f172a;
-  padding:20px;
-  border-radius:20px;
-  border:1px solid #1e293b;
+.details p{
+margin-bottom:8px;
+color:#cbd5e1;
 }
 
-.form input{
-  width:100%;
-  padding:15px;
-  margin-bottom:15px;
-  border:none;
-  border-radius:10px;
-  background:#1e293b;
-  color:white;
-  font-size:16px;
+.trending{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+margin-top:25px;
 }
 
-.form button{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:10px;
-  background:#38bdf8;
-  color:white;
-  font-size:18px;
-  cursor:pointer;
-  transition:0.3s;
+.trend{
+background:#111827;
+padding:12px 18px;
+border-radius:999px;
+border:1px solid #1e293b;
 }
 
-.form button:hover{
-  opacity:0.8;
-}
-   #search{
-  width:100%;
-  padding:15px;
-  margin-bottom:25px;
-  border:none;
-  border-radius:15px;
-  background:#0f172a;
-  color:white;
-  font-size:16px;
-  border:1px solid #1e293b;
-}
-   .image{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:15px;
-  margin-bottom:15px;
-   }
-   .card button{
-  margin-top:15px;
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:12px;
-  background:#22c55e;
-  color:white;
-  font-size:16px;
-  cursor:pointer;
-  transition:0.3s;
+.add-box{
+background:#0f172a;
+padding:25px;
+border-radius:24px;
+border:1px solid #1e293b;
+margin-top:40px;
 }
 
-.card button:hover{
-  opacity:0.8;
-}
-   .trend{
-  margin-top:10px;
-  background:#f97316;
-  color:white;
-  padding:8px;
-  border-radius:10px;
-  text-align:center;
-  font-weight:bold;
-}
-   .new{
-  margin-top:10px;
-  background:#06b6d4;
-  color:white;
-  padding:8px;
-  border-radius:10px;
-  text-align:center;
-  font-weight:bold;
-   }
-   #stats{
-  margin-top:15px;
-  color:#94a3b8;
-  font-size:18px;
-   }
-   .filters{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:25px;
+.add-box h2{
+margin-bottom:15px;
+color:#38bdf8;
 }
 
-.filters button{
-  padding:10px 15px;
-  border:none;
-  border-radius:12px;
-  background:#1e293b;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
+.add-box input,
+.add-box select{
+width:100%;
+padding:14px;
+margin-top:12px;
+border:none;
+border-radius:14px;
+background:#111827;
+color:white;
 }
 
-.filters button:hover{
-  background:#38bdf8;
-}
-   @media(max-width:768px){
-
-  body{
-    padding:15px;
-  }
-
-  h1{
-    font-size:30px;
-  }
-
-  .filters{
-    overflow-x:auto;
-    flex-wrap:nowrap;
-    padding-bottom:10px;
-  }
-
-  .filters button{
-    min-width:max-content;
-  }
-
-  .card{
-    padding:15px;
-  }
-
-  .price{
-    font-size:26px;
-  }
-
-  .image{
-    height:160px;
-  }
-
-  .form{
-    padding:15px;
-  }
-
-   }
-   #loading{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
+.add-box button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:14px;
+background:#38bdf8;
+color:#020617;
+font-weight:bold;
+font-size:16px;
+cursor:pointer;
 }
 
-.skeleton{
-  height:250px;
-  border-radius:20px;
-  background:linear-gradient(
-    90deg,
-    #0f172a 25%,
-    #1e293b 50%,
-    #0f172a 75%
-  );
-
-  background-size:200% 100%;
-
-  animation:loading 1.5s infinite;
+footer{
+margin-top:50px;
+text-align:center;
+color:#94a3b8;
 }
 
-@keyframes loading{
-
-  0%{
-    background-position:200% 0;
-  }
-
-  100%{
-    background-position:-200% 0;
-  }
-
-}
-   .main-rate{
-  margin-top:10px;
-  background:#eab308;
-  color:black;
-  padding:8px;
-  border-radius:10px;
-  text-align:center;
-  font-weight:bold;
-   }
-   .up{
-  color:#22c55e;
-  font-weight:bold;
+footer a{
+color:#38bdf8;
+text-decoration:none;
+margin:0 10px;
 }
 
-.down{
-  color:#ef4444;
-  font-weight:bold;
-}
-   .rates{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:10px;
-  margin-bottom:10px;
+@media(max-width:768px){
+
+.hero h1{
+font-size:32px;
 }
 
-.rates span{
-  flex:1;
-  background:#111827;
-  padding:10px;
-  border-radius:10px;
-  text-align:center;
-  font-weight:bold;
-}
-   #market-update{
-  margin-top:10px;
-  color:#22c55e;
-  font-size:16px;
-  font-weight:bold;
-   }
-   .old-price{
-  margin-top:8px;
-  color:#94a3b8;
-  font-size:14px;
-   }
-   #top-devise{
-  margin-top:10px;
-  color:#eab308;
-  font-weight:bold;
-  font-size:16px;
-   }
-   #live-rates{
-     transition:0.4s;
-  margin-top:10px;
-  color:#38bdf8;
-  font-weight:bold;
-  font-size:16px;
-}
-#live-update{
-  margin-top:8px;
-  color:#22c55e;
-  font-size:14px;
-  font-weight:bold;
-}
-.chart-container{
-  background:#0f172a;
-  padding:20px;
-  border-radius:20px;
-  margin-top:20px;
-  box-shadow:0 0 20px rgba(56,189,248,0.15);
-}
-#top-trends{
-  margin-top:15px;
-  color:#f97316;
-  font-weight:bold;
-  font-size:16px;
-}
-body.dark {
-  background:#0b1220;
-  color:white;
+.section-title{
+font-size:24px;
 }
 
-body.light {
-  background:white;
-  color:black;
+.price{
+font-size:26px;
 }
 
-#themeBtn{
-  margin-top:10px;
-  padding:8px 12px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  background:#38bdf8;
-  color:white;
-  font-weight:bold;
-}
-.converter{
-  margin-top:20px;
-  padding:15px;
-  background:#0f172a;
-  border-radius:15px;
-  color:white;
 }
 
-.converter input,
-.converter select{
-  padding:8px;
-  margin:5px;
-  border-radius:8px;
-  border:none;
-}
+</style>
 
-.converter button{
-  padding:8px 12px;
-  background:#38bdf8;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-#result{
-  margin-top:10px;
-  font-weight:bold;
-  color:#22c55e;
-}
-.footer{
-  margin-top:40px;
-  padding:20px;
-  text-align:center;
-  color:#94a3b8;
-  font-size:14px;
-}
-   
- </style>
 </head>
+
 <body>
 
-<header class="header">
-  <h1>DZD market</h1>
-  <button id="themeBtn">🌙 Dark Mode</button>
-  <p>Suivi des prix en Algérie 🇩🇿</p>
-  <div id="stats"></div>
-  <div id="market-update"></div>
-  <div id="top-devise"></div>
-  <div id="top-trends"></div>
-  <div id="live-rates"></div>
-  <div id="live-update"></div>
-</header>
+<div class="container">
 
-<div class="converter">
-  <h2>💱 Convertisseur de devises</h2>
+<div class="hero">
 
-  <input type="number" id="amount" placeholder="Montant">
+<h1>DZD Market 🇩🇿</h1>
 
-  <select id="fromCurrency">
-    <option value="EUR">EUR</option>
-    <option value="USD">USD</option>
-  </select>
+<p>
+Tous les prix du marché algérien en temps réel.
+</p>
 
-  <button onclick="convert()">Convertir</button>
+<p>
+💱 Devises • 📱 Téléphones • 🎮 Gaming • 🪙 Or • 🔥 Marché Noir
+</p>
 
-  <div id="result"></div>
-</div>
-<input 
-  type="text" 
-  id="search"
-  placeholder="🔎 Rechercher..."
-  onkeyup="searchPrices()"
-/>
-  <div class="filters">
+<div class="badges">
 
-  <button onclick="filterCategory('all')">🌍 Tous</button>
-
-  <button onclick="filterCategory('Devises')">💵 Devises</button>
-
-  <button onclick="filterCategory('Or')">🪙 Or</button>
-
-  <button onclick="filterCategory('Électronique')">📱 Électronique</button>
-
-  <button onclick="filterCategory('Gaming')">🎮 Gaming</button>
-
-  </div>
-  
-<div id="loading">
-
-  <div class="skeleton"></div>
-  <div class="skeleton"></div>
-  <div class="skeleton"></div>
+<div class="badge">📊 Prix en direct</div>
+<div class="badge">👥 Communauté active</div>
+<div class="badge">👍 Confirmations</div>
+<div class="badge">🔄 API temps réel</div>
 
 </div>
 
-<div id="prix"></div>
-<div class="chart-container">
-  <canvas id="priceChart"></canvas>
+<div class="info-grid">
+
+<div class="info-box">
+<h3>👥 Ajouter des prix</h3>
+<p>
+Les utilisateurs peuvent ajouter les prix du marché algérien.
+</p>
 </div>
-<div class="form">
 
-  <input type="text" id="devise" placeholder="Nom du produit ou devise">
+<div class="info-box">
+<h3>👍 Confirmations</h3>
+<p>
+La communauté confirme les prix pour améliorer la fiabilité.
+</p>
+</div>
 
-  <input type="number" id="prixInput" placeholder="Prix en DZD">
-
-  <input type="text" id="source" placeholder="Source">
-  <select id="category">
-
-  <option value="Devises">💵 Devises</option>
-
-  <option value="Or">🪙 Or</option>
-
-  <option value="Électronique">📱 Électronique</option>
-
-  <option value="Gaming">🎮 Gaming</option>
-
-  </select>
-
-  <button onclick="addPrice()">Ajouter</button>
+<div class="info-box">
+<h3>🌍 Taux officiels</h3>
+<p>
+EUR et USD sont mis à jour automatiquement via API.
+</p>
+</div>
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div class="trending">
+
+<div class="trend">🔥 EUR/DZD</div>
+<div class="trend">📱 iPhone 15</div>
+<div class="trend">🎮 PS5</div>
+<div class="trend">🪙 Or 24K</div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">💱 Devises</h2>
+
+<div class="cards">
+
+<div class="card" onclick="toggleCard(this)">
+
+<div class="card-top">
+<h3>💶 EUR/DZD</h3>
+<span class="tag">Square</span>
+</div>
+
+<div class="price">280 DZD</div>
+
+<p>🌍 Officiel : <span id="eur-price">Chargement...</span></p>
+
+<p class="change-up">📈 +2 DZD</p>
+
+<div class="details">
+
+<p>💵 Achat : 261 DZD</p>
+<p>💸 Vente : 263 DZD</p>
+<p>👥 Confirmé par 5 utilisateurs</p>
+<p>🕒 Mise à jour aujourd’hui</p>
+
+</div>
+
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+
+<div class="card-top">
+<h3>💵 USD/DZD</h3>
+<span class="tag">Square</span>
+</div>
+
+<div class="price">240 DZD</div>
+
+<p>🌍 Officiel : <span id="usd-price">Chargement...</span></p>
+
+<p class="change-down">📉 -1 DZD</p>
+
+<div class="details">
+
+<p>💵 Achat : 239 DZD</p>
+<p>💸 Vente : 241 DZD</p>
+<p>👥 Confirmé par 4 utilisateurs</p>
+<p>🕒 Mise à jour aujourd’hui</p>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">📱 Électronique</h2>
+
+<div class="cards">
+
+<div class="card" onclick="toggleCard(this)">
+
+<h3>📱 iPhone 15</h3>
+
+<div class="price">320 000 DZD</div>
+
+<p class="change-up">📈 +5000 DZD</p>
+
+<div class="details">
+
+<p>📌 Source : Ouedkniss</p>
+<p>👥 Confirmé par 3 utilisateurs</p>
+
+</div>
+
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+
+<h3>📱 Samsung S24 Ultra</h3>
+
+<div class="price">285 000 DZD</div>
+
+<div class="details">
+
+<p>📌 Source : Ouedkniss</p>
+<p>👥 Confirmé par 2 utilisateurs</p>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">🎮 Gaming</h2>
+
+<div class="cards">
+
+<div class="card" onclick="toggleCard(this)">
+
+<h3>🎮 PS5</h3>
+
+<div class="price">125 000 DZD</div>
+
+<p class="change-down">📉 -3000 DZD</p>
+
+<div class="details">
+
+<p>📌 Source : Magasins locaux</p>
+<p>👥 Confirmé par 3 utilisateurs</p>
+
+</div>
+
+</div>
+
+<div class="card" onclick="toggleCard(this)">
+
+<h3>🖥️ RTX 4060</h3>
+
+<div class="price">78 000 DZD</div>
+
+<div class="details">
+
+<p>📌 Source : Ouedkniss</p>
+<p>👥 Confirmé par 2 utilisateurs</p>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="section-title">🪙 Or</h2>
+
+<div class="cards">
+
+<div class="card" onclick="toggleCard(this)">
+
+<h3>🪙 Or 24K</h3>
+
+<div class="price">14 500 DZD</div>
+
+<p class="change-up">📈 +500 DZD</p>
+
+<div class="details">
+
+<p>📌 Source : Bijouteries</p>
+<p>👥 Confirmé par 4 utilisateurs</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="add-box">
+
+<h2>➕ Ajouter un prix</h2>
+
+<p>
+Ajoutez un prix et aidez la communauté algérienne.
+</p>
+
+<input type="text" placeholder="Nom du produit ou devise">
+
+<input type="number" placeholder="Prix en DZD">
+
+<select>
+<option>💵 Devises</option>
+<option>📱 Électronique</option>
+<option>🎮 Gaming</option>
+<option>🪙 Or</option>
+</select>
+
+<button>Ajouter</button>
+
+</div>
+
+<footer>
+
+<p>
+© 2026 DZD Market
+</p>
+
+<div style="margin-top:10px;">
+
+<a href="/privacy.html">Privacy</a>
+<a href="/terms.html">Terms</a>
+<a href="/contact.html">Contact</a>
+
+</div>
+
+</footer>
+
+</div>
 
 <script>
-const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjbW5nem9tcHlvanVmZmVwc3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzOTM2MDYsImV4cCI6MjA5NDk2OTYwNn0.15SBxqm0g2odZgSJi_iJlhTVGn7R3uuP2xH0-kV-Afg";
 
-const { createClient } = supabase;
-const client = createClient(supabaseUrl, supabaseKey);
+function toggleCard(card){
 
-async function loadPrices() {
-  const { data, error } = await client
-    .from('prix')
-    .select('*')
-  .order('id', { ascending: false });
-  if (error) {
-    console.log(error);
-    return;
-  }
-
-  const recipient = document.getElementById("prix");
-
-  recipient.innerHTML = "";
-  document.getElementById("loading").style.display = "none";
-  document.getElementById("stats").innerHTML =
-`📊 ${data.length} Prix suivis en direct`;
-  const latest = data[0];
-
-const minutes = Math.floor(
-  (Date.now() - new Date(latest.created_at)) / 60000
-);
-
-let timeText = "";
-
-if(minutes < 60){
-
-  timeText = `il y a ${minutes} min`;
-
-} else {
-
-  const hours = Math.floor(minutes / 60);
-
-  timeText = `il y a ${hours} h`;
+card.classList.toggle("active");
 
 }
 
-document.getElementById("market-update").innerHTML =
-`🟢 Dernière mise à jour du Square : ${timeText}`;
+async function loadRates(){
 
-  const top = [...data].sort(
-(a,b)=>b.confirme_par-a.confirme_par
-)[0];
+const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
 
-document.getElementById("top-devise").innerHTML =
-`👑 Devise la plus suivie : ${top.devise}`;
+const eurData = await eur.json();
 
-const priority = ["EUR/DZD", "USD/DZD"];
+const usd = await fetch("https://open.er-api.com/v6/latest/USD");
 
-data.sort((a, b) => {
+const usdData = await usd.json();
 
-  const aPriority = priority.includes(a.devise) ? 0 : 1;
+document.getElementById("eur-price").innerHTML =
+Math.round(eurData.rates.DZD) + " DZD";
 
-  const bPriority = priority.includes(b.devise) ? 0 : 1;
-
-  return aPriority - bPriority;
-
-});
-const labels = data.map(item => item.devise);
-
-const prices = data.map(item => item.prix);
-
-const ctx = document.getElementById('priceChart');
-
-new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: labels,
-    datasets: [{
-      label: 'Prix en DZD',
-      data: prices,
-      borderWidth: 3,
-      tension: 0.4
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        labels: {
-          color: "white"
-        }
-      }
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: "white"
-        }
-      },
-      y: {
-        ticks: {
-          color: "white"
-        }
-      }
-    }
-  }
-});
-
-data.forEach(item => {
-
-  recipient.innerHTML += `
-    <div class="card">
-    
-      <img src="${item.image}" class="image">
-      
-      <h2>${item.devise}</h2>
-      
-      ${item.achat ? `
-<div class="rates">
-
-  <span>💵 Achat: ${item.achat}</span>
-
-  <span>💸 Vente: ${item.vente}</span>
-
-</div>
-` : ""}
-
-      ${item.devise === "EUR/DZD" || item.devise === "USD/DZD" ? `
-<div class="main-rate">⭐ Taux principal</div>
-` : ""}
-
-      <div class="price">
-  ${Number(item.prix).toLocaleString()} DZD
-</div>
-${item.ancien_prix ? `
-<div class="old-price">
-Ancien : ${item.ancien_prix} DZD
-</div>
-` : ""}
-
-<p>🏷️ ${item.category}</p>
-<p>📌 ${item.source}</p>
-
-<p class="${item.variation && item.variation.includes('📈') ? 'up' : 'down'}">
-${item.variation || ""}
-</p>
-      
-<p>👥 Confirmé par ${item.confirme_par}</p>
-
-${item.confirme_par >= 5 ? `
-<div class="trend">🔥 Tendance</div>
-` : ""}
-
-<button onclick="confirmPrice(${item.id}, ${item.confirme_par})">
-👍 Confirmer
-</button>
-
-${Date.now() - new Date(item.created_at) < 172800000 ? `
-<div class="new">🆕 Nouveau</div>
-` : ""}
-
-<div class="update">
-🕒 ${new Date(item.created_at).toLocaleDateString()}
-</div>
-    </div>
-  `;
-
-});
-
-}
-async function addPrice(){
-
-  const devise = document.getElementById("devise").value;
-
-  const prix = document.getElementById("prixInput").value;
-
-  const source = document.getElementById("source").value;
-  const category = document.getElementById("category").value;
-
-  const { error } = await client
-    .from('prix')
-    .insert([
-      {
-        devise,
-        prix,
-        source,
-        category,
-        confirme_par: 1
-      }
-    ]);
-
-  if(error){
-    alert("Erreur");
-    console.log(error);
-    return;
-  }
-
-  alert("Prix ajouté ✅");
-
-  loadPrices();
-
-}
-  function searchPrices(){
-
-  const value = document
-    .getElementById("search")
-    .value
-    .toLowerCase();
-
-  const cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-
-    if(card.innerText.toLowerCase().includes(value)){
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-
-  });
-
-}
-  async function confirmPrice(id, current){
-    
-    if(localStorage.getItem("confirmed_" + id)){
-
-  alert("Déjà confirmé ✅");
-  return;
+document.getElementById("usd-price").innerHTML =
+Math.round(usdData.rates.DZD) + " DZD";
 
 }
 
-  const { error } = await client
-    .from('prix')
-    .update({
-      confirme_par: current + 1
-    })
-    .eq('id', id);
+loadRates();
 
-  if(error){
-    console.log(error);
-    return;
-  }
-
-  if(error){
-    console.log(error);
-    return;
-  }
-    
-localStorage.setItem("confirmed_" + id, true);
-loadPrices();
-
-}
-    
-
-  function filterCategory(category){
-
-  const cards = document.querySelectorAll(".card");
-
-  cards.forEach(card => {
-
-    if(category === "all"){
-      card.style.display = "block";
-      return;
-    }
-
-    if(card.innerText.includes(category)){
-      card.style.display = "block";
-    } else {
-      card.style.display = "none";
-    }
-
-  });
-
-  }
- async function updateRates(){
-
-  try {
-
-    const res = await fetch("https://open.er-api.com/v6/latest/EUR");
-    const eurData = await res.json();
-
-    const eurToDzd = Math.round(eurData.rates.DZD);
-
-    const usdRes = await fetch("https://open.er-api.com/v6/latest/USD");
-    const usdData = await usdRes.json();
-
-    const usdToDzd = Math.round(usdData.rates.DZD);
-
-    const { data: squareRates, error } = await client
-      .from("square_rates")
-      .select("*");
-
-    let eurSquare = 0;
-let usdSquare = 0;
-
-if(squareRates && squareRates.length > 0){
-  eurSquare = squareRates[0].eur;
-  usdSquare = squareRates[0].usd;
-}
-
-    document.getElementById("top-trends").innerHTML =
-    "🔥 Tendances: EUR/DZD • iPhone 15 • PS5";
-
-    const live = document.getElementById("live-rates");
-
-    live.innerHTML = `
-💱 EUR officiel: ${eurToDzd}<br>
-💱 EUR square: ${eurSquare}<br><br>
-
-💱 USD officiel: ${usdToDzd}<br>
-💱 USD square: ${usdSquare}
-`;
-
-    document.getElementById("live-update").innerHTML =
-    "🟢 Mise à jour maintenant";
-
-  } catch(err) {
-
-    console.log(err);
-
-  }
-
-}
-
-window.onload = () => {
-
-  loadPrices();
-
-  updateRates();
-
-  setInterval(updateRates, 60000);
-
-};
-
-async function convert(){
-
-  const amount = document.getElementById("amount").value;
-  const from = document.getElementById("fromCurrency").value;
-
-  const res = await fetch(`https://open.er-api.com/v6/latest/${from}`);
-  const data = await res.json();
-
-  const rate = data.rates.DZD;
-
-  const result = amount * rate;
-
-  document.getElementById("result").innerHTML =
-  `${amount} ${from} = ${result.toFixed(2)} DZD`;
-
-}
-
-const btn = document.getElementById("themeBtn");
-
-btn.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-
-  if(document.body.classList.contains("dark")){
-    btn.innerHTML = "☀️ Light Mode";
-  } else {
-    btn.innerHTML = "🌙 Dark Mode";
-  }
-});
 </script>
 
-<footer class="footer">
-  <p>© 2026 DZD Market - Tous droits réservés</p>
-</footer>
-
-  <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js")
-    .then(() => console.log("Service Worker enregistré"));
-}
-  </script>
-  
-  <footer class="footer" style="text-align:center; margin-top:40px;">
-  <a href="/privacy.html" style="color:#38bdf8; margin:10px;">Privacy Policy</a>
-  <a href="/terms.html" style="color:#38bdf8; margin:10px;">Terms</a>
-  <a href="/contact.html" style="color:#38bdf8; margin:10px;">Contact</a>
-
-  <p style="color:#64748b; margin-top:10px;">
-    © 2026 DZD Market
-  </p>
-</footer>
-
 </body>
+
 </html>
