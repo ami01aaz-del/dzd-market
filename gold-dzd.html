@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr" translate="no">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- 🔥 منع الترجمة -->
+<meta name="google" content="notranslate">
+
+<title>Prix de l'Or en Algérie 24K - Cours en Temps Réel DZD</title>
+
+<meta name="description" content="Prix de l'or 24K en Algérie en temps réel. Suivi du marché de l'or, cours international et conversion en DZD.">
+
+<meta name="keywords" content="or algérie, prix or 24k, gold algérie, cours or dzd">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#020617;
+color:white;
+font-family:Arial,sans-serif;
+line-height:1.6;
+padding-bottom:80px;
+}
+
+.container{
+width:92%;
+max-width:900px;
+margin:auto;
+padding-top:25px;
+}
+
+.header{
+text-align:center;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:40px;
+color:#fbbf24;
+margin-bottom:10px;
+}
+
+.header p{
+color:#94a3b8;
+font-size:18px;
+}
+
+.section{
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:24px;
+padding:25px;
+margin-bottom:25px;
+}
+
+.title{
+font-size:30px;
+color:#fbbf24;
+margin-bottom:18px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 0;
+border-bottom:1px solid #1e293b;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.green{
+color:#22c55e;
+font-weight:bold;
+}
+
+.blue{
+color:#38bdf8;
+font-weight:bold;
+}
+
+.price{
+font-size:50px;
+text-align:center;
+margin:20px 0;
+color:#fbbf24;
+font-weight:bold;
+}
+
+.converter input{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:none;
+border-radius:12px;
+background:#162033;
+color:white;
+font-size:18px;
+}
+
+.result{
+margin-top:15px;
+font-size:24px;
+color:#fbbf24;
+font-weight:bold;
+}
+
+.links a{
+display:block;
+margin-top:10px;
+color:white;
+text-decoration:none;
+padding:10px;
+background:#111827;
+border-radius:10px;
+border:1px solid #1e293b;
+}
+
+.links a:hover{
+border-color:#fbbf24;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>🪙 Gold 24K Algeria</h1>
+
+<p>
+Prix de l'or en Algérie - marché local & international
+</p>
+
+</div>
+
+<div class="section">
+
+<div class="title">💰 Cours de l'Or</div>
+
+<div class="row">
+<span>Or 24K (1g)</span>
+<span class="green" id="gold-price">Chargement...</span>
+</div>
+
+<div class="price" id="live-price">--</div>
+
+</div>
+
+<div class="section">
+
+<div class="title">💱 Convertisseur Or</div>
+
+<input id="grams" type="number" value="10" placeholder="Grammes">
+
+<div class="result" id="result">Chargement...</div>
+
+</div>
+
+<div class="section">
+
+<div class="title">📌 Informations</div>
+
+<p style="color:#94a3b8">
+Le prix de l'or en Algérie dépend du marché mondial, du dollar et de la demande locale.
+L'or 24K est le plus pur et le plus utilisé.
+</p>
+
+</div>
+
+<div class="section">
+
+<div class="title">🔗 Pages liées</div>
+
+<div class="links">
+
+<a href="/eur-dzd.html">Euro DZD</a>
+<a href="/usd-dzd.html">USD DZD</a>
+<a href="/marche-noir-algerie.html">Marché Noir</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let goldPrice = 14500;
+
+function update(){
+
+document.getElementById("gold-price").innerText =
+goldPrice + " DZD";
+
+document.getElementById("live-price").innerText =
+goldPrice + " DZD";
+
+const grams = document.getElementById("grams").value;
+
+document.getElementById("result").innerText =
+(grams * goldPrice).toLocaleString() + " DZD";
+
+}
+
+document.getElementById("grams").addEventListener("input", update);
+
+update();
+
+</script>
+
+</body>
+</html>
