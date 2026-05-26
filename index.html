@@ -78,6 +78,16 @@ background:#1f2937;
 .red{color:#ef4444;}
 .blue{color:#38bdf8;}
 
+.currency-link{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+.currency-link:hover{
+color:#38bdf8;
+}
+
 footer{
 text-align:center;
 padding:20px;
@@ -111,15 +121,20 @@ opacity:0.6;
 <div class="grid">
 
 <div class="row">
-<span>EUR/DZD</span>
+<span>
+<a href="/eur-dzd.html" class="currency-link">
+EUR/DZD
+</a>
+</span>
 <span class="green" id="eur-rate">
 Chargement...
 </span>
 </div>
 
 <div class="row">
-<span>USD/DZD</span>
-
+<a href="/usd-dzd.html" class="currency-link">
+USD/DZD
+</a>
 <span class="green" id="usd-rate">
 Chargement...
 </span>
