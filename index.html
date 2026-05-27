@@ -426,25 +426,6 @@ document.getElementById("amount")
 document.getElementById("currency")
 .addEventListener("change", updateConverter);
 
-// GOLD PRICE
-
-const { data: goldData } = await supabaseClient
-.from("square_rates")
-.select("gold")
-.limit(1)
-.single();
-
-const goldPriceGram = goldData.gold;
-
-document.getElementById("gold-local").innerHTML =
-goldPriceGram + " DZD";
-
-document.getElementById("gold-rate").innerHTML =
-"107 USD";
-
-document.getElementById("gold-100g").innerHTML =
-(100 * goldPriceGram).toLocaleString() + " DZD";
-
 function updateGold(){
 
 const grams =
