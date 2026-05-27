@@ -355,143 +355,150 @@ Contact
 <script>
 
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
-const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
 
-const supabaseClient = supabase.createClient
+const supabaseKey =
+"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
+
+const supabaseClient = supabase.createClient(
 supabaseUrl,
 supabaseKey
 );
 
-async function loadSquareRates){
-
-const { data, error } = await supabaseClient
-.from"square_rates")
-.select"*")
-.limit1)
-.single);
-
-iferror){
-console.logerror);
-return;
-}
-
-window.eurSquare = data.eur;
-window.usdSquare = data.usd;
-
-window.goldPriceGram = data.gold;
-
-document.getElementById"gold-local").innerHTML =
-window.goldPriceGram + " DZD";
-
-document.getElementById"gold-rate").innerHTML =
-"107 USD";
-
-document.getElementById"gold-100g").innerHTML =
-
-(window.goldPriceGram * 100).toLocaleString) + " DZD";
-
-}
-
-loadSquareRates);
-
-</script>
-
-<script>
-
-async function loadRates){
+async function loadRates(){
 
 try{
 
-const eur = await fetch"https://open.er-api.com/v6/latest/EUR");
-const eurData = await eur.json);
+// OFFICIAL RATES
 
-const usd = await fetch"https://open.er-api.com/v6/latest/USD");
-const usdData = await usd.json);
+const eur = await fetch(
+"https://open.er-api.com/v6/latest/EUR"
+);
 
-const eurOfficial = Math.roundeurData.rates.DZD);
-const usdOfficial = Math.roundusdData.rates.DZD);
+const eurData = await eur.json();
+
+const usd = await fetch(
+"https://open.er-api.com/v6/latest/USD"
+);
+
+const usdData = await usd.json();
+
+const eurOfficial =
+Math.round(eurData.rates.DZD);
+
+const usdOfficial =
+Math.round(usdData.rates.DZD);
+
+// SUPABASE SQUARE RATES
 
 const { data, error } = await supabaseClient
-.from"square_rates")
-.select"*")
-.limit1)
-.single);
+.from("square_rates")
+.select("*")
+.limit(1)
+.single();
 
-iferror){
-console.logerror);
+if(error){
+console.log(error);
 return;
 }
+
+// GLOBAL VARIABLES
 
 window.eurSquare = data.eur;
 window.usdSquare = data.usd;
+window.goldPriceGram = data.gold;
 
-document.getElementById"eur-rate").innerHTML =
-`Square: ${eurSquare} | Officiel: ${eurOfficial}`;
+// CURRENCY DISPLAY
 
-document.getElementById"usd-rate").innerHTML =
-`Square: ${usdSquare} | Officiel: ${usdOfficial}`;
+document.getElementById("eur-rate").innerHTML =
+`Square: ${window.eurSquare} | Officiel: ${eurOfficial}`;
 
-}catcherror){
+document.getElementById("usd-rate").innerHTML =
+`Square: ${window.usdSquare} | Officiel: ${usdOfficial}`;
 
-document.getElementById"eur-rate").innerHTML =
+// GOLD DISPLAY
+
+document.getElementById("gold-local").innerHTML =
+window.goldPriceGram + " DZD";
+
+document.getElementById("gold-rate").innerHTML =
+"International";
+
+document.getElementById("gold-100g").innerHTML =
+(window.goldPriceGram * 100).toLocaleString() + " DZD";
+
+}catch(error){
+
+console.log(error);
+
+document.getElementById("eur-rate").innerHTML =
 "Erreur API";
 
-document.getElementById"usd-rate").innerHTML =
+document.getElementById("usd-rate").innerHTML =
 "Erreur API";
 
 }
 
 }
 
-loadRates);
+loadRates();
 
-function updateConverter){
+// CONVERTER
 
-const amount =
-parseFloatdocument.getElementById"amount").value);
+function updateConverter(){
+
+const amount = parseFloat(
+document.getElementById("amount").value
+);
 
 const currency =
-document.getElementById"currency").value;
+document.getElementById("currency").value;
 
 let result = 0;
 
-ifcurrency === "eur"){
-result = amount * eurSquare;
+if(currency === "eur"){
+result = amount * window.eurSquare;
 }else{
-result = amount * usdSquare;
+result = amount * window.usdSquare;
 }
 
-document.getElementById"conversion-result").innerHTML =
-result.toLocaleString) + " DZD";
+document.getElementById("conversion-result").innerHTML =
+result.toLocaleString() + " DZD";
 
 }
 
-document.getElementById"amount")
-.addEventListener"input", updateConverter);
+document.getElementById("amount")
+.addEventListener("input", updateConverter);
 
-document.getElementById"currency")
-.addEventListener"change", updateConverter);
+document.getElementById("currency")
+.addEventListener("change", updateConverter);
 
-function updateGold){
+// GOLD CALCULATOR
 
-const grams =
-parseFloatdocument.getElementById"goldAmount").value);
+function updateGold(){
 
-ifisNaNgrams)){
-document.getElementById"goldResult").innerHTML =
+const grams = parseFloat(
+document.getElementById("goldAmount").value
+);
+
+if(isNaN(grams)){
+
+document.getElementById("goldResult").innerHTML =
 "0 DZD";
+
 return;
-}
-
-const result = grams * window.goldPriceGram;
-
-document.getElementById"goldResult").innerHTML =
-result.toLocaleString) + " DZD";
 
 }
 
-document.getElementById"goldAmount")
-.addEventListener"input", updateGold);
+const result =
+grams * window.goldPriceGram;
+
+document.getElementById("goldResult").innerHTML =
+result.toLocaleString() + " DZD";
+
+}
+
+document.getElementById("goldAmount")
+.addEventListener("input", updateGold);
 
 </script>
 
