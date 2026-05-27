@@ -127,7 +127,7 @@ opacity:0.6;
 <div class="section">
 
 <div class="title">
-💱 Devises (Square + Officiel)
+💱 Devises Square + Officiel)
 </div>
 
 <p class="small">
@@ -218,7 +218,7 @@ color:white;
 <div class="row">
   <span>
     <a href="/gold-dzd.html" class="currency-link">
-      Gold 24K (1g)
+      Gold 24K 1g)
     </a>
   </span>
 
@@ -357,21 +357,21 @@ Contact
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
 const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
 
-const supabaseClient = supabase.createClient(
+const supabaseClient = supabase.createClient
 supabaseUrl,
 supabaseKey
 );
 
-async function loadSquareRates(){
+async function loadSquareRates){
 
 const { data, error } = await supabaseClient
-.from("square_rates")
-.select("*")
-.limit(1)
-.single();
+.from"square_rates")
+.select"*")
+.limit1)
+.single);
 
-if(error){
-console.log(error);
+iferror){
+console.logerror);
 return;
 }
 
@@ -380,133 +380,120 @@ window.usdSquare = data.usd;
 
 window.goldPriceGram = data.gold;
 
-document.getElementById("gold-local").innerHTML =
-goldPriceGram + " DZD";
+document.getElementById"gold-local").innerHTML =
+window.goldPriceGram + " DZD";
 
-document.getElementById("gold-rate").innerHTML =
+document.getElementById"gold-rate").innerHTML =
 "107 USD";
 
-document.getElementById("gold-100g").innerHTML =
-(100 * goldPriceGram).toLocaleString() + " DZD";
+document.getElementById"gold-100g").innerHTML =
+
+(window.goldPriceGram * 100).toLocaleString) + " DZD";
 
 }
 
-loadSquareRates();
+loadSquareRates);
 
 </script>
 
 <script>
 
-async function loadRates(){
+async function loadRates){
 
 try{
 
-const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
-const eurData = await eur.json();
+const eur = await fetch"https://open.er-api.com/v6/latest/EUR");
+const eurData = await eur.json);
 
-const usd = await fetch("https://open.er-api.com/v6/latest/USD");
-const usdData = await usd.json();
+const usd = await fetch"https://open.er-api.com/v6/latest/USD");
+const usdData = await usd.json);
 
-const eurOfficial = Math.round(eurData.rates.DZD);
-const usdOfficial = Math.round(usdData.rates.DZD);
+const eurOfficial = Math.roundeurData.rates.DZD);
+const usdOfficial = Math.roundusdData.rates.DZD);
 
 const { data, error } = await supabaseClient
-.from("square_rates")
-.select("*")
-.limit(1)
-.single();
+.from"square_rates")
+.select"*")
+.limit1)
+.single);
 
-if(error){
-console.log(error);
+iferror){
+console.logerror);
 return;
 }
 
 window.eurSquare = data.eur;
 window.usdSquare = data.usd;
 
-document.getElementById("eur-rate").innerHTML =
+document.getElementById"eur-rate").innerHTML =
 `Square: ${eurSquare} | Officiel: ${eurOfficial}`;
 
-document.getElementById("usd-rate").innerHTML =
+document.getElementById"usd-rate").innerHTML =
 `Square: ${usdSquare} | Officiel: ${usdOfficial}`;
 
-}catch(error){
+}catcherror){
 
-document.getElementById("eur-rate").innerHTML =
+document.getElementById"eur-rate").innerHTML =
 "Erreur API";
 
-document.getElementById("usd-rate").innerHTML =
+document.getElementById"usd-rate").innerHTML =
 "Erreur API";
 
 }
 
 }
 
-loadRates();
+loadRates);
 
-function updateConverter(){
+function updateConverter){
 
 const amount =
-parseFloat(document.getElementById("amount").value);
+parseFloatdocument.getElementById"amount").value);
 
 const currency =
-document.getElementById("currency").value;
+document.getElementById"currency").value;
 
 let result = 0;
 
-if(currency === "eur"){
+ifcurrency === "eur"){
 result = amount * eurSquare;
 }else{
 result = amount * usdSquare;
 }
 
-document.getElementById("conversion-result").innerHTML =
-result.toLocaleString() + " DZD";
+document.getElementById"conversion-result").innerHTML =
+result.toLocaleString) + " DZD";
 
 }
 
-document.getElementById("amount")
-.addEventListener("input", updateConverter);
+document.getElementById"amount")
+.addEventListener"input", updateConverter);
 
-document.getElementById("currency")
-.addEventListener("change", updateConverter);
+document.getElementById"currency")
+.addEventListener"change", updateConverter);
 
-function updateGold(){
+function updateGold){
 
 const grams =
-parseFloat(document.getElementById("goldAmount").value);
+parseFloatdocument.getElementById"goldAmount").value);
 
-if(isNaN(grams)){
-document.getElementById("goldResult").innerHTML =
+ifisNaNgrams)){
+document.getElementById"goldResult").innerHTML =
 "0 DZD";
 return;
 }
 
-const result = grams * goldPriceGram;
+const result = grams * window.goldPriceGram;
 
-document.getElementById("goldResult").innerHTML =
-result.toLocaleString() + " DZD";
+document.getElementById"goldResult").innerHTML =
+result.toLocaleString) + " DZD";
 
 }
 
-document.getElementById("goldAmount")
-.addEventListener("input", updateGold);
-
-</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script>
-
-const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
-const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
-
-const supabaseClient = supabase.createClient(
-supabaseUrl,
-supabaseKey
-);
+document.getElementById"goldAmount")
+.addEventListener"input", updateGold);
 
 </script>
 
 </body>
-  </html>
+</html>
