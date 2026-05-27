@@ -428,7 +428,13 @@ document.getElementById("currency")
 
 // GOLD PRICE
 
-const goldPriceGram = 14500;
+const { data: goldData } = await supabaseClient
+.from("square_rates")
+.select("gold")
+.limit(1)
+.single();
+
+const goldPriceGram = goldData.gold;
 
 document.getElementById("gold-local").innerHTML =
 goldPriceGram + " DZD";
