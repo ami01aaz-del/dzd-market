@@ -365,8 +365,19 @@ const usdData = await usd.json();
 const eurOfficial = Math.round(eurData.rates.DZD);
 const usdOfficial = Math.round(usdData.rates.DZD);
 
-window.eurSquare = eurOfficial + 125;
-window.usdSquare = usdOfficial + 107;
+const { data, error } = await supabaseClient
+.from("square_rates")
+.select("*")
+.limit(1)
+.single();
+
+if(error){
+console.log(error);
+return;
+}
+
+window.eurSquare = data.eur;
+window.usdSquare = data.usd;
 
 document.getElementById("eur-rate").innerHTML =
 `Square: ${eurSquare} | Officiel: ${eurOfficial}`;
