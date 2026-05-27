@@ -1,30 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>DZD Market - Marché Algérien</title>
-  <link rel="icon" type="image/png" href="/icon-new.png">
 
-<meta name="description" content="DZD Market - Suivi des prix en Algérie : devises, produits, or, gaming et marché noir.">
+<link rel="icon" type="image/png" href="/icon-new.png">
 
-<meta name="theme-color" content="#0f172a">
-
-<link rel="canonical" href="https://dzdmarket.vercel.app/">
-
-<meta property="og:title" content="DZD Market - Marché Algérien">
-<meta property="og:description" content="Suivi des prix en Algérie : devises, or, gaming et marché noir.">
-<meta property="og:image" content="https://dzdmarket.vercel.app/icon-new.png">
-<meta property="og:url" content="https://dzdmarket.vercel.app/">
-<meta property="og:type" content="website">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="DZD Market">
-<meta name="twitter:description" content="Prix du marché algérien en temps réel">
-<meta name="twitter:image" content="https://dzdmarket.vercel.app/icon-new.png">
+<meta name="description" content="DZD Market - Suivi des prix en Algérie">
 
 <style>
+
 body{
 margin:0;
 font-family:Arial,sans-serif;
@@ -64,18 +53,13 @@ margin-bottom:10px;
 color:#22c55e;
 }
 
-.grid{
-display:grid;
-grid-template-columns:1fr;
-gap:10px;
-}
-
 .row{
 display:flex;
 justify-content:space-between;
 padding:10px;
 background:#111827;
 border-radius:8px;
+margin-top:10px;
 }
 
 .small{
@@ -83,16 +67,13 @@ font-size:13px;
 opacity:0.7;
 }
 
-.badge{
-font-size:12px;
-padding:2px 6px;
-border-radius:6px;
-background:#1f2937;
+.green{
+color:#22c55e;
 }
 
-.green{color:#22c55e;}
-.red{color:#ef4444;}
-.blue{color:#38bdf8;}
+.blue{
+color:#38bdf8;
+}
 
 .currency-link{
 color:white;
@@ -100,65 +81,77 @@ text-decoration:none;
 font-weight:bold;
 }
 
-.currency-link:hover{
-color:#38bdf8;
+input,
+select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#162033;
+color:white;
+font-size:18px;
+box-sizing:border-box;
 }
 
 footer{
 text-align:center;
 padding:20px;
-font-size:12px;
 opacity:0.6;
+font-size:12px;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <h1>🇩🇿 DZD Market</h1>
-<p class="small">Marché algérien - Prix en temps réel</p>
+
+<p class="small">
+Marché algérien - Prix en temps réel
+</p>
+
 </header>
 
 <div class="container">
 
-<!-- 💱 Devises -->
+<!-- DEVISES -->
+
 <div class="section">
 
 <div class="title">
 💱 Devises (Square + Officiel)
 </div>
 
-<p class="small">
-🕒 Mise à jour : il y a 5 min
-</p>
-
 <div class="row">
-  <span>
-    <a href="/eur-dzd.html" class="currency-link">
-      EUR/DZD
-    </a>
-  </span>
+<span>
+<a href="#" class="currency-link">
+EUR/DZD
+</a>
+</span>
 
-  <span class="green" id="eur-rate">
-    Chargement...
-  </span>
+<span class="green" id="eur-rate">
+Chargement...
+</span>
 </div>
 
 <div class="row">
-  <span>
-    <a href="/usd-dzd.html" class="currency-link">
-      USD/DZD
-    </a>
-  </span>
+<span>
+<a href="#" class="currency-link">
+USD/DZD
+</a>
+</span>
 
-  <span class="green" id="usd-rate">
-    Chargement...
-  </span>
+<span class="green" id="usd-rate">
+Chargement...
+</span>
 </div>
 
-<p class="small" style="margin-top:15px;">
+<p class="small" style="margin-top:20px;">
 💰 Convertisseur DZD
 </p>
 
@@ -166,82 +159,68 @@ opacity:0.6;
 id="amount"
 type="number"
 value="100"
-placeholder="Montant"
-style="
-width:100%;
-padding:10px;
-margin-top:8px;
-border:none;
-border-radius:8px;
-background:#162033;
-font-size:18px;
-color:white;
-"
 />
 
-<select
-id="currency"
-style="
-width:100%;
-padding:10px;
-margin-top:10px;
-border:none;
-border-radius:8px;
-background:#162033;
-font-size:18px;
-color:white;
-"
->
+<select id="currency">
 
-<option value="eur">EUR</option>
-<option value="usd">USD</option>
+<option value="eur">
+EUR
+</option>
+
+<option value="usd">
+USD
+</option>
 
 </select>
 
-<p class="small" id="conversion-result" style="margin-top:10px;">
-28 000 DZD
+<p
+id="conversion-result"
+style="margin-top:15px;font-size:22px;"
+>
+0 DZD
 </p>
 
 </div>
 
-<!-- 🪙 GOLD -->
+<!-- GOLD -->
+
 <div class="section">
 
 <div class="title">
 🪙 Or 24K
 </div>
 
-<p class="small">
-🕒 Mise à jour automatique
-</p>
-
 <div class="row">
-  <span>
-    <a href="/gold-dzd.html" class="currency-link">
-      Gold 24K (1g)
-    </a>
-  </span>
+<span>
+Gold 24K (1g)
+</span>
 
-  <span class="green" id="gold-local">
-    Chargement...
-  </span>
+<span class="green" id="gold-local">
+Chargement...
+</span>
 </div>
 
 <div class="row">
-  <span>Prix international</span>
-  <span class="blue" id="gold-rate">
-    Chargement...
-  </span>
+<span>
+Prix international
+</span>
+
+<span class="blue" id="gold-rate">
+Chargement...
+</span>
 </div>
 
 <div class="row">
-  <span>100g Gold</span>
-  <span class="green" id="gold-100g">
-    Auto calcul
-  </span>
+<span>
+100g Gold
+</span>
+
+<span class="green" id="gold-100g">
+Chargement...
+</span>
 </div>
 
-<p class="small" style="margin-top:15px;">
+<p class="small" style="margin-top:20px;">
 ⚖️ Calculateur Gold
 </p>
 
@@ -249,74 +228,14 @@ color:white;
 id="goldAmount"
 type="number"
 placeholder="Grammes"
-style="
-width:100%;
-padding:10px;
-margin-top:8px;
-border:none;
-border-radius:8px;
-background:#162033;
-font-size:18px;
-color:white;
-"
 />
 
 <p
 id="goldResult"
-class="small"
-style="margin-top:12px;font-size:22px;color:#22c55e;"
+style="margin-top:15px;font-size:22px;color:#22c55e;"
 >
 0 DZD
 </p>
-
-</div>
-
-<!-- PRODUCTS -->
-<div class="section">
-
-<div class="title">
-🛒 Produits du marché
-</div>
-
-<p class="small">
-🕒 Dernière mise à jour : aujourd’hui
-</p>
-
-<div class="row">
-<span>📱 iPhone 15</span>
-<span class="blue">320 000 DZD</span>
-</div>
-
-<div class="row">
-<span>🎮 PS5</span>
-<span class="blue">125 000 DZD</span>
-</div>
-
-<div class="row">
-<span>🪙 Or 24K</span>
-<span class="blue">14 500 DZD</span>
-</div>
-
-</div>
-
-<!-- FEATURES -->
-<div class="section">
-<div class="title">🔥 Marché Live</div>
-
-<div class="row">
-<span>👥 Confirmations</span>
-<span class="badge">Active</span>
-</div>
-
-<div class="row">
-<span>🔄 API temps réel</span>
-<span class="badge">ON</span>
-</div>
-
-<div class="row">
-<span>📊 Tendance</span>
-<span class="red">Mix</span>
-</div>
 
 </div>
 
@@ -324,60 +243,77 @@ style="margin-top:12px;font-size:22px;color:#22c55e;"
 
 <footer>
 
-<p>
-© 2026 DZD Market - Algeria Market Prices
-</p>
-
-<p style="margin-top:10px;">
-
-<a href="/privacy.html" class="currency-link">
-Privacy
-</a>
-
-|
-
-<a href="/terms.html" class="currency-link">
-Terms
-</a>
-
-|
-
-<a href="/contact.html" class="currency-link">
-Contact
-</a>
-
-</p>
+© 2026 DZD Market
 
 </footer>
 
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
 <script>
+
+const supabaseUrl =
+"https://bcmngzompyojuffepstk.supabase.co";
+
+const supabaseKey =
+"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
+
+const supabaseClient =
+supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+let eurSquare = 0;
+let usdSquare = 0;
+let goldPriceGram = 0;
 
 async function loadRates(){
 
 try{
 
-const eur = await fetch("https://open.er-api.com/v6/latest/EUR");
-const eurData = await eur.json();
+// OFFICIAL
 
-const usd = await fetch("https://open.er-api.com/v6/latest/USD");
-const usdData = await usd.json();
+const eur =
+await fetch("https://open.er-api.com/v6/latest/EUR");
 
-const eurOfficial = Math.round(eurData.rates.DZD);
-const usdOfficial = Math.round(usdData.rates.DZD);
+const eurData =
+await eur.json();
 
-const { data, error } = await supabaseClient
+const usd =
+await fetch("https://open.er-api.com/v6/latest/USD");
+
+const usdData =
+await usd.json();
+
+const eurOfficial =
+Math.round(eurData.rates.DZD);
+
+const usdOfficial =
+Math.round(usdData.rates.DZD);
+
+// SUPABASE
+
+const { data, error } =
+await supabaseClient
 .from("square_rates")
 .select("*")
 .limit(1)
 .single();
 
 if(error){
+
 console.log(error);
 return;
+
 }
 
-window.eurSquare = data.eur;
-window.usdSquare = data.usd;
+eurSquare = data.eur;
+usdSquare = data.usd;
+goldPriceGram = data.gold;
+
+// UI
 
 document.getElementById("eur-rate").innerHTML =
 `Square: ${eurSquare} | Officiel: ${eurOfficial}`;
@@ -385,13 +321,20 @@ document.getElementById("eur-rate").innerHTML =
 document.getElementById("usd-rate").innerHTML =
 `Square: ${usdSquare} | Officiel: ${usdOfficial}`;
 
-}catch(error){
+document.getElementById("gold-local").innerHTML =
+goldPriceGram + " DZD";
 
-document.getElementById("eur-rate").innerHTML =
-"Erreur API";
+document.getElementById("gold-rate").innerHTML =
+"107 USD";
 
-document.getElementById("usd-rate").innerHTML =
-"Erreur API";
+document.getElementById("gold-100g").innerHTML =
+(100 * goldPriceGram).toLocaleString() + " DZD";
+
+updateConverter();
+
+}catch(err){
+
+console.log(err);
 
 }
 
@@ -399,10 +342,14 @@ document.getElementById("usd-rate").innerHTML =
 
 loadRates();
 
+// CONVERTER
+
 function updateConverter(){
 
 const amount =
-parseFloat(document.getElementById("amount").value);
+parseFloat(
+document.getElementById("amount").value
+);
 
 const currency =
 document.getElementById("currency").value;
@@ -410,9 +357,13 @@ document.getElementById("currency").value;
 let result = 0;
 
 if(currency === "eur"){
+
 result = amount * eurSquare;
+
 }else{
+
 result = amount * usdSquare;
+
 }
 
 document.getElementById("conversion-result").innerHTML =
@@ -426,18 +377,26 @@ document.getElementById("amount")
 document.getElementById("currency")
 .addEventListener("change", updateConverter);
 
+// GOLD
+
 function updateGold(){
 
 const grams =
-parseFloat(document.getElementById("goldAmount").value);
+parseFloat(
+document.getElementById("goldAmount").value
+);
 
 if(isNaN(grams)){
+
 document.getElementById("goldResult").innerHTML =
 "0 DZD";
+
 return;
+
 }
 
-const result = grams * goldPriceGram;
+const result =
+grams * goldPriceGram;
 
 document.getElementById("goldResult").innerHTML =
 result.toLocaleString() + " DZD";
@@ -446,40 +405,6 @@ result.toLocaleString() + " DZD";
 
 document.getElementById("goldAmount")
 .addEventListener("input", updateGold);
-
-</script>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script>
-
-const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
-const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
-
-const supabaseClient = supabase.createClient(
-supabaseUrl,
-supabaseKey
-);
-
-async function loadSquareRates(){
-
-const { data, error } = await supabaseClient
-.from("square_rates")
-.select("*")
-.limit(1)
-.single();
-
-if(error){
-console.log(error);
-return;
-}
-
-window.eurSquare = data.eur;
-window.usdSquare = data.usd;
-
-}
-
-loadSquareRates();
 
 </script>
 
