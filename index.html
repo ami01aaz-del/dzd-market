@@ -383,10 +383,10 @@ const usd = await fetch(
 const usdData = await usd.json();
 
 const eurOfficial =
-Math.round(eurData.rates.DZD);
+eurData.rates.DZD.toFixed(2);
 
 const usdOfficial =
-Math.round(usdData.rates.DZD);
+usdData.rates.DZD.toFixed(2);
 
 // SUPABASE SQUARE RATES
 
@@ -421,7 +421,7 @@ document.getElementById("gold-local").innerHTML =
 window.goldPriceGram + " DZD";
 
 document.getElementById("gold-rate").innerHTML =
-goldPriceGram / usdOfficial + " USD";
+(goldPriceGram / usdOfficial).toFixed(2) + " USD";
 
 document.getElementById("gold-100g").innerHTML =
 (window.goldPriceGram * 100).toLocaleString() + " DZD";
