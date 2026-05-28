@@ -439,16 +439,16 @@ const goldItem = data.find(item => item.name === "GOLD_24K");
 
 // GLOBAL VARIABLES
 
-window.eurSquare = eurItem.value;
-window.usdSquare = usdItem.value;
+window.eurSquare = parseFloat(eurItem?.value || 0);
+window.usdSquare = parseFloat(usdItem?.value || 0);
 
-window.gbp = gbpItem.value;
-window.cad = cadItem.value;
-window.aed = aedItem.value;
-window.tryRate = tryItem.value;
-window.chf = chfItem.value;
+window.gbp = parseFloat(gbpItem?.value || 0);
+window.cad = parseFloat(cadItem?.value || 0);
+window.aed = parseFloat(aedItem?.value || 0);
+window.tryRate = parseFloat(tryItem?.value || 0);
+window.chf = parseFloat(chfItem?.value || 0);
 
-window.goldPriceGram = goldItem.value;
+window.goldPriceGram = parseFloat(goldItem?.value || 0);
 
 // CURRENCY DISPLAY
 
