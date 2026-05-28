@@ -413,29 +413,43 @@ eurData.rates.DZD.toFixed(2);
 const usdOfficial =
 usdData.rates.DZD.toFixed(2);
 
-// SUPABASE SQUARE RATES
+// MARKET ITEMS TABLE
 
 const { data, error } = await supabaseClient
-.from("square_rates")
-.select("*")
-.limit(1)
-.single();
+.from("market_items")
+.select("*");
 
 if(error){
 console.log(error);
 return;
 }
 
+// FIND ITEMS
+
+const eurItem = data.find(item => item.name === "EUR");
+const usdItem = data.find(item => item.name === "USD");
+
+const gbpItem = data.find(item => item.name === "GBP");
+const cadItem = data.find(item => item.name === "CAD");
+const aedItem = data.find(item => item.name === "AED");
+const tryItem = data.find(item => item.name === "TRY");
+const chfItem = data.find(item => item.name === "CHF");
+
+const goldItem = data.find(item => item.name === "GOLD_24K");
+
 // GLOBAL VARIABLES
 
-window.eurSquare = data.eur;
-window.usdSquare = data.usd;
-window.goldPriceGram = data.gold;
-window.gbp = data.gbp;
-window.cad = data.cad;
-window.aed = data.aed;
-window.tryRate = data.try;
-window.chf = data.chf;
+window.eurSquare = eurItem.value;
+window.usdSquare = usdItem.value;
+
+window.gbp = gbpItem.value;
+window.cad = cadItem.value;
+window.aed = aedItem.value;
+window.tryRate = tryItem.value;
+window.chf = chfItem.value;
+
+window.goldPriceGram = goldItem.value;
+
 // CURRENCY DISPLAY
 
 document.getElementById("eur-rate").innerHTML =
@@ -444,11 +458,20 @@ document.getElementById("eur-rate").innerHTML =
 document.getElementById("usd-rate").innerHTML =
 `Square: ${window.usdSquare} | Officiel: ${usdOfficial}`;
 
-document.getElementById("gbp-rate").innerHTML = window.gbp + " DZD";
-document.getElementById("cad-rate").innerHTML = window.cad + " DZD";
-document.getElementById("aed-rate").innerHTML = window.aed + " DZD";
-document.getElementById("try-rate").innerHTML = window.tryRate + " DZD";
-document.getElementById("chf-rate").innerHTML = window.chf + " DZD";
+document.getElementById("gbp-rate").innerHTML =
+window.gbp + " DZD";
+
+document.getElementById("cad-rate").innerHTML =
+window.cad + " DZD";
+
+document.getElementById("aed-rate").innerHTML =
+window.aed + " DZD";
+
+document.getElementById("try-rate").innerHTML =
+window.tryRate + " DZD";
+
+document.getElementById("chf-rate").innerHTML =
+window.chf + " DZD";
 
 // GOLD DISPLAY
 
