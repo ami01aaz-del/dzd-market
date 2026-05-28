@@ -479,7 +479,7 @@ document.getElementById("gold-local").innerHTML =
 window.goldPriceGram + " DZD";
 
 document.getElementById("gold-rate").innerHTML =
-(goldPriceGram / usdOfficial).toFixed(2) + " USD";
+(window.goldPriceGram / usdOfficial).toFixed(2) + " USD";
 
 document.getElementById("gold-100g").innerHTML =
 (window.goldPriceGram * 100).toLocaleString() + " DZD";
