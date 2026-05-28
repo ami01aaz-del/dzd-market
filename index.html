@@ -158,6 +158,31 @@ opacity:0.6;
   </span>
 </div>
 
+<div class="row">
+<span>GBP</span>
+<span class="blue" id="gbp-rate">Chargement...</span>
+</div>
+
+<div class="row">
+<span>CAD</span>
+<span class="blue" id="cad-rate">Chargement...</span>
+</div>
+
+<div class="row">
+<span>AED</span>
+<span class="blue" id="aed-rate">Chargement...</span>
+</div>
+
+<div class="row">
+<span>TRY</span>
+<span class="blue" id="try-rate">Chargement...</span>
+</div>
+
+<div class="row">
+<span>CHF</span>
+<span class="blue" id="chf-rate">Chargement...</span>
+</div>
+
 <p class="small" style="margin-top:15px;">
 💰 Convertisseur DZD
 </p>
@@ -406,7 +431,11 @@ return;
 window.eurSquare = data.eur;
 window.usdSquare = data.usd;
 window.goldPriceGram = data.gold;
-
+window.gbp = data.gbp;
+window.cad = data.cad;
+window.aed = data.aed;
+window.tryRate = data.try;
+window.chf = data.chf;
 // CURRENCY DISPLAY
 
 document.getElementById("eur-rate").innerHTML =
@@ -414,6 +443,12 @@ document.getElementById("eur-rate").innerHTML =
 
 document.getElementById("usd-rate").innerHTML =
 `Square: ${window.usdSquare} | Officiel: ${usdOfficial}`;
+
+document.getElementById("gbp-rate").innerHTML = window.gbp + " DZD";
+document.getElementById("cad-rate").innerHTML = window.cad + " DZD";
+document.getElementById("aed-rate").innerHTML = window.aed + " DZD";
+document.getElementById("try-rate").innerHTML = window.tryRate + " DZD";
+document.getElementById("chf-rate").innerHTML = window.chf + " DZD";
 
 // GOLD DISPLAY
 
