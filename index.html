@@ -432,7 +432,7 @@ const usdItem = data.find(item => item.name === "USD");
 const gbpItem = data.find(item => item.name === "GBP");
 const cadItem = data.find(item => item.name === "CAD");
 const aedItem = data.find(item => item.name === "AED");
-const tryItem = data.find(item => item.name === "TRY");
+const turkeyItem = data.find(item => item.name === "TRY");
 const chfItem = data.find(item => item.name === "CHF");
 
 const goldItem = data.find(item => item.name === "GOLD_24K");
@@ -445,7 +445,7 @@ window.usdSquare = parseFloat(usdItem?.value || 0);
 window.gbp = parseFloat(gbpItem?.value || 0);
 window.cad = parseFloat(cadItem?.value || 0);
 window.aed = parseFloat(aedItem?.value || 0);
-window.tryRate = parseFloat(tryItem?.value || 0);
+window.tryRate = parseFloat(turkeyItem?.value || 0);
 window.chf = parseFloat(chfItem?.value || 0);
 
 window.goldPriceGram = parseFloat(goldItem?.value || 0);
