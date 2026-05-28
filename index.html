@@ -220,8 +220,6 @@ color:white;
 
 <option value="eur">EUR</option>
 <option value="usd">USD</option>
-<option value="eur">EUR</option>
-<option value="usd">USD</option>
 <option value="gbp">GBP</option>
 <option value="cad">CAD</option>
 <option value="aed">AED</option>
@@ -523,8 +521,30 @@ let result = 0;
 
 if(currency === "eur"){
 result = amount * window.eurSquare;
-}else{
+}
+
+else if(currency === "usd"){
 result = amount * window.usdSquare;
+}
+
+else if(currency === "gbp"){
+result = amount * window.gbp;
+}
+
+else if(currency === "cad"){
+result = amount * window.cad;
+}
+
+else if(currency === "aed"){
+result = amount * window.aed;
+}
+
+else if(currency === "try"){
+result = amount * window.tryRate;
+}
+
+else if(currency === "chf"){
+result = amount * window.chf;
 }
 
 document.getElementById("conversion-result").innerHTML =
