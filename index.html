@@ -271,6 +271,27 @@ color:white;
   </span>
 </div>
 
+<div class="row">
+  <span>Gold 21K</span>
+  <span class="blue" id="gold-21k">
+    Chargement...
+  </span>
+</div>
+
+<div class="row">
+  <span>Gold 18K</span>
+  <span class="blue" id="gold-18k">
+    Chargement...
+  </span>
+</div>
+
+<div class="row">
+  <span>Silver 1g</span>
+  <span class="blue" id="silver-rate">
+    Chargement...
+  </span>
+</div>
+
 <p class="small" style="margin-top:15px;">
 ⚖️ Calculateur Gold
 </p>
@@ -441,6 +462,9 @@ const turkeyItem = data.find(item => item.name === "TRY");
 const chfItem = data.find(item => item.name === "CHF");
 
 const goldItem = data.find(item => item.name === "GOLD_24K");
+const gold21Item = data.find(item => item.name === "GOLD_21K");
+const gold18Item = data.find(item => item.name === "GOLD_18K");
+const silverItem = data.find(item => item.name === "SILVER_1G");
 
 // GLOBAL VARIABLES
 
@@ -454,6 +478,9 @@ window.tryRate = Number(turkeyItem?.value);
 window.chf = Number(chfItem?.value);
 
 window.goldPriceGram = Number(goldItem?.value);
+window.gold21 = Number(gold21Item?.value);
+window.gold18 = Number(gold18Item?.value);
+window.silver = Number(silverItem?.value);
 
 // CURRENCY DISPLAY
 
@@ -488,6 +515,15 @@ document.getElementById("gold-rate").innerHTML =
 
 document.getElementById("gold-100g").innerHTML =
 (window.goldPriceGram * 100).toLocaleString() + " DZD";
+
+document.getElementById("gold-21k").innerHTML =
+window.gold21 + " DZD";
+
+document.getElementById("gold-18k").innerHTML =
+window.gold18 + " DZD";
+
+document.getElementById("silver-rate").innerHTML =
+window.silver + " DZD";
 
 }catch(error){
 
@@ -589,4 +625,4 @@ document.getElementById("goldAmount")
 </script>
 
 </body>
-</html>
+  </html>
