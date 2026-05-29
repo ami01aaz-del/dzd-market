@@ -7,6 +7,8 @@
 
 <title>EUR/DZD - DZD Market</title>
 
+<meta name="description" content="Suivi EUR/DZD en Algérie : square, officiel, convertisseur, tendances et marchés liés.">
+
 <link rel="icon" href="/icon-new.png">
 
 <style>
@@ -30,16 +32,16 @@ text-decoration:none;
 font-size:14px;
 }
 
-.page-title{
+.title{
 font-size:32px;
 margin-top:15px;
 font-weight:bold;
 }
 
-.page-subtitle{
-opacity:0.7;
-font-size:14px;
+.subtitle{
 margin-top:10px;
+font-size:14px;
+opacity:0.75;
 line-height:1.6;
 }
 
@@ -65,21 +67,22 @@ animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-0%{opacity:0.3;transform:scale(0.9);}
-50%{opacity:1;transform:scale(1.2);}
-100%{opacity:0.3;transform:scale(0.9);}
+0%{transform:scale(0.9);opacity:0.3;}
+50%{transform:scale(1.2);opacity:1;}
+100%{transform:scale(0.9);opacity:0.3;}
 }
 
 .container{
-max-width:900px;
+max-width:950px;
 margin:auto;
 padding:20px;
 }
 
-.top-cards{
+.grid-prices{
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:15px;
+margin-top:20px;
 }
 
 .card{
@@ -106,8 +109,8 @@ margin-top:10px;
 .section{
 margin-top:20px;
 background:#0f172a;
-padding:18px;
 border-radius:16px;
+padding:18px;
 border:1px solid rgba(255,255,255,0.05);
 }
 
@@ -129,16 +132,18 @@ box-sizing:border-box;
 }
 
 .result{
-margin-top:15px;
+margin-top:12px;
 font-size:26px;
 font-weight:bold;
 color:#22c55e;
 }
 
+/* CHART */
+
 .chart-tabs{
 display:flex;
 gap:8px;
-margin-bottom:15px;
+margin-bottom:12px;
 }
 
 .chart-tab{
@@ -146,14 +151,13 @@ padding:6px 12px;
 border-radius:999px;
 background:#111827;
 font-size:13px;
-opacity:0.7;
 cursor:pointer;
+opacity:0.7;
 }
 
 .chart-tab.active{
 background:#38bdf8;
 opacity:1;
-color:white;
 }
 
 .chart-box{
@@ -162,8 +166,8 @@ display:flex;
 align-items:flex-end;
 justify-content:space-around;
 padding:15px;
-background:linear-gradient(180deg,rgba(56,189,248,0.12),transparent);
 border-radius:14px;
+background:linear-gradient(180deg,rgba(56,189,248,0.12),transparent);
 }
 
 .chart-bar{
@@ -173,60 +177,140 @@ border-radius:8px 8px 0 0;
 transition:all 0.3s ease;
 }
 
+/* LINKS */
+
+.links{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.link-card{
+background:#111827;
+padding:14px;
+border-radius:14px;
+text-decoration:none;
+color:white;
+border:1px solid rgba(255,255,255,0.05);
+transition:0.2s;
+}
+
+.link-card:hover{
+border-color:#38bdf8;
+transform:translateY(-2px);
+}
+
+.link-title{
+font-weight:bold;
+}
+
+.link-desc{
+font-size:13px;
+opacity:0.7;
+margin-top:5px;
+line-height:1.4;
+}
+
+/* INFO */
+
+.info{
+font-size:14px;
+line-height:1.8;
+opacity:0.85;
+}
+
+/* FAQ */
+
+.faq-item{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.faq-item:last-child{
+border:none;
+}
+
+.faq-q{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.faq-a{
+font-size:13px;
+opacity:0.75;
+line-height:1.6;
+}
+
+/* MARKET */
+
 .market-row{
 display:flex;
 justify-content:space-between;
 padding:10px 0;
-border-bottom:1px solid rgba(255,255,255,0.04);
+border-bottom:1px solid rgba(255,255,255,0.05);
 }
 
 .market-row:last-child{
 border:none;
 }
 
-.related a{
-display:block;
-margin:6px 0;
-color:#38bdf8;
-text-decoration:none;
+footer{
+text-align:center;
+padding:30px;
+font-size:12px;
+opacity:0.6;
+}
+
+@media(max-width:700px){
+.grid-prices{
+grid-template-columns:1fr;
+}
+.links{
+grid-template-columns:1fr;
+}
+.title{
+font-size:26px;
+}
+.card-price{
+font-size:24px;
+}
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
 
-<a class="back-link" href="/">← Retour</a>
+<a class="back-link" href="/">← Retour au marché</a>
 
-<div class="page-title">EUR / DZD</div>
+<div class="title">💶 EUR / DZD</div>
 
-<div class="page-subtitle">
-Suivi du prix de l’euro en Algérie (Square & Officiel)
+<div class="subtitle">
+Suivi du prix de l’euro en Algérie : marché square, officiel, convertisseur et tendances.
 </div>
 
 <div class="live-badge">
 <div class="live-dot"></div>
-Live Market
+Marché Live
 </div>
 
 </header>
 
 <div class="container">
 
-<!-- TOP PRICES -->
-<div class="top-cards">
+<!-- PRICES -->
+<div class="grid-prices">
 
 <div class="card">
 <div class="card-label">Prix Square</div>
-<div class="card-price green" id="squarePrice">279 DZD</div>
+<div class="card-price green" id="square">279.20 DZD</div>
 </div>
 
 <div class="card">
 <div class="card-label">Prix Officiel</div>
-<div class="card-price blue">154 DZD</div>
+<div class="card-price blue">154.32 DZD</div>
 </div>
 
 </div>
@@ -234,28 +318,29 @@ Live Market
 <!-- CONVERTER -->
 <div class="section">
 
-<div class="section-title">Convertisseur</div>
+<div class="section-title">💰 Convertisseur</div>
 
 <input type="number" id="amount" value="100">
 
-<div class="result" id="result">27 900 DZD</div>
+<div class="result" id="result">27 920 DZD</div>
 
 </div>
 
 <!-- CHART -->
 <div class="section">
 
-<div class="section-title">Tendance</div>
+<div class="section-title">📈 Tendance</div>
 
 <div class="chart-tabs">
 
-<div class="chart-tab active" data-tab="7J">7J</div>
-<div class="chart-tab" data-tab="30J">30J</div>
-<div class="chart-tab" data-tab="1A">1A</div>
+<div class="chart-tab active" data-tab="7">7J</div>
+<div class="chart-tab" data-tab="30">30J</div>
+<div class="chart-tab" data-tab="365">1A</div>
 
 </div>
 
 <div class="chart-box">
+
 <div class="chart-bar"></div>
 <div class="chart-bar"></div>
 <div class="chart-bar"></div>
@@ -263,14 +348,15 @@ Live Market
 <div class="chart-bar"></div>
 <div class="chart-bar"></div>
 <div class="chart-bar"></div>
-</div>
 
 </div>
 
-<!-- INFO -->
+</div>
+
+<!-- MARKET -->
 <div class="section">
 
-<div class="section-title">État du marché</div>
+<div class="section-title">📊 État du marché</div>
 
 <div class="market-row">
 <span>Tendance</span>
@@ -278,71 +364,128 @@ Live Market
 </div>
 
 <div class="market-row">
-<span>Update</span>
-<span>Live</span>
+<span>Statut</span>
+<span class="green">Live</span>
+</div>
+
+<div class="market-row">
+<span>Dernière mise à jour</span>
+<span>Maintenant</span>
 </div>
 
 </div>
 
 <!-- LINKS -->
-<div class="section related">
+<div class="section">
 
-<div class="section-title">Marchés liés</div>
+<div class="section-title">🔗 Marchés liés</div>
 
-<a href="/usd-dzd.html">USD / DZD</a>
-<a href="/gold-dzd.html">Gold 24K</a>
-<a href="/">Produits</a>
+<div class="links">
+
+<a class="link-card" href="/usd-dzd.html">
+<div class="link-title">USD / DZD</div>
+<div class="link-desc">Prix du dollar en Algérie</div>
+</a>
+
+<a class="link-card" href="/gold-dzd.html">
+<div class="link-title">Gold 24K</div>
+<div class="link-desc">Prix de l’or aujourd’hui</div>
+</a>
+
+<a class="link-card" href="/">
+<div class="link-title">Produits</div>
+<div class="link-desc">Marché algérien</div>
+</a>
+
+<a class="link-card" href="/">
+<div class="link-title">Tendances</div>
+<div class="link-desc">Marchés populaires</div>
+</a>
 
 </div>
 
 </div>
+
+<!-- INFO -->
+<div class="section">
+
+<div class="section-title">🇩🇿 Euro en Algérie</div>
+
+<div class="info">
+Le marché EUR/DZD est l’un des plus suivis en Algérie.
+Il combine le marché parallèle (square) et le taux officiel.
+Cette page permet un suivi rapide et simple des prix.
+</div>
+
+</div>
+
+<!-- FAQ -->
+<div class="section">
+
+<div class="section-title">❓ FAQ</div>
+
+<div class="faq-item">
+<div class="faq-q">Quelle est la différence entre square et officiel ?</div>
+<div class="faq-a">Le square est le marché parallèle, l’officiel est fixé par la Banque d’Algérie.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">Le prix change souvent ?</div>
+<div class="faq-a">Oui, le marché évolue selon l’offre et la demande.</div>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 DZD Market
+</footer>
 
 <script>
 
-let eurPrice = 279;
+/* Converter */
+let price = 279.20;
 
-function updateConverter(){
+function update(){
 const amount = document.getElementById("amount").value;
-document.getElementById("result").innerHTML =
-Math.round(amount * eurPrice).toLocaleString() + " DZD";
+document.getElementById("result").innerText =
+Math.round(amount * price).toLocaleString() + " DZD";
 }
 
-document.getElementById("amount")
-.addEventListener("input", updateConverter);
+document.getElementById("amount").addEventListener("input", update);
 
-// CHART DATA
+/* Chart logic */
 const data = {
-"7J":[40,55,60,70,80,90,85],
-"30J":[30,45,50,60,70,85,95],
-"1A":[20,30,45,55,70,80,100]
+"7":[40,55,60,70,80,90,85],
+"30":[30,45,50,60,70,85,95],
+"365":[20,30,45,55,70,80,100]
 };
 
-function renderChart(type){
+function render(tab){
 
 document.querySelectorAll(".chart-tab")
 .forEach(t=>t.classList.remove("active"));
 
-document.querySelector(`[data-tab="${type}"]`)
+document.querySelector(`[data-tab="${tab}"]`)
 .classList.add("active");
 
 const bars = document.querySelectorAll(".chart-bar");
 
-data[type].forEach((val,i)=>{
-bars[i].style.height = val + "px";
+data[tab].forEach((v,i)=>{
+bars[i].style.height = v + "px";
 });
 
 }
 
-// EVENTS
+/* events */
 document.querySelectorAll(".chart-tab")
-.forEach(tab=>{
-tab.addEventListener("click",()=>{
-renderChart(tab.dataset.tab);
-});
+.forEach(t=>{
+t.addEventListener("click",()=>render(t.dataset.tab));
 });
 
-renderChart("7J");
-updateConverter();
+render("30");
+update();
 
 </script>
 
