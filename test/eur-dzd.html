@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 
 <meta charset="UTF-8">
@@ -22,7 +23,7 @@ color:white;
 }
 
 header{
-padding:22px;
+padding:20px;
 background:#0f172a;
 border-bottom:1px solid rgba(255,255,255,0.05);
 }
@@ -34,57 +35,57 @@ font-size:14px;
 }
 
 .page-title{
-margin-top:15px;
-font-size:30px;
+font-size:34px;
+margin-top:18px;
 font-weight:bold;
 }
 
 .page-subtitle{
-margin-top:8px;
+margin-top:10px;
+opacity:0.75;
+line-height:1.7;
 font-size:14px;
-opacity:0.7;
-line-height:1.6;
+}
+
+.live-badge{
+display:inline-block;
+margin-top:15px;
+padding:6px 12px;
+background:rgba(34,197,94,0.12);
+border:1px solid rgba(34,197,94,0.25);
+border-radius:999px;
+font-size:13px;
+color:#22c55e;
 }
 
 .container{
-max-width:900px;
+max-width:950px;
 margin:auto;
 padding:20px;
 }
 
-.section{
+.top-cards{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
 margin-top:20px;
+}
+
+.card{
 background:#0f172a;
 border:1px solid rgba(255,255,255,0.05);
-border-radius:16px;
+border-radius:18px;
 padding:18px;
 }
 
-.section-title{
-font-size:18px;
-margin-bottom:15px;
-color:#22c55e;
+.card-label{
+font-size:14px;
+opacity:0.7;
 }
 
-.price-box{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:14px 0;
-border-bottom:1px solid rgba(255,255,255,0.04);
-}
-
-.price-box:last-child{
-border-bottom:none;
-}
-
-.price-label{
-font-size:15px;
-opacity:0.85;
-}
-
-.price-value{
-font-size:18px;
+.card-price{
+margin-top:10px;
+font-size:30px;
 font-weight:bold;
 }
 
@@ -96,38 +97,133 @@ color:#22c55e;
 color:#38bdf8;
 }
 
-input,select{
+.small-info{
+margin-top:8px;
+font-size:13px;
+opacity:0.6;
+}
+
+.section{
+margin-top:20px;
+background:#0f172a;
+border:1px solid rgba(255,255,255,0.05);
+border-radius:18px;
+padding:20px;
+}
+
+.section-title{
+font-size:19px;
+margin-bottom:18px;
+color:#22c55e;
+}
+
+.market-status{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.market-status:last-child{
+border-bottom:none;
+}
+
+.market-label{
+opacity:0.75;
+}
+
+.market-value{
+font-weight:bold;
+}
+
+.chart-box{
+height:180px;
+border-radius:16px;
+background:linear-gradient(
+180deg,
+rgba(56,189,248,0.12),
+rgba(56,189,248,0.02)
+);
+display:flex;
+align-items:end;
+justify-content:space-around;
+padding:20px;
+overflow:hidden;
+}
+
+.chart-bar{
+width:30px;
+background:#38bdf8;
+border-radius:10px 10px 0 0;
+opacity:0.8;
+}
+
+input{
 width:100%;
-padding:12px;
-margin-top:10px;
+padding:14px;
+margin-top:12px;
 border:none;
-border-radius:10px;
+border-radius:12px;
 background:#162033;
+font-size:18px;
 color:white;
-font-size:16px;
 box-sizing:border-box;
 }
 
 .result{
-margin-top:15px;
-font-size:24px;
+margin-top:18px;
+font-size:28px;
 font-weight:bold;
 color:#22c55e;
 }
 
-.trend-box{
-padding:14px;
-border-radius:12px;
-background:#111827;
-font-size:14px;
+.info-text{
+line-height:1.8;
+font-size:15px;
+opacity:0.85;
+}
+
+.faq-item{
+padding:14px 0;
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.faq-item:last-child{
+border-bottom:none;
+}
+
+.faq-question{
+font-weight:bold;
+margin-bottom:8px;
+}
+
+.faq-answer{
+opacity:0.75;
 line-height:1.7;
+font-size:14px;
 }
 
 footer{
-padding:30px;
+padding:35px;
 text-align:center;
 font-size:12px;
-opacity:0.6;
+opacity:0.55;
+}
+
+@media(max-width:700px){
+
+.top-cards{
+grid-template-columns:1fr;
+}
+
+.page-title{
+font-size:28px;
+}
+
+.card-price{
+font-size:26px;
+}
+
 }
 
 </style>
@@ -147,50 +243,121 @@ opacity:0.6;
 </div>
 
 <div class="page-subtitle">
-Prix de l’euro en Algérie (Square et officiel),
-convertisseur et suivi du marché algérien.
+
+Suivi du prix de l’euro en Algérie :
+taux square, taux officiel, convertisseur
+et tendances du marché algérien.
+
+</div>
+
+<div class="live-badge">
+● Marché Live
 </div>
 
 </header>
 
 <div class="container">
 
-<!-- PRICES -->
+<!-- TOP CARDS -->
+
+<div class="top-cards">
+
+<div class="card">
+
+<div class="card-label">
+Prix Square
+</div>
+
+<div class="card-price green">
+279 DZD
+</div>
+
+<div class="small-info">
+Marché parallèle Algérie
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-label">
+Prix Officiel
+</div>
+
+<div class="card-price blue">
+154 DZD
+</div>
+
+<div class="small-info">
+Banque d’Algérie
+</div>
+
+</div>
+
+</div>
+
+<!-- MARKET STATUS -->
 
 <div class="section">
 
 <div class="section-title">
-💱 Prix EUR/DZD
+📊 État du marché
 </div>
 
-<div class="price-box">
-<div class="price-label">
-Prix Square
+<div class="market-status">
+<div class="market-label">
+Tendance aujourd’hui
 </div>
 
-<div class="price-value green" id="eur-square">
-279 DZD
-</div>
-</div>
-
-<div class="price-box">
-<div class="price-label">
-Prix Officiel
-</div>
-
-<div class="price-value blue" id="eur-official">
-154 DZD
+<div class="market-value green">
++2.1%
 </div>
 </div>
 
-<div class="price-box">
-<div class="price-label">
+<div class="market-status">
+<div class="market-label">
 Dernière mise à jour
 </div>
 
-<div class="price-value">
+<div class="market-value">
+Il y a 5 min
+</div>
+</div>
+
+<div class="market-status">
+<div class="market-label">
+Statut
+</div>
+
+<div class="market-value green">
 Live
 </div>
+</div>
+
+</div>
+
+<!-- CHART -->
+
+<div class="section">
+
+<div class="section-title">
+📈 Tendance EUR/DZD
+</div>
+
+<div class="chart-box">
+
+<div class="chart-bar" style="height:70px;"></div>
+
+<div class="chart-bar" style="height:110px;"></div>
+
+<div class="chart-bar" style="height:90px;"></div>
+
+<div class="chart-bar" style="height:140px;"></div>
+
+<div class="chart-bar" style="height:125px;"></div>
+
+<div class="chart-bar" style="height:155px;"></div>
+
 </div>
 
 </div>
@@ -206,8 +373,8 @@ Live
 <input
 type="number"
 id="amount"
-placeholder="Montant en EUR"
 value="100"
+placeholder="Montant EUR"
 />
 
 <div class="result" id="result">
@@ -216,25 +383,7 @@ value="100"
 
 </div>
 
-<!-- TREND -->
-
-<div class="section">
-
-<div class="section-title">
-📈 Tendance du marché
-</div>
-
-<div class="trend-box">
-
-L’euro reste l’une des devises les plus recherchées
-en Algérie. Les prix du square évoluent selon
-l’offre, la demande et les tendances du marché.
-
-</div>
-
-</div>
-
-<!-- SEO TEXT -->
+<!-- MARKET TEXT -->
 
 <div class="section">
 
@@ -242,11 +391,63 @@ l’offre, la demande et les tendances du marché.
 🇩🇿 Euro en Algérie
 </div>
 
-<div class="trend-box">
+<div class="info-text">
 
-Consultez le prix EUR/DZD en temps réel sur DZD Market.
-Suivez le taux de change de l’euro au square et le taux officiel
-de la Banque d’Algérie avec un convertisseur rapide et simple.
+L’euro reste l’une des devises les plus suivies
+en Algérie. Les prix du square évoluent selon
+l’offre, la demande et les tendances du marché.
+
+DZD Market permet de suivre rapidement
+les prix EUR/DZD avec comparaison
+entre le marché parallèle et le taux officiel.
+
+</div>
+
+</div>
+
+<!-- FAQ -->
+
+<div class="section">
+
+<div class="section-title">
+❓ FAQ EUR/DZD
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+Quel est le prix de l’euro au square ?
+</div>
+
+<div class="faq-answer">
+Le prix du square varie selon le marché parallèle
+et les tendances quotidiennes.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+Quelle différence entre square et officiel ?
+</div>
+
+<div class="faq-answer">
+Le taux officiel est celui de la Banque d’Algérie,
+tandis que le square représente le marché parallèle.
+</div>
+
+</div>
+
+<div class="faq-item">
+
+<div class="faq-question">
+Le convertisseur utilise quel prix ?
+</div>
+
+<div class="faq-answer">
+Le convertisseur utilise actuellement le prix square.
+</div>
 
 </div>
 
@@ -262,14 +463,14 @@ de la Banque d’Algérie avec un convertisseur rapide et simple.
 
 <script>
 
-const eurSquare = 279;
+const eurPrice = 279;
 
 function updateConverter(){
 
 const amount =
 parseFloat(document.getElementById("amount").value);
 
-const result = amount * eurSquare;
+const result = amount * eurPrice;
 
 document.getElementById("result").innerHTML =
 result.toLocaleString() + " DZD";
