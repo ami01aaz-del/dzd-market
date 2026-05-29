@@ -1,226 +1,590 @@
 <!DOCTYPE html>
-<html lang="fr" translate="no">
+<html lang="fr">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- 🔥 منع الترجمة -->
-<meta name="google" content="notranslate">
+<title>Gold/DZD - DZD Market</title>
 
-<title>Prix de l'Or en Algérie 24K - Cours en Temps Réel DZD</title>
+<meta name="description" content="Suivi du prix de l’or en Algérie : Gold 24K, tendances, convertisseur et marché algérien.">
 
-<meta name="description" content="Prix de l'or 24K en Algérie en temps réel. Suivi du marché de l'or, cours international et conversion en DZD.">
-
-<meta name="keywords" content="or algérie, prix or 24k, gold algérie, cours or dzd">
+<link rel="icon" href="/icon-new.png">
 
 <style>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
-background:#020617;
-color:white;
+margin:0;
 font-family:Arial,sans-serif;
-line-height:1.6;
-padding-bottom:80px;
+background:#0b1220;
+color:white;
 }
 
-.container{
-width:92%;
-max-width:900px;
-margin:auto;
-padding-top:25px;
-}
-
-.header{
-text-align:center;
-margin-bottom:30px;
-}
-
-.header h1{
-font-size:40px;
-color:#fbbf24;
-margin-bottom:10px;
-}
-
-.header p{
-color:#94a3b8;
-font-size:18px;
-}
-
-.section{
+header{
+padding:20px;
 background:#0f172a;
-border:1px solid #1e293b;
-border-radius:24px;
-padding:25px;
-margin-bottom:25px;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.back-link{
+color:#38bdf8;
+text-decoration:none;
+font-size:14px;
 }
 
 .title{
-font-size:30px;
-color:#fbbf24;
-margin-bottom:18px;
+font-size:32px;
+margin-top:15px;
+font-weight:bold;
 }
 
-.row{
-display:flex;
-justify-content:space-between;
+.subtitle{
+margin-top:10px;
+font-size:14px;
+opacity:0.75;
+line-height:1.6;
+}
+
+.live-badge{
+display:inline-flex;
 align-items:center;
-padding:14px 0;
-border-bottom:1px solid #1e293b;
-}
-
-.row:last-child{
-border-bottom:none;
-}
-
-.green{
+gap:8px;
+margin-top:12px;
+padding:6px 12px;
+border-radius:999px;
+background:rgba(34,197,94,0.1);
+border:1px solid rgba(34,197,94,0.2);
 color:#22c55e;
-font-weight:bold;
+font-size:13px;
 }
 
-.blue{
-color:#38bdf8;
-font-weight:bold;
+.live-dot{
+width:10px;
+height:10px;
+border-radius:50%;
+background:#22c55e;
+animation:pulse 2s infinite;
 }
 
-.price{
-font-size:50px;
-text-align:center;
-margin:20px 0;
-color:#fbbf24;
-font-weight:bold;
+@keyframes pulse{
+0%{transform:scale(0.9);opacity:0.3;}
+50%{transform:scale(1.2);opacity:1;}
+100%{transform:scale(0.9);opacity:0.3;}
 }
 
-.converter input{
+.container{
+max-width:950px;
+margin:auto;
+padding:20px;
+}
+
+.section{
+margin-top:20px;
+background:#0f172a;
+border-radius:16px;
+padding:18px;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.section-title{
+font-size:18px;
+margin-bottom:15px;
+color:#22c55e;
+}
+
+input{
 width:100%;
 padding:14px;
-margin-top:10px;
 border:none;
 border-radius:12px;
 background:#162033;
 color:white;
 font-size:18px;
+box-sizing:border-box;
 }
 
 .result{
-margin-top:15px;
-font-size:24px;
-color:#fbbf24;
+margin-top:12px;
+font-size:26px;
+font-weight:bold;
+color:#22c55e;
+}
+
+.chart-tabs{
+display:flex;
+gap:8px;
+margin-bottom:12px;
+}
+
+.chart-tab{
+padding:6px 12px;
+border-radius:999px;
+background:#111827;
+font-size:13px;
+cursor:pointer;
+opacity:0.7;
+}
+
+.chart-tab.active{
+background:#38bdf8;
+opacity:1;
+}
+
+.chart-box{
+height:200px;
+display:flex;
+align-items:flex-end;
+justify-content:space-around;
+padding:20px;
+border-radius:18px;
+background:
+linear-gradient(
+180deg,
+rgba(56,189,248,0.10),
+transparent
+);
+overflow:hidden;
+position:relative;
+}
+
+.chart-bar{
+width:18px;
+background:linear-gradient(
+180deg,
+#38bdf8,
+#2563eb
+);
+border-radius:999px;
+transition:all 0.35s ease;
+box-shadow:0 0 12px rgba(56,189,248,0.25);
+opacity:0.9;
+}
+
+.links{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.link-card{
+background:#111827;
+padding:14px;
+border-radius:14px;
+text-decoration:none;
+color:white;
+border:1px solid rgba(255,255,255,0.05);
+transition:0.2s;
+}
+
+.link-card:hover{
+border-color:#38bdf8;
+transform:translateY(-2px);
+}
+
+.link-title{
 font-weight:bold;
 }
 
-.links a{
-display:block;
-margin-top:10px;
-color:white;
-text-decoration:none;
-padding:10px;
-background:#111827;
-border-radius:10px;
-border:1px solid #1e293b;
+.link-desc{
+font-size:13px;
+opacity:0.7;
+margin-top:5px;
+line-height:1.4;
 }
 
-.links a:hover{
-border-color:#fbbf24;
+.info{
+font-size:14px;
+line-height:1.8;
+opacity:0.85;
+}
+
+.faq-item{
+padding:12px 0;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.faq-item:last-child{
+border:none;
+}
+
+.faq-q{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.faq-a{
+font-size:13px;
+opacity:0.75;
+line-height:1.6;
+}
+
+.market-row{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.market-row:last-child{
+border:none;
+}
+
+footer{
+text-align:center;
+padding:30px;
+font-size:12px;
+opacity:0.6;
+}
+
+@media(max-width:700px){
+.links{
+grid-template-columns:1fr;
+}
+.title{
+font-size:26px;
+}
+}
+
+.compare{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+margin-top:10px;
+}
+
+.compare-box{
+flex:1;
+background:#111827;
+padding:18px;
+border-radius:16px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.compare-box .label{
+font-size:13px;
+opacity:0.7;
+margin-bottom:8px;
+}
+
+.compare-box .value{
+font-size:26px;
+font-weight:bold;
+}
+
+.green{color:#22c55e;}
+.blue{color:#38bdf8;}
+
+.vs-circle{
+width:52px;
+height:52px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#162033;
+border:1px solid rgba(255,255,255,0.08);
+font-size:13px;
+font-weight:bold;
+opacity:0.8;
+box-shadow:0 0 20px rgba(56,189,248,0.08);
+flex-shrink:0;
+}
+
+.price-update{
+animation:flash 0.4s ease;
+}
+
+@keyframes flash{
+0%{
+opacity:0.5;
+transform:scale(0.98);
+}
+100%{
+opacity:1;
+transform:scale(1);
+}
+}
+
+.seo-links{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.seo-links a{
+padding:10px 14px;
+background:#111827;
+border-radius:999px;
+text-decoration:none;
+color:#38bdf8;
+font-size:13px;
+border:1px solid rgba(255,255,255,0.05);
+transition:0.2s;
+}
+
+.seo-links a:hover{
+border-color:#38bdf8;
+transform:translateY(-2px);
 }
 
 </style>
-
 </head>
 
 <body>
 
+<header>
+
+<a class="back-link" href="/">← Retour au marché</a>
+
+<div class="title">🥇 GOLD / DZD</div>
+
+<div class="subtitle">
+Suivi du prix de l’or en Algérie : Gold 24K, convertisseur et tendances du marché.
+</div>
+
+<div class="live-badge">
+<div class="live-dot"></div>
+Marché Live
+</div>
+
+</header>
+
 <div class="container">
 
-<div class="header">
+<div class="section">
 
-<h1>🪙 Gold 24K Algeria</h1>
+<div class="section-title">🥇 Prix Gold 24K</div>
 
-<p>
-Prix de l'or en Algérie - marché local & international
-</p>
+<div class="compare">
+
+<div class="compare-box left">
+<div class="label">Marché</div>
+<div class="value green" id="square">13 500</div>
+</div>
+
+<div class="vs-circle">1G</div>
+
+<div class="compare-box right">
+<div class="label">International</div>
+<div class="value blue">12 980</div>
+</div>
+
+</div>
 
 </div>
 
 <div class="section">
 
-<div class="title">💰 Cours de l'Or</div>
+<div class="section-title">💰 Convertisseur</div>
 
-<div class="row">
-<span>Or 24K (1g)</span>
-<span class="green" id="gold-price">Chargement...</span>
-</div>
+<input type="number" id="amount" value="10">
 
-<div class="price" id="live-price">--</div>
+<div class="result" id="result">135 000 DZD</div>
 
 </div>
 
 <div class="section">
 
-<div class="title">💱 Convertisseur Or</div>
+<div class="section-title">📈 Tendance</div>
 
-<input id="grams" type="number" value="10" placeholder="Grammes">
+<div class="chart-tabs">
 
-<div class="result" id="result">Chargement...</div>
+<div class="chart-tab active" data-tab="7">7J</div>
+<div class="chart-tab" data-tab="30">30J</div>
+<div class="chart-tab" data-tab="365">1A</div>
+
+</div>
+
+<div class="chart-box">
+
+<div class="chart-bar"></div>
+<div class="chart-bar"></div>
+<div class="chart-bar"></div>
+<div class="chart-bar"></div>
+<div class="chart-bar"></div>
+<div class="chart-bar"></div>
+<div class="chart-bar"></div>
+
+</div>
 
 </div>
 
 <div class="section">
 
-<div class="title">📌 Informations</div>
+<div class="section-title">📊 État du marché</div>
 
-<p style="color:#94a3b8">
-Le prix de l'or en Algérie dépend du marché mondial, du dollar et de la demande locale.
-L'or 24K est le plus pur et le plus utilisé.
-</p>
+<div class="market-row">
+<span>Tendance</span>
+<span class="green">+3.2%</span>
+</div>
+
+<div class="market-row">
+<span>Statut</span>
+<span class="green">Live</span>
+</div>
+
+<div class="market-row">
+<span>Dernière mise à jour</span>
+<span>Maintenant</span>
+</div>
 
 </div>
 
 <div class="section">
 
-<div class="title">🔗 Pages liées</div>
+<div class="section-title">🔗 Marchés liés</div>
 
 <div class="links">
 
-<a href="/eur-dzd.html">Euro DZD</a>
-<a href="/usd-dzd.html">USD DZD</a>
-<a href="/marche-noir-algerie.html">Marché Noir</a>
+<a class="link-card" href="/test/eur-dzd.html">
+<div class="link-title">EUR / DZD</div>
+<div class="link-desc">Prix de l’euro en Algérie</div>
+</a>
+
+<a class="link-card" href="/test/usd-dzd.html">
+<div class="link-title">USD / DZD</div>
+<div class="link-desc">Prix du dollar en Algérie</div>
+</a>
+
+<a class="link-card" href="/">
+<div class="link-title">Produits</div>
+<div class="link-desc">Marché algérien</div>
+</a>
+
+<a class="link-card" href="/">
+<div class="link-title">Tendances</div>
+<div class="link-desc">Marchés populaires</div>
+</a>
 
 </div>
 
 </div>
 
+<div class="section">
+
+<div class="section-title">🇩🇿 Gold en Algérie</div>
+
+<div class="info">
+Le prix de l’or en Algérie varie selon le marché international,
+le dollar et la demande locale.
+Cette page permet un suivi rapide du Gold 24K et des tendances du marché algérien.
 </div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">
+🔍 Recherches populaires
+</div>
+
+<div class="seo-links">
+
+<a href="/prix-or-algerie.html">
+Prix Or Algérie
+</a>
+
+<a href="/gold-24k-algerie.html">
+Gold 24K Algérie
+</a>
+
+<a href="/prix-euro-algerie.html">
+Prix Euro Algérie
+</a>
+
+<a href="/prix-dollar-algerie.html">
+Prix Dollar Algérie
+</a>
+
+<a href="/taux-change-algerie.html">
+Taux de Change Algérie
+</a>
+
+<a href="/devise-algerie.html">
+Devise Algérie
+</a>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<div class="section-title">❓ FAQ</div>
+
+<div class="faq-item">
+<div class="faq-q">Pourquoi le prix de l’or change ?</div>
+<div class="faq-a">Le prix dépend du marché international, du dollar et de la demande locale.</div>
+</div>
+
+<div class="faq-item">
+<div class="faq-q">Quel type d’or est suivi ici ?</div>
+<div class="faq-a">Cette page suit principalement le Gold 24K en Algérie.</div>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 DZD Market
+</footer>
 
 <script>
 
-let goldPrice = 14500;
+let price = 13500;
 
 function update(){
-
-document.getElementById("gold-price").innerText =
-goldPrice + " DZD";
-
-document.getElementById("live-price").innerText =
-goldPrice + " DZD";
-
-const grams = document.getElementById("grams").value;
-
+const amount = document.getElementById("amount").value;
 document.getElementById("result").innerText =
-(grams * goldPrice).toLocaleString() + " DZD";
+Math.round(amount * price).toLocaleString() + " DZD";
+}
+
+document.getElementById("amount").addEventListener("input", update);
+
+const data = {
+"7":[35,48,60,72,84,92,100],
+"30":[25,35,50,65,78,90,105],
+"365":[20,30,45,60,75,95,115]
+};
+
+function render(tab){
+
+document.querySelectorAll(".chart-tab")
+.forEach(t=>t.classList.remove("active"));
+
+document.querySelector(`[data-tab="${tab}"]`)
+.classList.add("active");
+
+const bars = document.querySelectorAll(".chart-bar");
+
+data[tab].forEach((v,i)=>{
+bars[i].style.height = v + "px";
+});
 
 }
 
-document.getElementById("grams").addEventListener("input", update);
+document.querySelectorAll(".chart-tab")
+.forEach(t=>{
+t.addEventListener("click",()=>render(t.dataset.tab));
+});
 
+render("30");
 update();
+
+setInterval(()=>{
+
+const el = document.getElementById("square");
+
+el.classList.add("price-update");
+
+setTimeout(()=>{
+el.classList.remove("price-update");
+},400);
+
+},5000);
 
 </script>
 
