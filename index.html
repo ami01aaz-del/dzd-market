@@ -87,6 +87,14 @@ background:#1a2438;
 border-color:#38bdf8;
 }
 
+.clickable{
+cursor:pointer;
+}
+
+.clickable:hover{
+transform:translateY(-1px);
+}
+
 .small{
 font-size:13px;
 opacity:0.7;
@@ -132,7 +140,10 @@ opacity:0.6;
 
 <header>
 <h1>🇩🇿 DZD Market</h1>
-<p class="small">Marché algérien - Prix en temps réel</p>
+<p class="small">
+Suivi des prix réels en Algérie :
+devises, or, produits et tendances.
+</p>
 </header>
 
 <div class="container">
@@ -148,7 +159,7 @@ opacity:0.6;
 🕒 Mise à jour : il y a 5 min
 </p>
 
-<div class="row">
+<div class="row clickable">
   <span>
     <a href="/eur-dzd.html" class="currency-link">
       EUR/DZD
@@ -160,7 +171,7 @@ opacity:0.6;
   </span>
 </div>
 
-<div class="row">
+<div class="row clickable">
   <span>
     <a href="/usd-dzd.html" class="currency-link">
       USD/DZD
@@ -259,7 +270,7 @@ color:white;
 🕒 Mise à jour automatique
 </p>
 
-<div class="row">
+<div class="row clickable">
   <span>
     <a href="/gold-dzd.html" class="currency-link">
       Gold 24K 1g)
