@@ -368,7 +368,7 @@ Marché Live
 
 <div class="compare-box right">
 <div class="label">International</div>
-<div class="value blue">12 980</div>
+<div class="value blue" id="official"></div>
 </div>
 
 </div>
@@ -532,17 +532,63 @@ Devise Algérie
 © 2026 DZD Market
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script src="/prices.js"></script>
+
 <script>
 
-let price = 13500;
+async function loadGoldPrice(){
 
-function update(){
-const amount = document.getElementById("amount").value;
-document.getElementById("result").innerText =
-Math.round(amount * price).toLocaleString() + " DZD";
+const supabaseUrl =
+"https://bcmngzompyojuffepstk.supabase.co";
+
+const supabaseKey =
+"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
+
+const supabaseClient =
+supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+const { data } = await supabaseClient
+.from("market_items")
+.select("*");
+
+const goldItem =
+data.find(item => item.name === "GOLD_24K");
+
+const price =
+Number(goldItem.value);
+
+document.getElementById("square").innerText =
+formatPrice(price);
+
+document.getElementById("official").innerText =
+formatPrice(price);
+
+window.price = price;
+
+update();
+
 }
 
-document.getElementById("amount").addEventListener("input", update);
+loadGoldPrice();
+
+function update(){
+
+const amount =
+document.getElementById("amount").value;
+
+document.getElementById("result").innerText =
+Math.round(amount * window.price)
+.toLocaleString() + " DZD";
+
+}
+
+document.getElementById("amount")
+.addEventListener("input", update);
 
 const data = {
 "7":[35,48,60,72,84,92,100],
