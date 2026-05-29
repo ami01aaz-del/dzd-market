@@ -276,6 +276,40 @@ font-size:24px;
 }
 }
 
+.compare{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:15px;
+margin-top:10px;
+}
+
+.compare-box{
+flex:1;
+background:#111827;
+padding:18px;
+border-radius:16px;
+text-align:center;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+.compare-box .label{
+font-size:13px;
+opacity:0.7;
+margin-bottom:8px;
+}
+
+.compare-box .value{
+font-size:26px;
+font-weight:bold;
+}
+
+.vs{
+font-size:14px;
+opacity:0.6;
+padding:10px;
+}
+
 </style>
 </head>
 
@@ -299,18 +333,25 @@ Marché Live
 </header>
 
 <div class="container">
+<!-- PRICES COMPARISON -->
+<div class="section">
 
-<!-- PRICES -->
-<div class="grid-prices">
+<div class="section-title">💶 Prix EUR / DZD</div>
 
-<div class="card">
-<div class="card-label">Prix Square</div>
-<div class="card-price green" id="square">279.20 DZD</div>
+<div class="compare">
+
+<div class="compare-box left">
+<div class="label">Square</div>
+<div class="value green" id="square">279.20</div>
 </div>
 
-<div class="card">
-<div class="card-label">Prix Officiel</div>
-<div class="card-price blue">154.32 DZD</div>
+<div class="vs">VS</div>
+
+<div class="compare-box right">
+<div class="label">Officiel</div>
+<div class="value blue">154.32</div>
+</div>
+
 </div>
 
 </div>
