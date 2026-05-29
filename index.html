@@ -133,6 +133,41 @@ font-size:12px;
 opacity:0.6;
 }
 
+.market-strip{
+overflow:hidden;
+padding:8px 0;
+background:#0d1526;
+border-top:1px solid #1e293b;
+border-bottom:1px solid #1e293b;
+}
+
+.market-track{
+display:flex;
+gap:40px;
+width:max-content;
+animation:scrollMarket 18s linear infinite;
+font-size:14px;
+opacity:0.85;
+padding-left:20px;
+}
+
+.market-track span{
+white-space:nowrap;
+color:#cbd5e1;
+}
+
+@keyframes scrollMarket{
+
+0%{
+transform:translateX(100%);
+}
+
+100%{
+transform:translateX(-100%);
+}
+
+}
+
 .hidden-currency{
 display:none;
 }
@@ -157,6 +192,25 @@ opacity:0.9;
 Suivi des prix réels en Algérie :
 devises, or, produits et tendances.
 </p>
+
+<div class="market-strip">
+
+<div class="market-track">
+
+<span>💱 Devises</span>
+
+<span>🪙 Gold</span>
+
+<span>📱 Produits</span>
+
+<span>🔥 Tendances</span>
+
+<span>🇩🇿 Marché DZ</span>
+
+</div>
+
+</div>
+
 </header>
 
 <div class="container">
