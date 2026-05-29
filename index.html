@@ -592,10 +592,10 @@ window.silver = Number(silverItem?.value);
 // CURRENCY DISPLAY
 
 document.getElementById("eur-rate").innerHTML =
-`Square: ${window.eurSquare} | Officiel: ${eurOfficial}`;
+`Square: ${formatPrice(window.eurSquare)} | Officiel: ${formatPrice(eurOfficial)}`;
 
 document.getElementById("usd-rate").innerHTML =
-`Square: ${window.usdSquare} | Officiel: ${usdOfficial}`;
+`Square: ${formatPrice(window.usdSquare)} | Officiel: ${formatPrice(usdOfficial)}`;
 
 document.getElementById("gbp-rate").innerHTML =
 window.gbp + " DZD";
