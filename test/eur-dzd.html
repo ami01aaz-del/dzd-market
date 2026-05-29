@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EUR/DZD Square et Officiel - DZD Market</title>
+
+<meta name="description"
+content="Suivi du prix EUR/DZD en Algérie : taux square, taux officiel, tendances et convertisseur euro dinar algérien.">
+
+<link rel="icon" type="image/png" href="/icon-new.png">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b1220;
+color:white;
+}
+
+header{
+padding:22px;
+background:#0f172a;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.back-link{
+color:#38bdf8;
+text-decoration:none;
+font-size:14px;
+}
+
+.page-title{
+margin-top:15px;
+font-size:30px;
+font-weight:bold;
+}
+
+.page-subtitle{
+margin-top:8px;
+font-size:14px;
+opacity:0.7;
+line-height:1.6;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.section{
+margin-top:20px;
+background:#0f172a;
+border:1px solid rgba(255,255,255,0.05);
+border-radius:16px;
+padding:18px;
+}
+
+.section-title{
+font-size:18px;
+margin-bottom:15px;
+color:#22c55e;
+}
+
+.price-box{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:14px 0;
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.price-box:last-child{
+border-bottom:none;
+}
+
+.price-label{
+font-size:15px;
+opacity:0.85;
+}
+
+.price-value{
+font-size:18px;
+font-weight:bold;
+}
+
+.green{
+color:#22c55e;
+}
+
+.blue{
+color:#38bdf8;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border:none;
+border-radius:10px;
+background:#162033;
+color:white;
+font-size:16px;
+box-sizing:border-box;
+}
+
+.result{
+margin-top:15px;
+font-size:24px;
+font-weight:bold;
+color:#22c55e;
+}
+
+.trend-box{
+padding:14px;
+border-radius:12px;
+background:#111827;
+font-size:14px;
+line-height:1.7;
+}
+
+footer{
+padding:30px;
+text-align:center;
+font-size:12px;
+opacity:0.6;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<a href="/" class="back-link">
+← Retour au marché
+</a>
+
+<div class="page-title">
+💶 EUR / DZD
+</div>
+
+<div class="page-subtitle">
+Prix de l’euro en Algérie (Square et officiel),
+convertisseur et suivi du marché algérien.
+</div>
+
+</header>
+
+<div class="container">
+
+<!-- PRICES -->
+
+<div class="section">
+
+<div class="section-title">
+💱 Prix EUR/DZD
+</div>
+
+<div class="price-box">
+<div class="price-label">
+Prix Square
+</div>
+
+<div class="price-value green" id="eur-square">
+279 DZD
+</div>
+</div>
+
+<div class="price-box">
+<div class="price-label">
+Prix Officiel
+</div>
+
+<div class="price-value blue" id="eur-official">
+154 DZD
+</div>
+</div>
+
+<div class="price-box">
+<div class="price-label">
+Dernière mise à jour
+</div>
+
+<div class="price-value">
+Live
+</div>
+</div>
+
+</div>
+
+<!-- CONVERTER -->
+
+<div class="section">
+
+<div class="section-title">
+💰 Convertisseur EUR/DZD
+</div>
+
+<input
+type="number"
+id="amount"
+placeholder="Montant en EUR"
+value="100"
+/>
+
+<div class="result" id="result">
+27 900 DZD
+</div>
+
+</div>
+
+<!-- TREND -->
+
+<div class="section">
+
+<div class="section-title">
+📈 Tendance du marché
+</div>
+
+<div class="trend-box">
+
+L’euro reste l’une des devises les plus recherchées
+en Algérie. Les prix du square évoluent selon
+l’offre, la demande et les tendances du marché.
+
+</div>
+
+</div>
+
+<!-- SEO TEXT -->
+
+<div class="section">
+
+<div class="section-title">
+🇩🇿 Euro en Algérie
+</div>
+
+<div class="trend-box">
+
+Consultez le prix EUR/DZD en temps réel sur DZD Market.
+Suivez le taux de change de l’euro au square et le taux officiel
+de la Banque d’Algérie avec un convertisseur rapide et simple.
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 DZD Market
+
+</footer>
+
+<script>
+
+const eurSquare = 279;
+
+function updateConverter(){
+
+const amount =
+parseFloat(document.getElementById("amount").value);
+
+const result = amount * eurSquare;
+
+document.getElementById("result").innerHTML =
+result.toLocaleString() + " DZD";
+
+}
+
+document.getElementById("amount")
+.addEventListener("input", updateConverter);
+
+</script>
+
+</body>
+</html>
