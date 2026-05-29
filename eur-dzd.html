@@ -639,6 +639,17 @@ update();
 
 loadEuroPrice();
 
+function update(){
+
+const amount =
+document.getElementById("amount").value;
+
+document.getElementById("result").innerText =
+Math.round(amount * window.price).toLocaleString()
++ " DZD";
+
+}
+
 document.getElementById("amount").addEventListener("input", update);
 
 /* Chart logic */
@@ -687,9 +698,6 @@ el.classList.remove("price-update");
 
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-<script src="/prices.js"></script>
 
 </body>
 </html>
