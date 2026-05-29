@@ -161,20 +161,33 @@ opacity:1;
 }
 
 .chart-box{
-height:180px;
+height:200px;
 display:flex;
 align-items:flex-end;
 justify-content:space-around;
-padding:15px;
-border-radius:14px;
-background:linear-gradient(180deg,rgba(56,189,248,0.12),transparent);
+padding:20px;
+border-radius:18px;
+background:
+linear-gradient(
+180deg,
+rgba(56,189,248,0.10),
+transparent
+);
+overflow:hidden;
+position:relative;
 }
 
 .chart-bar{
-width:25px;
-background:#38bdf8;
-border-radius:8px 8px 0 0;
-transition:all 0.3s ease;
+width:18px;
+background:linear-gradient(
+180deg,
+#38bdf8,
+#2563eb
+);
+border-radius:999px;
+transition:all 0.35s ease;
+box-shadow:0 0 12px rgba(56,189,248,0.25);
+opacity:0.9;
 }
 
 /* LINKS */
