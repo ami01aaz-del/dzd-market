@@ -221,7 +221,11 @@ devises, or, produits et tendances.
 <span class="blue" id="chf-rate">Chargement...</span>
 </div>
 
-<div class="show-button" onclick="toggleCurrencies()">
+<div
+class="show-button"
+id="toggle-button"
+onclick="toggleCurrencies()"
+>
 Voir plus ↓
 </div>
 
@@ -669,15 +673,35 @@ function toggleCurrencies(){
 const hidden =
 document.querySelectorAll(".hidden-currency");
 
+const button =
+document.getElementById("toggle-button");
+
+let opened = false;
+
 hidden.forEach(item => {
 
 if(item.style.display === "flex"){
+
 item.style.display = "none";
+
 }else{
+
 item.style.display = "flex";
+opened = true;
+
 }
 
 });
+
+if(opened){
+
+button.innerHTML = "Voir moins ↑";
+
+}else{
+
+button.innerHTML = "Voir plus ↓";
+
+}
 
 }
 
