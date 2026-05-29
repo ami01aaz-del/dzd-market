@@ -339,6 +339,21 @@ box-shadow:0 0 20px rgba(56,189,248,0.08);
 flex-shrink:0;
 }
 
+.price-update{
+animation:flash 0.4s ease;
+}
+
+@keyframes flash{
+0%{
+opacity:0.5;
+transform:scale(0.98);
+}
+100%{
+opacity:1;
+transform:scale(1);
+}
+}
+
 </style>
 </head>
 
@@ -556,6 +571,18 @@ t.addEventListener("click",()=>render(t.dataset.tab));
 
 render("30");
 update();
+
+setInterval(()=>{
+
+const el = document.getElementById("square");
+
+el.classList.add("price-update");
+
+setTimeout(()=>{
+el.classList.remove("price-update");
+},400);
+
+},5000);
 
 </script>
 
