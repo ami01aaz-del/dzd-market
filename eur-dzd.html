@@ -408,14 +408,14 @@ Marché Live
 
 <div class="compare-box left">
 <div class="label">Square</div>
-<div class="value green" id="square">279.20</div>
+<div class="value green" id="square"></div>
 </div>
 
 <div class="vs-circle">VS</div>
 
 <div class="compare-box right">
 <div class="label">Officiel</div>
-<div class="value blue" id="official">154.32</div>
+<div class="value blue" id="official"></div>
 </div>
 
 </div>
@@ -586,22 +586,56 @@ Devise Algérie
 © 2026 DZD Market
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script src="/prices.js"></script>
+
 <script>
 
-/* Converter */
-let price = 279.20;
+async function loadEuroPrice(){
+
+const eur = await fetch(
+"https://open.er-api.com/v6/latest/EUR"
+);
+
+const eurData = await eur.json();
+
+const eurOfficial =
+eurData.rates.DZD;
+
+const supabaseUrl =
+"https://bcmngzompyojuffepstk.supabase.co";
+
+const supabaseKey =
+"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
+
+const supabaseClient =
+supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+const { data } = await supabaseClient
+.from("market_items")
+.select("*");
+
+const eurItem =
+data.find(item => item.name === "EUR");
+
+const price =
+Number(eurItem.value);
 
 document.getElementById("square").innerText =
 formatPrice(price);
 
 document.getElementById("official").innerText =
-formatPrice(154.32);
+formatPrice(eurOfficial);
 
-function update(){
-const amount = document.getElementById("amount").value;
-document.getElementById("result").innerText =
-Math.round(amount * price).toLocaleString() + " DZD";
+window.price = price;
+
 }
+
+loadEuroPrice();
 
 document.getElementById("amount").addEventListener("input", update);
 
@@ -650,6 +684,8 @@ el.classList.remove("price-update");
 },5000);
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
 <script src="/prices.js"></script>
 
