@@ -133,6 +133,19 @@ font-size:12px;
 opacity:0.6;
 }
 
+.hidden-currency{
+display:none;
+}
+
+.show-button{
+margin-top:10px;
+font-size:14px;
+color:#38bdf8;
+cursor:pointer;
+text-align:center;
+opacity:0.9;
+}
+
 </style>
 </head>
 
@@ -188,24 +201,28 @@ devises, or, produits et tendances.
 <span class="blue" id="gbp-rate">Chargement...</span>
 </div>
 
-<div class="row">
+<div class="row hidden-currency">
 <span>CAD</span>
 <span class="blue" id="cad-rate">Chargement...</span>
 </div>
 
-<div class="row">
+<div class="row hidden-currency">
 <span>AED</span>
 <span class="blue" id="aed-rate">Chargement...</span>
 </div>
 
-<div class="row">
+<div class="row hidden-currency">
 <span>TRY</span>
 <span class="blue" id="try-rate">Chargement...</span>
 </div>
 
-<div class="row">
+<div class="row hidden-currency">
 <span>CHF</span>
 <span class="blue" id="chf-rate">Chargement...</span>
+</div>
+
+<div class="show-button" onclick="toggleCurrencies()">
+Voir plus ↓
 </div>
 
 <p class="small" style="margin-top:15px;">
@@ -646,6 +663,23 @@ result.toLocaleString() + " DZD";
 
 document.getElementById("goldAmount")
 .addEventListener("input", updateGold);
+
+function toggleCurrencies(){
+
+const hidden =
+document.querySelectorAll(".hidden-currency");
+
+hidden.forEach(item => {
+
+if(item.style.display === "flex"){
+item.style.display = "none";
+}else{
+item.style.display = "flex";
+}
+
+});
+
+}
 
 </script>
 
