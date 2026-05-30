@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Produits - DZD Market</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b1220;
+color:white;
+}
+
+header{
+padding:20px;
+text-align:center;
+background:#0f172a;
+border-bottom:1px solid #1e293b;
+}
+
+h1{
+margin:0;
+color:#38bdf8;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:16px;
+overflow:hidden;
+text-decoration:none;
+color:white;
+transition:0.2s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.content{
+padding:15px;
+}
+
+.title{
+font-size:20px;
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.price{
+font-size:28px;
+font-weight:bold;
+color:#22c55e;
+margin-bottom:10px;
+}
+
+.category{
+opacity:0.7;
+font-size:14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🛒 Produits DZD Market</h1>
+<p>Produits populaires en Algérie</p>
+</header>
+
+<div class="container">
+
+<div class="grid" id="products"></div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseUrl =
+"https://bcmngzompyojuffepstk.supabase.co";
+
+const supabaseKey =
+"ضع هنا نفس المفتاح الموجود في المشروع";
+
+const client =
+supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+async function loadProducts(){
+
+const { data, error } = await client
+.from("products")
+.select("*")
+.order("id");
+
+if(error){
+console.log(error);
+return;
+}
+
+const container =
+document.getElementById("products");
+
+container.innerHTML = "";
+
+data.forEach(product=>{
+
+container.innerHTML += `
+<a class="card"
+href="/product.html?slug=${product.slug}">
+
+<img src="${product.image_url}">
+
+<div class="content">
+
+<div class="title">
+${product.title}
+</div>
+
+<div class="price">
+${Number(product.price).toLocaleString()} DZD
+</div>
+
+<div class="category">
+${product.category}
+</div>
+
+</div>
+
+</a>
+`;
+
+});
+
+}
+
+loadProducts();
+
+</script>
+
+</body>
+</html>
