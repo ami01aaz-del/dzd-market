@@ -217,6 +217,8 @@ const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 let items = [];
+let currentProductId = null;
+let productsData = [];
 
 /* AUTH */
 async function checkAuth(){
@@ -312,6 +314,7 @@ console.log(error);
 return;
 }
 
+productsData = data;
 renderProducts(data);
 }
 
@@ -408,8 +411,21 @@ async function deleteProduct(id){
 
 function editProduct(id){
 
-  document.getElementById("productModal").style.display = "block";
+  currentProductId = id;
 
+  const product = productsData.find(
+    p => String(p.id) === String(id)
+  );
+
+  if(!product) return;
+
+  document.getElementById("editTitle").value =
+    product.title || "";
+
+  document.getElementById("editPrice").value =
+    product.price || 0;
+
+  document.getElementById("productModal").style.display = "block";
 }
 
 function closeModal(){
