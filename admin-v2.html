@@ -162,25 +162,23 @@ background:#1f2937;
 <script>
 
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
-const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS"; // ضع مفتاحك هنا فقط
+const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 let items = [];
 
-/* AUTH FIX */
+/* AUTH (stronger check) */
 async function checkAuth(){
-
 const { data: { user } } = await client.auth.getUser();
 
 if(!user){
 window.location.href = "/login.html";
+return;
 }
-
 }
 
 /* LOAD DATA */
 async function loadData(){
-
 const { data, error } = await client
 .from("market_items")
 .select("*");
@@ -229,7 +227,7 @@ document.getElementById("products").innerHTML += row;
 
 }
 
-/* SAVE ALL */
+/* SAVE ALL (improved) */
 async function saveAll(){
 
 const inputs = document.querySelectorAll("input");
@@ -247,11 +245,10 @@ value: Number(input.value)
 
 alert("Saved successfully ✅");
 
-loadData();
-
+await loadData();
 }
 
-/* INIT SAFE */
+/* INIT */
 async function init(){
 await checkAuth();
 await loadData();
