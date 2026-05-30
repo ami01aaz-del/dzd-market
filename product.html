@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Product - DZD Market</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b1220;
+color:white;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#0f172a;
+border-radius:16px;
+padding:20px;
+border:1px solid rgba(255,255,255,0.05);
+}
+
+img{
+width:100%;
+max-width:400px;
+border-radius:12px;
+display:block;
+margin:auto;
+}
+
+.title{
+font-size:32px;
+font-weight:bold;
+margin-top:20px;
+}
+
+.price{
+font-size:30px;
+font-weight:bold;
+color:#22c55e;
+margin-top:15px;
+}
+
+.meta{
+margin-top:10px;
+opacity:0.8;
+}
+
+.desc{
+margin-top:20px;
+line-height:1.8;
+opacity:0.9;
+}
+
+.loading{
+text-align:center;
+padding:60px;
+font-size:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div id="loading" class="loading">
+Chargement...
+</div>
+
+<img id="image" style="display:none;">
+
+<div id="title" class="title"></div>
+
+<div id="price" class="price"></div>
+
+<div id="brand" class="meta"></div>
+
+<div id="category" class="meta"></div>
+
+<div id="description" class="desc"></div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const supabaseUrl =
+"https://bcmngzompyojuffepstk.supabase.co";
+
+const supabaseKey =
+"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
+
+const client =
+supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+async function loadProduct(){
+
+const params =
+new URLSearchParams(window.location.search);
+
+const slug =
+params.get("slug");
+
+if(!slug){
+document.getElementById("loading").innerText =
+"Product not found";
+return;
+}
+
+const { data, error } =
+await client
+.from("products")
+.select("*")
+.eq("slug", slug)
+.single();
+
+if(error || !data){
+
+document.getElementById("loading").innerText =
+"Product not found";
+
+return;
+}
+
+document.title =
+data.title + " - DZD Market";
+
+document.getElementById("loading").style.display =
+"none";
+
+document.getElementById("image").src =
+data.image;
+
+document.getElementById("image").style.display =
+"block";
+
+document.getElementById("title").innerText =
+data.title;
+
+document.getElementById("price").innerText =
+Number(data.price).toLocaleString() + " DZD";
+
+document.getElementById("brand").innerText =
+"Brand: " + data.brand;
+
+document.getElementById("category").innerText =
+"Category: " + data.category;
+
+document.getElementById("description").innerText =
+data.description;
+
+}
+
+loadProduct();
+
+</script>
+
+</body>
+</html>
