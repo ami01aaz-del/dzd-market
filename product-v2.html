@@ -51,7 +51,7 @@ padding:25px;
 width:100%;
 border-radius:16px;
 background:#111827;
-min-height:350px;
+max-height:500px;
 object-fit:cover;
 }
 
@@ -209,7 +209,7 @@ Chargement...
 
 <div class="hero">
 
-<div>
+<div id="imageContainer">
 <img id="image" class="product-image">
 </div>
 
@@ -354,13 +354,17 @@ document.getElementById("breadcrumb").innerHTML =
 ${data.category} ›
 ${data.title}`;
 
-const image = document.getElementById("image");
+const imageElement =
+document.getElementById("image");
 
-if(data.image_url){
-  image.src = data.image_url;
-}else{
-  image.style.display = "none";
-}
+imageElement.src =
+data.image_url ||
+"https://via.placeholder.com/800x600?text=DZD+Market";
+
+imageElement.onerror = function(){
+this.src =
+"https://via.placeholder.com/800x600?text=DZD+Market";
+};
 
 document.getElementById("title").innerText =
 data.title;
