@@ -290,6 +290,31 @@ return;
 alert("Product created ✅");
 
 }  
+
+  async function addProduct(){
+
+const title = prompt("Product name");
+
+if(!title) return;
+
+const price = prompt("Price");
+
+await client
+.from("products")
+.insert([{
+title: title,
+slug: title.toLowerCase().replace(/\s+/g,"-"),
+price: Number(price) || 0,
+category: "phones",
+brand: "",
+description: "",
+image_url: ""
+}]);
+
+alert("Product added ✅");
+location.reload();
+
+  }
   
 init();
 
