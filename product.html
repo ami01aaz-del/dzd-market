@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Product - DZD Market</title>
+<title>Produit - DZD Market</title>
+
+<meta name="description" content="Produit DZD Market">
 
 <style>
 
@@ -16,34 +18,44 @@ color:white;
 }
 
 .container{
-max-width:1000px;
+max-width:1100px;
 margin:auto;
 padding:20px;
+}
+
+.back-btn{
+display:inline-block;
+margin-bottom:20px;
+padding:10px 16px;
+background:#1e293b;
+color:white;
+text-decoration:none;
+border-radius:10px;
 }
 
 .card{
 background:#0f172a;
-border-radius:16px;
+border-radius:18px;
 padding:20px;
-border:1px solid rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.06);
 }
 
-img{
+.product-image{
 width:100%;
-max-width:400px;
-border-radius:12px;
+max-height:450px;
+object-fit:cover;
+border-radius:16px;
 display:block;
-margin:auto;
 }
 
 .title{
-font-size:32px;
+font-size:38px;
 font-weight:bold;
 margin-top:20px;
 }
 
 .price{
-font-size:30px;
+font-size:42px;
 font-weight:bold;
 color:#22c55e;
 margin-top:15px;
@@ -51,19 +63,85 @@ margin-top:15px;
 
 .meta{
 margin-top:10px;
-opacity:0.8;
+font-size:15px;
+opacity:0.85;
 }
 
 .desc{
-margin-top:20px;
-line-height:1.8;
-opacity:0.9;
+margin-top:25px;
+line-height:1.9;
+font-size:16px;
+}
+
+.info-box{
+margin-top:30px;
+padding:20px;
+background:#111827;
+border-radius:14px;
+}
+
+.info-box h3{
+margin-top:0;
+color:#38bdf8;
+}
+
+.info-row{
+padding:10px 0;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.info-row:last-child{
+border:none;
+}
+
+.related{
+margin-top:35px;
+}
+
+.related h3{
+color:#38bdf8;
+}
+
+.related-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:15px;
+}
+
+.related-card{
+background:#111827;
+padding:15px;
+border-radius:12px;
+text-decoration:none;
+color:white;
+}
+
+.related-title{
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.related-price{
+color:#22c55e;
+font-weight:bold;
 }
 
 .loading{
 text-align:center;
 padding:60px;
 font-size:20px;
+}
+
+@media(max-width:700px){
+
+.title{
+font-size:30px;
+}
+
+.price{
+font-size:34px;
+}
+
 }
 
 </style>
@@ -73,13 +151,19 @@ font-size:20px;
 
 <div class="container">
 
+<a href="/products.html" class="back-btn">
+← Retour aux produits
+</a>
+
 <div class="card">
 
 <div id="loading" class="loading">
 Chargement...
 </div>
 
-<img id="image" style="display:none;">
+<img id="image"
+class="product-image"
+style="display:none;">
 
 <div id="title" class="title"></div>
 
@@ -90,6 +174,27 @@ Chargement...
 <div id="category" class="meta"></div>
 
 <div id="description" class="desc"></div>
+
+<div class="info-box">
+
+<h3>Informations produit</h3>
+
+<div id="infoBrand" class="info-row"></div>
+
+<div id="infoCategory" class="info-row"></div>
+
+<div id="infoPrice" class="info-row"></div>
+
+</div>
+
+<div class="related">
+
+<h3>Produits similaires</h3>
+
+<div id="relatedProducts"
+class="related-grid"></div>
+
+</div>
 
 </div>
 
@@ -120,8 +225,10 @@ const slug =
 params.get("slug");
 
 if(!slug){
+
 document.getElementById("loading").innerText =
 "Product not found";
+
 return;
 }
 
@@ -141,16 +248,27 @@ return;
 }
 
 document.title =
-data.title + " - DZD Market";
+data.title + " Prix en Algérie - DZD Market";
+
+document
+.querySelector('meta[name="description"]')
+.setAttribute(
+"content",
+data.description || data.title
+);
 
 document.getElementById("loading").style.display =
 "none";
 
+if(data.image_url){
+
 document.getElementById("image").src =
-data.image;
+data.image_url;
 
 document.getElementById("image").style.display =
 "block";
+
+}
 
 document.getElementById("title").innerText =
 data.title;
@@ -166,6 +284,65 @@ document.getElementById("category").innerText =
 
 document.getElementById("description").innerText =
 data.description;
+
+document.getElementById("infoBrand").innerText =
+"Marque : " + data.brand;
+
+document.getElementById("infoCategory").innerText =
+"Catégorie : " + data.category;
+
+document.getElementById("infoPrice").innerText =
+"Prix : " +
+Number(data.price).toLocaleString() +
+" DZD";
+
+loadRelatedProducts(
+data.category,
+data.slug
+);
+
+}
+
+async function loadRelatedProducts(
+category,
+currentSlug
+){
+
+const { data } =
+await client
+.from("products")
+.select("*")
+.eq("category", category)
+.limit(6);
+
+const container =
+document.getElementById("relatedProducts");
+
+container.innerHTML = "";
+
+data
+.filter(
+item => item.slug !== currentSlug
+)
+.forEach(item => {
+
+container.innerHTML += `
+<a class="related-card"
+href="/product.html?slug=${item.slug}">
+
+<div class="related-title">
+${item.title}
+</div>
+
+<div class="related-price">
+${Number(item.price)
+.toLocaleString()} DZD
+</div>
+
+</a>
+`;
+
+});
 
 }
 
