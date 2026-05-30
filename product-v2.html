@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Produit - DZD Market</title>
+<meta name="description" content="Prix des produits en Algérie sur DZD Market">
+
+<style>
+
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b1220;
+color:white;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.breadcrumb{
+margin:20px 0;
+font-size:14px;
+opacity:.8;
+}
+
+.breadcrumb a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:18px;
+padding:25px;
+}
+
+.product-image{
+width:100%;
+border-radius:16px;
+background:#111827;
+min-height:350px;
+object-fit:cover;
+}
+
+.product-title{
+font-size:40px;
+font-weight:bold;
+margin-bottom:15px;
+}
+
+.product-price{
+font-size:44px;
+font-weight:bold;
+color:#22c55e;
+margin-bottom:15px;
+}
+
+.meta{
+margin-bottom:10px;
+opacity:.9;
+}
+
+.summary{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+margin-top:25px;
+}
+
+.summary-card{
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:14px;
+padding:18px;
+}
+
+.summary-label{
+opacity:.7;
+font-size:13px;
+margin-bottom:8px;
+}
+
+.summary-value{
+font-weight:bold;
+}
+
+.section{
+margin-top:30px;
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:18px;
+padding:25px;
+}
+
+.section h2{
+margin-top:0;
+color:#38bdf8;
+}
+
+.description{
+line-height:1.9;
+}
+
+.related-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+gap:15px;
+}
+
+.related-card{
+display:block;
+background:#111827;
+border-radius:12px;
+padding:15px;
+color:white;
+text-decoration:none;
+}
+
+.related-title{
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.related-price{
+color:#22c55e;
+font-weight:bold;
+}
+
+.links{
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+}
+
+.links a{
+background:#111827;
+padding:10px 14px;
+border-radius:10px;
+text-decoration:none;
+color:white;
+}
+
+.footer{
+margin-top:40px;
+text-align:center;
+opacity:.7;
+padding:30px 0;
+}
+
+.loading{
+text-align:center;
+padding:80px;
+font-size:20px;
+}
+
+@media(max-width:900px){
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.summary{
+grid-template-columns:1fr 1fr;
+}
+
+.product-title{
+font-size:30px;
+}
+
+.product-price{
+font-size:34px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div id="loading" class="loading">
+Chargement...
+</div>
+
+<div id="content" style="display:none;">
+
+<div class="breadcrumb" id="breadcrumb"></div>
+
+<div class="hero">
+
+<div>
+<img id="image" class="product-image">
+</div>
+
+<div>
+
+<div id="title" class="product-title"></div>
+
+<div id="price" class="product-price"></div>
+
+<div id="brand" class="meta"></div>
+
+<div id="category" class="meta"></div>
+
+</div>
+
+</div>
+
+<div class="summary">
+
+<div class="summary-card">
+<div class="summary-label">Prix</div>
+<div id="summaryPrice" class="summary-value"></div>
+</div>
+
+<div class="summary-card">
+<div class="summary-label">Marque</div>
+<div id="summaryBrand" class="summary-value"></div>
+</div>
+
+<div class="summary-card">
+<div class="summary-label">Catégorie</div>
+<div id="summaryCategory" class="summary-value"></div>
+</div>
+
+<div class="summary-card">
+<div class="summary-label">Statut</div>
+<div id="summaryStatus" class="summary-value"></div>
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Description</h2>
+
+<div id="description" class="description"></div>
+
+</div>
+
+<div class="section">
+
+<h2>À propos de DZD Market</h2>
+
+<p>
+DZD Market est une plateforme dédiée au suivi des prix en Algérie.
+Les informations affichées sont fournies à titre indicatif et peuvent
+évoluer selon les vendeurs, les régions et la disponibilité des produits.
+</p>
+
+</div>
+
+<div class="section">
+
+<h2>Liens utiles</h2>
+
+<div class="links">
+
+<a href="/products.html">
+Tous les produits
+</a>
+
+<a href="/index.html">
+Accueil
+</a>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>Produits similaires</h2>
+
+<div id="relatedProducts" class="related-grid"></div>
+
+</div>
+
+</div>
+
+<div class="footer">
+© DZD Market
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+const client = supabase.createClient(
+"https://bcmngzompyojuffepstk.supabase.co",
+"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS"
+);
+
+async function loadProduct(){
+
+const params = new URLSearchParams(window.location.search);
+const slug = params.get("slug");
+
+if(!slug){
+document.getElementById("loading").innerText = "Produit introuvable";
+return;
+}
+
+const { data, error } = await client
+.from("products")
+.select("*")
+.eq("slug", slug)
+.single();
+
+if(error || !data){
+document.getElementById("loading").innerText = "Produit introuvable";
+return;
+}
+
+document.title =
+data.title + " Prix en Algérie | DZD Market";
+
+document
+.querySelector('meta[name="description"]')
+.setAttribute(
+"content",
+data.description || data.title
+);
+
+document.getElementById("loading").style.display = "none";
+document.getElementById("content").style.display = "block";
+
+document.getElementById("breadcrumb").innerHTML =
+`<a href="/index.html">Accueil</a> ›
+<a href="/products.html">Produits</a> ›
+${data.category} ›
+${data.title}`;
+
+document.getElementById("image").src =
+data.image_url || "";
+
+document.getElementById("title").innerText =
+data.title;
+
+document.getElementById("price").innerText =
+Number(data.price).toLocaleString() + " DZD";
+
+document.getElementById("brand").innerText =
+"Marque : " + (data.brand || "-");
+
+document.getElementById("category").innerText =
+"Catégorie : " + (data.category || "-");
+
+document.getElementById("description").innerText =
+data.description || "Aucune description disponible.";
+
+document.getElementById("summaryPrice").innerText =
+Number(data.price).toLocaleString() + " DZD";
+
+document.getElementById("summaryBrand").innerText =
+data.brand || "-";
+
+document.getElementById("summaryCategory").innerText =
+data.category || "-";
+
+document.getElementById("summaryStatus").innerText =
+data.status || "-";
+
+loadRelatedProducts(data.category, data.slug);
+
+}
+
+async function loadRelatedProducts(category,currentSlug){
+
+const { data } = await client
+.from("products")
+.select("*")
+.eq("category", category)
+.limit(6);
+
+const container =
+document.getElementById("relatedProducts");
+
+container.innerHTML = "";
+
+data
+.filter(p => p.slug !== currentSlug)
+.forEach(p => {
+
+container.innerHTML += `
+<a class="related-card"
+href="/product-v2.html?slug=${p.slug}">
+<div class="related-title">${p.title}</div>
+<div class="related-price">
+${Number(p.price).toLocaleString()} DZD
+</div>
+</a>
+`;
+
+});
+
+}
+
+loadProduct();
+
+</script>
+
+</body>
+  </html>
