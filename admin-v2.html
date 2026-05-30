@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 body{
 margin:0;
 font-family:Arial;
@@ -21,18 +20,13 @@ background:#0f172a;
 border-bottom:1px solid #1e293b;
 }
 
-h1{
-margin:0;
-color:#38bdf8;
-}
+h1{margin:0;color:#38bdf8;}
 
 .container{
 max-width:1100px;
 margin:auto;
 padding:20px;
 }
-
-/* SECTIONS */
 
 .section{
 background:#0f172a;
@@ -47,8 +41,6 @@ font-size:18px;
 margin-bottom:10px;
 color:#22c55e;
 }
-
-/* TABLE */
 
 table{
 width:100%;
@@ -78,8 +70,6 @@ background:#162033;
 color:white;
 }
 
-/* BUTTON */
-
 .save-bar{
 position:sticky;
 bottom:0;
@@ -99,11 +89,7 @@ font-size:16px;
 cursor:pointer;
 }
 
-button:hover{
-opacity:0.9;
-}
-
-/* BADGE */
+button:hover{opacity:0.9;}
 
 .badge{
 padding:3px 8px;
@@ -111,7 +97,6 @@ border-radius:6px;
 font-size:12px;
 background:#1f2937;
 }
-
 </style>
 </head>
 
@@ -124,7 +109,6 @@ background:#1f2937;
 
 <div class="container">
 
-<!-- CURRENCIES -->
 <div class="section">
 <div class="title">💱 Currencies</div>
 <table>
@@ -132,14 +116,13 @@ background:#1f2937;
 <tr>
 <th>Name</th>
 <th>Category</th>
-<th>Value (DZD)</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody id="currencies"></tbody>
 </table>
 </div>
 
-<!-- METALS -->
 <div class="section">
 <div class="title">🪙 Metals</div>
 <table>
@@ -147,14 +130,13 @@ background:#1f2937;
 <tr>
 <th>Name</th>
 <th>Category</th>
-<th>Value (DZD)</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody id="metals"></tbody>
 </table>
 </div>
 
-<!-- PRODUCTS -->
 <div class="section">
 <div class="title">🛒 Products</div>
 <table>
@@ -162,7 +144,7 @@ background:#1f2937;
 <tr>
 <th>Name</th>
 <th>Category</th>
-<th>Value (DZD)</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody id="products"></tbody>
@@ -171,7 +153,6 @@ background:#1f2937;
 
 </div>
 
-<!-- SAVE -->
 <div class="save-bar">
 <button onclick="saveAll()">💾 Save All Changes</button>
 </div>
@@ -180,27 +161,24 @@ background:#1f2937;
 
 <script>
 
-// Supabase
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJjbW5nem9tcHlvanVmZmVwc3RrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkzOTM2MDYsImV4cCI6MjA5NDk2OTYwNn0.15SBxqm0g2odZgSJi_iJlhTVGn7R3uuP2xH0-kV-Afg";
-  ";
+const supabaseKey = "YOUR_SUPABASE_ANON_KEY"; // ضع مفتاحك هنا فقط
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
-// DATA STORAGE
 let items = [];
 
-// CHECK AUTH
+/* AUTH FIX */
 async function checkAuth(){
 
-const { data } = await client.auth.getUser();
+const { data: { user } } = await client.auth.getUser();
 
-if(!data.user){
+if(!user){
 window.location.href = "/login.html";
 }
 
 }
 
-// LOAD DATA
+/* LOAD DATA */
 async function loadData(){
 
 const { data, error } = await client
@@ -213,12 +191,10 @@ return;
 }
 
 items = data;
-
 renderTable();
-
 }
 
-// RENDER TABLES
+/* RENDER */
 function renderTable(){
 
 document.getElementById("currencies").innerHTML = "";
@@ -227,14 +203,12 @@ document.getElementById("products").innerHTML = "";
 
 items.forEach(item => {
 
-let row = `
+const row = `
 <tr>
 <td>${item.name}</td>
 <td><span class="badge">${item.category}</span></td>
 <td>
-<input type="number"
-data-id="${item.id}"
-value="${item.value}">
+<input type="number" data-id="${item.id}" value="${item.value}">
 </td>
 </tr>
 `;
@@ -255,9 +229,35 @@ document.getElementById("products").innerHTML += row;
 
 }
 
-// INIT
-checkAuth();
+/* SAVE ALL */
+async function saveAll(){
+
+const inputs = document.querySelectorAll("input");
+
+for(const input of inputs){
+
+await client
+.from("market_items")
+.update({
+value: Number(input.value)
+})
+.eq("id", input.dataset.id);
+
+}
+
+alert("Saved successfully ✅");
+
 loadData();
+
+}
+
+/* INIT SAFE */
+async function init(){
+await checkAuth();
+await loadData();
+}
+
+init();
 
 </script>
 
