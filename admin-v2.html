@@ -169,6 +169,41 @@ background:#1f2937;
 <button onclick="saveAll()">💾 Save All Changes</button>
 </div>
 
+<div id="productModal" style="
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+z-index:9999;
+">
+
+  <div style="
+  width:90%;
+  max-width:700px;
+  margin:40px auto;
+  background:#0f172a;
+  padding:20px;
+  border-radius:12px;
+  ">
+
+    <h2>Edit Product</h2>
+
+    <input id="editTitle" placeholder="Title">
+
+    <br><br>
+
+    <input id="editPrice" placeholder="Price">
+
+    <br><br>
+
+    <button onclick="closeModal()">
+      Close
+    </button>
+
+  </div>
+
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -369,7 +404,13 @@ async function deleteProduct(id){
 }
 
 function editProduct(id){
-  alert("Edit product ID: " + id);
+
+  document.getElementById("productModal").style.display = "block";
+
+}
+
+function closeModal(){
+  document.getElementById("productModal").style.display = "none";
 }
 
 init();
