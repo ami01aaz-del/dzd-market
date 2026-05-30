@@ -198,6 +198,38 @@ z-index:9999;
     <input id="editPrice" placeholder="Price">
 
     <br><br>
+    
+    <br><br>
+
+<input id="editCategory" placeholder="Category">
+
+<br><br>
+
+<input id="editBrand" placeholder="Brand">
+
+<br><br>
+
+<input id="editImageUrl" placeholder="Image URL">
+
+<br><br>
+
+<textarea
+  id="editDescription"
+  placeholder="Description"
+  style="
+    width:100%;
+    min-height:120px;
+    background:#162033;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:10px;
+  "
+></textarea>
+
+<br><br>
+
+<input id="editStatus" placeholder="Status">
 
     <button onclick="closeModal()">
       Close
@@ -424,6 +456,21 @@ function editProduct(id){
 
   document.getElementById("editPrice").value =
     product.price || 0;
+    
+    document.getElementById("editCategory").value =
+  product.category || "";
+
+document.getElementById("editBrand").value =
+  product.brand || "";
+
+document.getElementById("editImageUrl").value =
+  product.image_url || "";
+
+document.getElementById("editDescription").value =
+  product.description || "";
+
+document.getElementById("editStatus").value =
+  product.status || "active";
 
   document.getElementById("productModal").style.display = "block";
 }
