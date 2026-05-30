@@ -139,6 +139,11 @@ background:#1f2937;
 
 <div class="section">
 <div class="title">🛒 Products</div>
+<div style="margin-bottom:15px;">
+<button onclick="addProduct()">
+➕ Add Product
+</button>
+  </div>
 <table>
 <thead>
 <tr>
@@ -254,6 +259,38 @@ await checkAuth();
 await loadData();
 }
 
+async function addProduct(){
+
+const title = prompt("Product title");
+
+if(!title) return;
+
+const slug = title
+.toLowerCase()
+.replaceAll(" ","-");
+
+const { error } = await client
+.from("products")
+.insert([{
+title:title,
+slug:slug,
+category:"phones",
+price:0,
+image_url:"",
+description:"",
+brand:"",
+status:"active"
+}]);
+
+if(error){
+alert(error.message);
+return;
+}
+
+alert("Product created ✅");
+
+}  
+  
 init();
 
 </script>
