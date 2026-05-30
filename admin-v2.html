@@ -276,21 +276,26 @@ renderProducts(data);
 /* RENDER PRODUCTS */
 function renderProducts(products){
 
-const container = document.getElementById("products");
+  const container = document.getElementById("products");
 
-container.innerHTML = "";
+  container.innerHTML = "";
 
-products.forEach(product => {
+  products.forEach(product => {
 
-container.innerHTML += `
-<tr>
-<td>${product.title}</td>
-<td>${product.category}</td>
-<td>${product.price}</td>
-</tr>
-`;
-});
-
+    container.innerHTML += `
+      <tr>
+        <td>${product.title}</td>
+        <td>${product.category}</td>
+        <td>${product.price}</td>
+        <td>
+          <button onclick="deleteProduct('${product.id}')"
+            style="background:red;padding:6px 10px;border:none;border-radius:6px;color:white;">
+            Delete
+          </button>
+        </td>
+      </tr>
+    `;
+  });
 }
 
 /* ADD PRODUCT */
@@ -322,6 +327,25 @@ return;
 
 alert("Product added ✅");
 await loadProducts();
+}
+
+async function deleteProduct(id){
+
+  const confirmDelete = confirm("Are you sure you want to delete this product?");
+
+  if(!confirmDelete) return;
+
+  const { error } = await client
+    .from("products")
+    .delete()
+    .eq("id", id);
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  await loadProducts(); // تحديث مباشر
 }
 
 init();
