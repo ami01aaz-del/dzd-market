@@ -347,8 +347,13 @@ document.getElementById("breadcrumb").innerHTML =
 ${data.category} ›
 ${data.title}`;
 
-document.getElementById("image").src =
-data.image_url || "";
+const image = document.getElementById("image");
+
+if(data.image_url){
+  image.src = data.image_url;
+}else{
+  image.style.display = "none";
+}
 
 document.getElementById("title").innerText =
 data.title;
@@ -417,4 +422,4 @@ loadProduct();
 </script>
 
 </body>
-  </html>
+</html>
