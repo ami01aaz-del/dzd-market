@@ -280,16 +280,21 @@ function renderProducts(products){
 
   container.innerHTML = "";
 
-  products.forEach(product => {
+  products.forEach(p => {
 
     container.innerHTML += `
       <tr>
-        <td>${product.title}</td>
-        <td>${product.category}</td>
-        <td>${product.price}</td>
+        <td>${p.title}</td>
+        <td>${p.category}</td>
+        <td>${p.price}</td>
+        <td>${p.brand || "-"}</td>
         <td>
-          <button onclick="deleteProduct('${product.id}')"
-            style="background:red;padding:6px 10px;border:none;border-radius:6px;color:white;">
+          ${p.image_url ? `<img src="${p.image_url}" width="40">` : "-"}
+        </td>
+        <td>${p.status}</td>
+        <td>
+          <button onclick="deleteProduct('${p.id}')"
+            style="background:red;color:white;border:none;padding:6px 8px;border-radius:6px;">
             Delete
           </button>
         </td>
@@ -301,32 +306,36 @@ function renderProducts(products){
 /* ADD PRODUCT */
 async function addProduct(){
 
-const title = prompt("Product name");
-if(!title) return;
+  const title = prompt("Product name");
+  if(!title) return;
 
-const price = prompt("Price");
-if(price === null) return;
+  const price = prompt("Price") || 0;
+  const brand = prompt("Brand (optional)") || "";
+  const image_url = prompt("Image URL (optional)") || "";
+  const description = prompt("Description (optional)") || "";
+  const category = prompt("Category") || "phones";
 
-const { error } = await client
-.from("products")
-.insert([{
-title: title,
-slug: title.toLowerCase().replace(/\s+/g,"-"),
-price: Number(price) || 0,
-category: "phones",
-brand: "",
-description: "",
-image_url: "",
-status: "active"
-}]);
+  const { error } = await client
+    .from("products")
+    .insert([{
+      title: title,
+      slug: title.toLowerCase().replace(/\s+/g,"-"),
+      price: Number(price),
+      category: category,
+      brand: brand,
+      image_url: image_url,
+      description: description,
+      status: "active"
+    }]);
 
-if(error){
-alert(error.message);
-return;
-}
+  if(error){
+    alert(error.message);
+    return;
+  }
 
-alert("Product added ✅");
-await loadProducts();
+  alert("Product added ✅");
+
+  await loadProducts(); // تحديث الجدول
 }
 
 async function deleteProduct(id){
