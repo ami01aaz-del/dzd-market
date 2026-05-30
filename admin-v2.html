@@ -231,9 +231,13 @@ z-index:9999;
 
 <input id="editStatus" placeholder="Status">
 
-    <button onclick="closeModal()">
-      Close
-    </button>
+ <button onclick="saveProductChanges()">
+  Save Changes
+</button>
+
+<button onclick="closeModal()">
+  Close
+</button>
 
   </div>
 
@@ -477,6 +481,33 @@ document.getElementById("editStatus").value =
 
 function closeModal(){
   document.getElementById("productModal").style.display = "none";
+}
+
+async function saveProductChanges(){
+
+  const { error } = await client
+    .from("products")
+    .update({
+      title: document.getElementById("editTitle").value,
+      price: Number(document.getElementById("editPrice").value),
+      category: document.getElementById("editCategory").value,
+      brand: document.getElementById("editBrand").value,
+      image_url: document.getElementById("editImageUrl").value,
+      description: document.getElementById("editDescription").value,
+      status: document.getElementById("editStatus").value
+    })
+    .eq("id", currentProductId);
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  closeModal();
+
+  await loadProducts();
+
+  alert("Product updated ✅");
 }
 
 init();
