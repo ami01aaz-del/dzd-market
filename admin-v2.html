@@ -152,6 +152,10 @@ background:#1f2937;
 <th>Title</th>
 <th>Category</th>
 <th>Price</th>
+<th>Brand</th>
+<th>Image</th>
+<th>Status</th>
+<th>Actions</th>
 </tr>
 </thead>
 
@@ -293,11 +297,18 @@ function renderProducts(products){
         </td>
         <td>${p.status}</td>
         <td>
-          <button onclick="deleteProduct('${p.id}')"
-            style="background:red;color:white;border:none;padding:6px 8px;border-radius:6px;">
-            Delete
-          </button>
-        </td>
+  <button
+    onclick="editProduct('${p.id}')"
+    style="background:#2563eb;color:white;border:none;padding:6px 8px;border-radius:6px;margin-right:5px;">
+    Edit
+  </button>
+
+  <button
+    onclick="deleteProduct('${p.id}')"
+    style="background:red;color:white;border:none;padding:6px 8px;border-radius:6px;">
+    Delete
+  </button>
+</td>
       </tr>
     `;
   });
@@ -355,6 +366,10 @@ async function deleteProduct(id){
   }
 
   await loadProducts(); // تحديث مباشر
+}
+
+function editProduct(id){
+  alert("Edit product ID: " + id);
 }
 
 init();
