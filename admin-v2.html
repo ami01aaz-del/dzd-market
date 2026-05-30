@@ -104,11 +104,12 @@ background:#1f2937;
 
 <header>
 <h1>🔐 DZD Admin V2</h1>
-<p>Market Control Panel (market_items)</p>
+<p>Market Control Panel</p>
 </header>
 
 <div class="container">
 
+<!-- MARKET ITEMS -->
 <div class="section">
 <div class="title">💱 Currencies</div>
 <table>
@@ -137,21 +138,23 @@ background:#1f2937;
 </table>
 </div>
 
+<!-- PRODUCTS -->
 <div class="section">
 <div class="title">🛒 Products</div>
+
 <div style="margin-bottom:15px;">
-<button onclick="addProduct()">
-➕ Add Product
-</button>
-  </div>
+<button onclick="addProduct()">➕ Add Product</button>
+</div>
+
 <table>
 <thead>
 <tr>
-<th>Name</th>
+<th>Title</th>
 <th>Category</th>
-<th>Value</th>
+<th>Price</th>
 </tr>
 </thead>
+
 <tbody id="products"></tbody>
 </table>
 </div>
@@ -168,21 +171,28 @@ background:#1f2937;
 
 const supabaseUrl = "https://bcmngzompyojuffepstk.supabase.co";
 const supabaseKey = "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
+
 const client = supabase.createClient(supabaseUrl, supabaseKey);
 
 let items = [];
 
-/* AUTH (stronger check) */
+/* AUTH */
 async function checkAuth(){
 const { data: { user } } = await client.auth.getUser();
 
 if(!user){
 window.location.href = "/login.html";
-return;
 }
 }
 
-/* LOAD DATA */
+/* INIT */
+async function init(){
+await checkAuth();
+await loadData();
+await loadProducts();
+}
+
+/* LOAD MARKET ITEMS */
 async function loadData(){
 const { data, error } = await client
 .from("market_items")
@@ -197,12 +207,11 @@ items = data;
 renderTable();
 }
 
-/* RENDER */
+/* RENDER MARKET ITEMS */
 function renderTable(){
 
 document.getElementById("currencies").innerHTML = "";
 document.getElementById("metals").innerHTML = "";
-document.getElementById("products").innerHTML = "";
 
 items.forEach(item => {
 
@@ -224,15 +233,11 @@ else if(item.category === "gold" || item.category === "silver" || item.type === 
 document.getElementById("metals").innerHTML += row;
 }
 
-else{
-document.getElementById("products").innerHTML += row;
-}
-
 });
 
 }
 
-/* SAVE ALL (improved) */
+/* SAVE MARKET ITEMS */
 async function saveAll(){
 
 const inputs = document.querySelectorAll("input");
@@ -249,90 +254,33 @@ value: Number(input.value)
 }
 
 alert("Saved successfully ✅");
-
-await loadData();
-await loadProducts();
-}
-
-/* INIT */
-async function init(){
-await checkAuth();
 await loadData();
 }
 
-async function addProduct(){
-
-const title = prompt("Product title");
-
-if(!title) return;
-
-const slug = title
-.toLowerCase()
-.replaceAll(" ","-");
-
-const { error } = await client
-.from("products")
-.insert([{
-title:title,
-slug:slug,
-category:"phones",
-price:0,
-image_url:"",
-description:"",
-brand:"",
-status:"active"
-}]);
-
-if(error){
-alert(error.message);
-return;
-}
-
-alert("Product created ✅");
-
-}  
-
-  async function addProduct(){
-
-const title = prompt("Product name");
-
-if(!title) return;
-
-const price = prompt("Price");
-
-await client
-.from("products")
-.insert([{
-title: title,
-slug: title.toLowerCase().replace(/\s+/g,"-"),
-price: Number(price) || 0,
-category: "phones",
-brand: "",
-description: "",
-image_url: ""
-}]);
-
-alert("Product added ✅");
-location.reload();
-
-  }
-  
-  async function loadProducts(){
+/* LOAD PRODUCTS */
+async function loadProducts(){
 
 const { data, error } = await client
 .from("products")
-.select("*");
+.select("*")
+.order("id", { ascending: false });
 
 if(error){
 console.log(error);
 return;
 }
 
+renderProducts(data);
+}
+
+/* RENDER PRODUCTS */
+function renderProducts(products){
+
 const container = document.getElementById("products");
 
 container.innerHTML = "";
 
-data.forEach(product => {
+products.forEach(product => {
 
 container.innerHTML += `
 <tr>
@@ -341,9 +289,39 @@ container.innerHTML += `
 <td>${product.price}</td>
 </tr>
 `;
-
 });
 
+}
+
+/* ADD PRODUCT */
+async function addProduct(){
+
+const title = prompt("Product name");
+if(!title) return;
+
+const price = prompt("Price");
+if(price === null) return;
+
+const { error } = await client
+.from("products")
+.insert([{
+title: title,
+slug: title.toLowerCase().replace(/\s+/g,"-"),
+price: Number(price) || 0,
+category: "phones",
+brand: "",
+description: "",
+image_url: "",
+status: "active"
+}]);
+
+if(error){
+alert(error.message);
+return;
+}
+
+alert("Product added ✅");
+await loadProducts();
 }
 
 init();
