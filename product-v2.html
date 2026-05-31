@@ -379,6 +379,23 @@ document.getElementById("loading").innerText = "Produit introuvable";
 return;
 }
 
+const categoryNames = {
+  phones: "Téléphones",
+  laptops: "Ordinateurs",
+  gaming: "Jeux vidéo"
+};
+
+const statusNames = {
+  active: "Actif",
+  inactive: "Inactif"
+};
+
+const displayCategory =
+categoryNames[data.category] || data.category;
+
+const displayStatus =
+statusNames[data.status] || data.status;
+
 document.title =
 data.title + " Prix en Algérie | DZD Market";
 
@@ -395,7 +412,7 @@ document.getElementById("content").style.display = "block";
 document.getElementById("breadcrumb").innerHTML =
 `<a href="/index.html">Accueil</a> ›
 <a href="/products.html">Produits</a> ›
-${data.category} ›
+${displayCategory} ›
 ${data.title}`;
 
 const imageElement =
@@ -420,7 +437,7 @@ document.getElementById("brand").innerText =
 "Marque : " + (data.brand || "-");
 
 document.getElementById("category").innerText =
-"Catégorie : " + (data.category || "-");
+"Catégorie : " + (displayCategory || "-");
 
 document.getElementById("description").innerText =
 data.description || "Aucune description disponible.";
@@ -431,7 +448,7 @@ document.getElementById("specs").innerHTML = `
 </div>
 
 <div class="spec-row">
-<b>Catégorie :</b> ${data.category || "-"}
+<b>Catégorie :</b> ${displayCategory || "-"}
 </div>
 
 <div class="spec-row">
@@ -439,7 +456,7 @@ document.getElementById("specs").innerHTML = `
 </div>
 
 <div class="spec-row">
-<b>Statut :</b> ${data.status || "-"}
+<b>Statut :</b> ${displayStatus || "-"}
 </div>
 `;
 
@@ -450,14 +467,14 @@ document.getElementById("summaryBrand").innerText =
 data.brand || "-";
 
 document.getElementById("summaryCategory").innerText =
-data.category || "-";
+displayCategory || "-";
 
 document.getElementById("summaryStatus").innerText =
-data.status || "-";
+displayStatus || "-";
 
 document.getElementById("usefulLinks").innerHTML += `
 <a href="#">
-${data.category || "Catégorie"}
+${displayCategory || "Catégorie"}
 </a>
 
 <a href="#">
@@ -465,7 +482,7 @@ ${data.brand || "Marque"}
 </a>
 `;
 
-loadRelatedProducts(data.category, data.slug);
+loadRelatedProducts(displayCategory, data.slug);
 
 }
 
