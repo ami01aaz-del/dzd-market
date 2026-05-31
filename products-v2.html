@@ -137,6 +137,8 @@ const client = supabase.createClient(
 "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS"
 );
 
+let allProducts = [];
+
 async function loadProducts(){
 
 const { data, error } = await client
@@ -148,6 +150,8 @@ if(error){
 console.log(error);
 return;
 }
+
+allProducts = data;
 
 const container =
 document.getElementById("productsGrid");
@@ -219,46 +223,85 @@ Voir le produit →
 
 loadProducts();
 
-</script>
+document
+.getElementById("searchInput")
+.addEventListener("input", function(){
 
-<body>
+const search =
+this.value.toLowerCase();
 
-<header>
+const container =
+document.getElementById("productsGrid");
 
-<h1>
-Produits et Prix en Algérie
-</h1>
+container.innerHTML = "";
 
-<p>
-Découvrez les produits populaires et leurs prix en Algérie
-</p>
+allProducts
+.filter(product =>
+product.title
+.toLowerCase()
+.includes(search)
+)
+.forEach(product => {
 
-</header>
+container.innerHTML += `
+<a
+href="/product-v2.html?slug=${product.slug}"
+style="
+text-decoration:none;
+color:white;
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:16px;
+overflow:hidden;
+display:block;
+">
 
-<div class="container">
+<img
+src="${product.image_url || 'https://via.placeholder.com/500x300?text=DZD+Market'}"
+style="
+width:100%;
+height:220px;
+object-fit:cover;
+">
 
-<div class="search-box">
-<input
-type="text"
-placeholder="Rechercher un produit..."
-id="searchInput">
+<div style="padding:15px;">
+
+<div style="
+font-size:20px;
+font-weight:bold;
+margin-bottom:10px;
+">
+${product.title}
 </div>
 
-<div class="categories">
+<div style="
+font-size:26px;
+font-weight:bold;
+color:#22c55e;
+margin-bottom:10px;
+">
+${Number(product.price).toLocaleString()} DZD
+</div>
 
-<button class="cat-btn active">Tous</button>
+<div style="opacity:.7;">
+${product.brand || "-"}
+</div>
 
-<button class="cat-btn">Téléphones</button>
-
-<button class="cat-btn">Ordinateurs</button>
-
-<button class="cat-btn">Gaming</button>
+<div style="
+margin-top:12px;
+color:#38bdf8;
+font-weight:bold;
+">
+Voir le produit →
+</div>
 
 </div>
 
-<div id="productsGrid" class="grid"></div>
+</a>
+`;
+});
 
-</div>
+});
 
 </body>
-</html>
+  </html>
