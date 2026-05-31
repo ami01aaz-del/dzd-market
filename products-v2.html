@@ -316,6 +316,24 @@ displayProducts(filtered);
 
 });
 
+document
+.getElementById("searchInput")
+.addEventListener("input", function(){
+
+const search =
+this.value.toLowerCase();
+
+const filtered =
+allProducts.filter(product =>
+product.title
+.toLowerCase()
+.includes(search)
+);
+
+displayProducts(filtered);
+
+});
+
 loadProducts();
 
 </script>
