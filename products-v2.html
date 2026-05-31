@@ -88,6 +88,35 @@ grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
 gap:20px;
 }
 
+.categories{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:10px;
+margin-bottom:25px;
+scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+display:none;
+}
+
+.cat-btn{
+background:#111827;
+border:1px solid #1e293b;
+color:white;
+padding:10px 16px;
+border-radius:999px;
+cursor:pointer;
+white-space:nowrap;
+font-size:14px;
+}
+
+.cat-btn.active{
+background:#22c55e;
+border-color:#22c55e;
+}
+
 @media(max-width:800px){
 
 .stats{
@@ -205,6 +234,18 @@ Découvrez les produits populaires et leurs prix en Algérie
 type="text"
 placeholder="Rechercher un produit..."
 id="searchInput">
+</div>
+
+<div class="categories">
+
+<button class="cat-btn active">Tous</button>
+
+<button class="cat-btn">Téléphones</button>
+
+<button class="cat-btn">Ordinateurs</button>
+
+<button class="cat-btn">Gaming</button>
+
 </div>
 
 <div id="productsGrid" class="grid"></div>
