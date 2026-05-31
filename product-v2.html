@@ -139,26 +139,40 @@ gap:15px;
 .related-card{
 display:block;
 background:#111827;
-border-radius:12px;
-padding:15px;
+border:1px solid #1e293b;
+border-radius:16px;
+padding:18px;
 color:white;
 text-decoration:none;
+transition:.2s;
+}
+
+.related-card:hover{
+transform:translateY(-3px);
+}
+
+.related-category{
+font-size:13px;
+opacity:.7;
+margin-bottom:8px;
 }
 
 .related-title{
 font-weight:bold;
+font-size:18px;
 margin-bottom:10px;
 }
 
 .related-price{
 color:#22c55e;
 font-weight:bold;
+font-size:20px;
+margin-bottom:8px;
 }
 
-.links{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
+.related-brand{
+opacity:.8;
+font-size:14px;
 }
 
 .links a{
@@ -452,10 +466,23 @@ data
 container.innerHTML += `
 <a class="related-card"
 href="/product-v2.html?slug=${p.slug}">
-<div class="related-title">${p.title}</div>
+
+<div class="related-category">
+${p.category || "-"}
+</div>
+
+<div class="related-title">
+${p.title}
+</div>
+
 <div class="related-price">
 ${Number(p.price).toLocaleString()} DZD
 </div>
+
+<div class="related-brand">
+${p.brand || ""}
+</div>
+
 </a>
 `;
 
