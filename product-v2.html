@@ -442,6 +442,16 @@ data.category || "-";
 document.getElementById("summaryStatus").innerText =
 data.status || "-";
 
+document.getElementById("usefulLinks").innerHTML += `
+<a href="#">
+${data.category || "Catégorie"}
+</a>
+
+<a href="#">
+${data.brand || "Marque"}
+</a>
+`;
+
 loadRelatedProducts(data.category, data.slug);
 
 }
