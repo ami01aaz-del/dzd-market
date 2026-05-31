@@ -451,6 +451,7 @@ color:white;
 "
 />
 
+<div id="searchResults"></div>
 
 <div id="homepageProducts">
 Chargement...
@@ -825,28 +826,53 @@ ${Number(product.price).toLocaleString()} DZD
 
 document
 .getElementById("productSearch")
-.addEventListener("input", function(){
+.addEventListener("input", async function(){
 
-const search =
-this.value.toLowerCase();
+const search = this.value.trim();
 
-const products =
-document.querySelectorAll("#homepageProducts a");
+const resultsContainer =
+document.getElementById("searchResults");
 
-products.forEach(product => {
+if(search.length < 2){
 
-const text =
-product.textContent.toLowerCase();
-
-if(text.includes(search)){
-
-product.style.display = "flex";
-
-}else{
-
-product.style.display = "none";
+resultsContainer.innerHTML = "";
+return;
 
 }
+
+const { data, error } = await supabaseClient
+.from("products")
+.select("title,slug")
+.ilike("title", `%${search}%`)
+.limit(5);
+
+if(error){
+
+console.log(error);
+return;
+
+}
+
+resultsContainer.innerHTML = "";
+
+data.forEach(product => {
+
+resultsContainer.innerHTML += `
+<a
+href="/product.html?slug=${product.slug}"
+style="
+display:block;
+padding:10px;
+background:#162033;
+border-radius:8px;
+margin-bottom:5px;
+color:white;
+text-decoration:none;
+"
+>
+📦 ${product.title}
+</a>
+`;
 
 });
 
