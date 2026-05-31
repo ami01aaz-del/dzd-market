@@ -508,7 +508,7 @@ container.innerHTML += `
 href="/product-v2.html?slug=${p.slug}">
 
 <div class="related-category">
-${p.category || "-"}
+${p.category === "phones" ? "Téléphones" : p.category}
 </div>
 
 <div class="related-title">
