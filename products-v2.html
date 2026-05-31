@@ -175,6 +175,7 @@ const client = supabase.createClient(
 "https://bcmngzompyojuffepstk.supabase.co",
 "sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS"
 );
+let allProducts = [];
 
 async function loadProducts(){
 
@@ -187,6 +188,7 @@ if(error){
 console.log(error);
 return;
 }
+allProducts = data;
 
 const container =
 document.getElementById("productsGrid");
