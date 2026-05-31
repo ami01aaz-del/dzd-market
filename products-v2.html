@@ -120,15 +120,6 @@ console.log(error);
 return;
 }
 
-document.getElementById("totalProducts").innerText =
-data.length;
-
-const categories =
-[...new Set(data.map(p=>p.category))];
-
-document.getElementById("totalCategories").innerText =
-categories.length;
-
 const container =
 document.getElementById("productsGrid");
 
@@ -214,25 +205,6 @@ Découvrez les produits populaires et leurs prix en Algérie
 type="text"
 placeholder="Rechercher un produit..."
 id="searchInput">
-</div>
-
-<div class="stats">
-
-<div class="stat-card">
-<div id="totalProducts" class="stat-value">0</div>
-<div class="stat-label">Produits</div>
-</div>
-
-<div class="stat-card">
-<div id="totalCategories" class="stat-value">0</div>
-<div class="stat-label">Catégories</div>
-</div>
-
-<div class="stat-card">
-<div class="stat-value">Auto</div>
-<div class="stat-label">Mise à jour</div>
-</div>
-
 </div>
 
 <div id="productsGrid" class="grid"></div>
