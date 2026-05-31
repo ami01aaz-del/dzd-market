@@ -435,19 +435,8 @@ style="margin-top:12px;font-size:22px;color:#22c55e;"
 🕒 Dernière mise à jour : aujourd’hui
 </p>
 
-<div class="row">
-<span>📱 iPhone 15</span>
-<span class="blue">320 000 DZD</span>
-</div>
-
-<div class="row">
-<span>🎮 PS5</span>
-<span class="blue">125 000 DZD</span>
-</div>
-
-<div class="row">
-<span>🪙 Or 24K</span>
-<span class="blue">14 500 DZD</span>
+<div id="homepageProducts">
+Chargement...
 </div>
 
 </div>
@@ -649,6 +638,8 @@ document.getElementById("usd-rate").innerHTML =
 loadRates();
 setInterval(loadRates, 30000);
 
+loadHomepageProducts();
+
 // CONVERTER
 
 function updateConverter(){
@@ -763,6 +754,55 @@ button.innerHTML = "Voir moins ↑";
 button.innerHTML = "Voir plus ↓";
 
 }
+
+}
+
+async function loadHomepageProducts(){
+
+const { data, error } = await supabaseClient
+.from("products")
+.select("*")
+.eq("status","active")
+.order("id",{ascending:false})
+.limit(3);
+
+if(error){
+console.log(error);
+return;
+}
+
+const container =
+document.getElementById("homepageProducts");
+
+container.innerHTML = "";
+
+data.forEach(product => {
+
+container.innerHTML += `
+<a
+href="/product.html?slug=${product.slug}"
+style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:10px 0;
+color:white;
+text-decoration:none;
+border-bottom:1px solid rgba(255,255,255,0.08);
+">
+
+<span>
+📦 ${product.title}
+</span>
+
+<span class="blue">
+${Number(product.price).toLocaleString()} DZD
+</span>
+
+</a>
+`;
+
+});
 
 }
 
