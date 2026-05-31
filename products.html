@@ -4,7 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Produits - DZD Market</title>
+<title>Produits et Prix en Algérie | DZD Market</title>
+
+<meta name="description"
+content="Découvrez les produits populaires et leurs prix en Algérie sur DZD Market.">
 
 <style>
 
@@ -16,15 +19,21 @@ color:white;
 }
 
 header{
-padding:20px;
+padding:30px 20px;
 text-align:center;
 background:#0f172a;
 border-bottom:1px solid #1e293b;
 }
 
-h1{
+header h1{
 margin:0;
 color:#38bdf8;
+font-size:34px;
+}
+
+header p{
+opacity:.8;
+margin-top:10px;
 }
 
 .container{
@@ -33,52 +42,87 @@ margin:auto;
 padding:20px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
-gap:20px;
+.search-box{
+margin:25px 0;
 }
 
-.card{
+.search-box input{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #1e293b;
+background:#111827;
+color:white;
+font-size:16px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat-card{
 background:#0f172a;
 border:1px solid #1e293b;
-border-radius:16px;
-overflow:hidden;
-text-decoration:none;
-color:white;
-transition:0.2s;
+border-radius:14px;
+padding:20px;
+text-align:center;
 }
 
-.card:hover{
-transform:translateY(-3px);
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.content{
-padding:15px;
-}
-
-.title{
-font-size:20px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.price{
+.stat-value{
 font-size:28px;
 font-weight:bold;
 color:#22c55e;
-margin-bottom:10px;
 }
 
-.category{
-opacity:0.7;
+.stat-label{
+opacity:.7;
+margin-top:6px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:20px;
+}
+
+.categories{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding-bottom:10px;
+margin-bottom:25px;
+scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+display:none;
+}
+
+.cat-btn{
+background:#111827;
+border:1px solid #1e293b;
+color:white;
+padding:10px 16px;
+border-radius:999px;
+cursor:pointer;
+white-space:nowrap;
 font-size:14px;
+}
+
+.cat-btn.active{
+background:#22c55e;
+border-color:#22c55e;
+}
+
+@media(max-width:800px){
+
+.stats{
+grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -87,13 +131,47 @@ font-size:14px;
 <body>
 
 <header>
-<h1>🛒 Produits DZD Market</h1>
-<p>Produits populaires en Algérie</p>
+
+<h1>
+Produits et Prix en Algérie
+</h1>
+
+<p>
+Découvrez les produits populaires et leurs prix en Algérie
+</p>
+
 </header>
 
 <div class="container">
 
-<div class="grid" id="products"></div>
+<div class="search-box">
+<input
+type="text"
+placeholder="Rechercher un produit..."
+id="searchInput">
+</div>
+
+<div class="categories">
+
+<button class="cat-btn active" data-category="all">
+Tous
+</button>
+
+<button class="cat-btn" data-category="phones">
+Téléphones
+</button>
+
+<button class="cat-btn" data-category="laptops">
+Ordinateurs
+</button>
+
+<button class="cat-btn" data-category="gaming">
+Gaming
+</button>
+
+</div>
+
+<div id="productsGrid" class="grid"></div>
 
 </div>
 
@@ -101,55 +179,88 @@ font-size:14px;
 
 <script>
 
-const supabaseUrl =
-"https://bcmngzompyojuffepstk.supabase.co";
-
-const supabaseKey =
-"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS";
-
-const client =
-supabase.createClient(
-supabaseUrl,
-supabaseKey
+const client = supabase.createClient(
+"https://bcmngzompyojuffepstk.supabase.co",
+"sb_publishable_8ZqJ7RH9irgwN_0Wo6wD-g_ZjKO8DXS"
 );
+let allProducts = [];
 
 async function loadProducts(){
 
 const { data, error } = await client
 .from("products")
 .select("*")
-.order("id");
+.order("id",{ascending:false});
 
 if(error){
 console.log(error);
 return;
 }
+allProducts = data
+
+displayProducts(data);
+
+}
+
+function displayProducts(products){
 
 const container =
-document.getElementById("products");
+document.getElementById("productsGrid");
 
 container.innerHTML = "";
 
-data.forEach(product=>{
+products.forEach(product=>{
 
 container.innerHTML += `
-<a class="card"
-href="/product.html?slug=${product.slug}">
+<a
+href="/product-v2.html?slug=${product.slug}"
+style="
+text-decoration:none;
+color:white;
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:16px;
+overflow:hidden;
+display:block;
+">
 
-<img src="${product.image_url}">
+<img
+src="${product.image_url || 'https://via.placeholder.com/500x300?text=DZD+Market'}"
+style="
+width:100%;
+height:220px;
+object-fit:cover;
+">
 
-<div class="content">
+<div style="padding:15px;">
 
-<div class="title">
+<div style="
+font-size:20px;
+font-weight:bold;
+margin-bottom:10px;
+">
 ${product.title}
 </div>
 
-<div class="price">
+<div style="
+font-size:26px;
+font-weight:bold;
+color:#22c55e;
+margin-bottom:10px;
+">
 ${Number(product.price).toLocaleString()} DZD
 </div>
 
-<div class="category">
-${product.category}
+<div style="opacity:.7;">
+${product.brand || "-"}
+</div>
+
+<div style="
+margin-top:12px;
+color:#38bdf8;
+font-weight:bold;
+">
+Voir le produit →
 </div>
 
 </div>
@@ -160,6 +271,68 @@ ${product.category}
 });
 
 }
+
+document.querySelectorAll(".cat-btn")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".cat-btn")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+const category =
+button.innerText;
+
+if(category === "Tous"){
+
+displayProducts(allProducts);
+
+return;
+
+}
+
+const filtered =
+allProducts.filter(product=>{
+
+if(category === "Téléphones")
+return product.category === "phones";
+
+if(category === "Ordinateurs")
+return product.category === "laptops";
+
+if(category === "Gaming")
+return product.category === "gaming";
+
+return true;
+
+});
+
+displayProducts(filtered);
+
+});
+
+});
+
+document
+.getElementById("searchInput")
+.addEventListener("input", function(){
+
+const search =
+this.value.toLowerCase();
+
+const filtered =
+allProducts.filter(product =>
+product.title
+.toLowerCase()
+.includes(search)
+);
+
+displayProducts(filtered);
+
+});
 
 loadProducts();
 
