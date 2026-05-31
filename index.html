@@ -435,6 +435,23 @@ style="margin-top:12px;font-size:22px;color:#22c55e;"
 🕒 Dernière mise à jour : aujourd’hui
 </p>
 
+<input
+type="text"
+id="productSearch"
+placeholder="🔍 Rechercher un produit..."
+style="
+width:100%;
+padding:10px;
+margin:10px 0;
+border:none;
+border-radius:8px;
+background:#162033;
+font-size:16px;
+color:white;
+"
+/>
+
+
 <div id="homepageProducts">
 Chargement...
 </div>
@@ -805,6 +822,35 @@ ${Number(product.price).toLocaleString()} DZD
 });
 
 }
+
+document
+.getElementById("productSearch")
+.addEventListener("input", function(){
+
+const search =
+this.value.toLowerCase();
+
+const products =
+document.querySelectorAll("#homepageProducts a");
+
+products.forEach(product => {
+
+const text =
+product.textContent.toLowerCase();
+
+if(text.includes(search)){
+
+product.style.display = "flex";
+
+}else{
+
+product.style.display = "none";
+
+}
+
+});
+
+});
 
 </script>
   
