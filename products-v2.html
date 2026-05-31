@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Produits et Prix en Algérie | DZD Market</title>
+
+<meta name="description"
+content="Découvrez les produits populaires et leurs prix en Algérie sur DZD Market.">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b1220;
+color:white;
+}
+
+header{
+padding:30px 20px;
+text-align:center;
+background:#0f172a;
+border-bottom:1px solid #1e293b;
+}
+
+header h1{
+margin:0;
+color:#38bdf8;
+font-size:34px;
+}
+
+header p{
+opacity:.8;
+margin-top:10px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:20px;
+}
+
+.search-box{
+margin:25px 0;
+}
+
+.search-box input{
+width:100%;
+padding:14px;
+border-radius:12px;
+border:1px solid #1e293b;
+background:#111827;
+color:white;
+font-size:16px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-bottom:25px;
+}
+
+.stat-card{
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:14px;
+padding:20px;
+text-align:center;
+}
+
+.stat-value{
+font-size:28px;
+font-weight:bold;
+color:#22c55e;
+}
+
+.stat-label{
+opacity:.7;
+margin-top:6px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+gap:20px;
+}
+
+@media(max-width:800px){
+
+.stats{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>
+Produits et Prix en Algérie
+</h1>
+
+<p>
+Découvrez les produits populaires et leurs prix en Algérie
+</p>
+
+</header>
+
+<div class="container">
+
+<div class="search-box">
+<input
+type="text"
+placeholder="Rechercher un produit..."
+id="searchInput">
+</div>
+
+<div class="stats">
+
+<div class="stat-card">
+<div id="totalProducts" class="stat-value">0</div>
+<div class="stat-label">Produits</div>
+</div>
+
+<div class="stat-card">
+<div id="totalCategories" class="stat-value">0</div>
+<div class="stat-label">Catégories</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-value">Auto</div>
+<div class="stat-label">Mise à jour</div>
+</div>
+
+</div>
+
+<div id="productsGrid" class="grid"></div>
+
+</div>
+
+</body>
+</html>
