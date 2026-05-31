@@ -272,6 +272,50 @@ Voir le produit →
 
 }
 
+document.querySelectorAll(".cat-btn")
+.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+document
+.querySelectorAll(".cat-btn")
+.forEach(btn=>btn.classList.remove("active"));
+
+button.classList.add("active");
+
+const category =
+button.innerText;
+
+if(category === "Tous"){
+
+displayProducts(allProducts);
+
+return;
+
+}
+
+const filtered =
+allProducts.filter(product=>{
+
+if(category === "Téléphones")
+return product.category === "phones";
+
+if(category === "Ordinateurs")
+return product.category === "laptops";
+
+if(category === "Gaming")
+return product.category === "gaming";
+
+return true;
+
+});
+
+displayProducts(filtered);
+
+});
+
+});
+
 loadProducts();
 
 </script>
