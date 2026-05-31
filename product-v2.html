@@ -121,6 +121,15 @@ color:#38bdf8;
 line-height:1.9;
 }
 
+.spec-row{
+padding:12px 0;
+border-bottom:1px solid #1e293b;
+}
+
+.spec-row:last-child{
+border-bottom:none;
+}
+
 .related-grid{
 display:grid;
 grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
@@ -261,6 +270,14 @@ Chargement...
 
 <div class="section">
 
+<h2>Caractéristiques</h2>
+
+<div id="specs"></div>
+
+</div>
+
+<div class="section">
+
 <h2>À propos de DZD Market</h2>
 
 <p>
@@ -380,6 +397,24 @@ document.getElementById("category").innerText =
 
 document.getElementById("description").innerText =
 data.description || "Aucune description disponible.";
+
+document.getElementById("specs").innerHTML = `
+<div class="spec-row">
+<b>Marque :</b> ${data.brand || "-"}
+</div>
+
+<div class="spec-row">
+<b>Catégorie :</b> ${data.category || "-"}
+</div>
+
+<div class="spec-row">
+<b>Prix :</b> ${Number(data.price).toLocaleString()} DZD
+</div>
+
+<div class="spec-row">
+<b>Statut :</b> ${data.status || "-"}
+</div>
+`;
 
 document.getElementById("summaryPrice").innerText =
 Number(data.price).toLocaleString() + " DZD";
