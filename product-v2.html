@@ -175,12 +175,25 @@ opacity:.8;
 font-size:14px;
 }
 
+.links{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:12px;
+margin-top:15px;
+}
+
 .links a{
+display:flex;
+align-items:center;
+justify-content:center;
 background:#111827;
-padding:10px 14px;
-border-radius:10px;
+padding:14px;
+border-radius:12px;
 text-decoration:none;
 color:white;
+min-height:50px;
+text-align:center;
+border:1px solid #1e293b;
 }
 
 .footer{
