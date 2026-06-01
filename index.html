@@ -695,22 +695,22 @@ window.chf + " DZD";
 // GOLD DISPLAY
 
 document.getElementById("gold-local").innerHTML =
-window.goldPriceGram + " DZD";
+Number(window.goldPriceGram).toLocaleString('fr-FR') + " DZD";
 
 document.getElementById("gold-rate").innerHTML =
 (window.goldPriceGram / usdOfficial).toFixed(2) + " USD";
 
 document.getElementById("gold-100g").innerHTML =
-(window.goldPriceGram * 100).toLocaleString() + " DZD";
+Number(window.goldPriceGram * 100).toLocaleString('fr-FR') + " DZD";
 
 document.getElementById("gold-21k").innerHTML =
-window.gold21 + " DZD";
+Number(window.gold21).toLocaleString('fr-FR') + " DZD";
 
 document.getElementById("gold-18k").innerHTML =
-window.gold18 + " DZD";
+Number(window.gold18).toLocaleString('fr-FR') + " DZD";
 
 document.getElementById("silver-rate").innerHTML =
-window.silver + " DZD";
+Number(window.silver).toLocaleString('fr-FR') + " DZD";
 
 }catch(error){
 
