@@ -190,6 +190,7 @@ z-index:9999;
 ">
 
     <h2>Edit Product</h2>
+    <img id="previewImage" width="100" style="margin-bottom:10px;border-radius:8px;">
 
     <input id="editTitle" placeholder="Title">
 
@@ -209,7 +210,9 @@ z-index:9999;
 
 <br><br>
 
-<input id="editImageUrl" placeholder="Image URL">
+<label style="display:block;margin-bottom:5px;">Product Image</label>
+<input type="file" id="imageFile">
+<br><br>
 
 <br><br>
 
@@ -320,7 +323,7 @@ document.getElementById("metals").innerHTML += row;
 /* SAVE MARKET ITEMS */
 async function saveAll(){
 
-const inputs = document.querySelectorAll("input");
+const inputs = document.querySelectorAll("#currencies input, #metals input");
 
 for(const input of inputs){
 
@@ -467,14 +470,14 @@ function editProduct(id){
 document.getElementById("editBrand").value =
   product.brand || "";
 
-document.getElementById("editImageUrl").value =
-  product.image_url || "";
-
 document.getElementById("editDescription").value =
   product.description || "";
 
 document.getElementById("editStatus").value =
   product.status || "active";
+  
+  document.getElementById("previewImage").src =
+  product.image_url || "";
 
   document.getElementById("productModal").style.display = "block";
 }
@@ -485,6 +488,17 @@ function closeModal(){
 
 async function saveProductChanges(){
 
+  let imageUrl = productsData.find(p => p.id == currentProductId)?.image_url || "";
+
+  const fileInput = document.getElementById("imageFile");
+
+ if(fileInput && fileInput.files.length > 0){
+  const uploaded = await uploadImage(fileInput.files[0]);
+  if(uploaded){
+    imageUrl = uploaded;
+  }
+}
+
   const { error } = await client
     .from("products")
     .update({
@@ -492,8 +506,8 @@ async function saveProductChanges(){
       price: Number(document.getElementById("editPrice").value),
       category: document.getElementById("editCategory").value,
       brand: document.getElementById("editBrand").value,
-      image_url: document.getElementById("editImageUrl").value,
       description: document.getElementById("editDescription").value,
+      image_url: imageUrl,
       status: document.getElementById("editStatus").value
     })
     .eq("id", currentProductId);
@@ -504,10 +518,29 @@ async function saveProductChanges(){
   }
 
   closeModal();
-
   await loadProducts();
 
   alert("Product updated ✅");
+}
+
+async function uploadImage(file){
+
+  const fileName = `${Date.now()}-${file.name}`;
+
+  const { data, error } = await client.storage
+    .from("product-images")
+    .upload("products/" + fileName, file);
+
+  if(error){
+    alert("Image upload failed: " + error.message);
+    return null;
+  }
+
+  const { data: urlData } = client.storage
+    .from("product-images")
+    .getPublicUrl("products/" + fileName);
+
+  return urlData.publicUrl;
 }
 
 init();
