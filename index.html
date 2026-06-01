@@ -909,9 +909,15 @@ Voir tous les produits →
   document.getElementById("productSearch")
 .addEventListener("keydown", function(e){
 
-  alert("KEY = " + e.key);
+  alert(
+    "key=" + e.key +
+    " code=" + e.code +
+    " keyCode=" + e.keyCode +
+    " which=" + e.which
+  );
 
 });
+
 </script>
 
   <script src="/prices.js"></script>
