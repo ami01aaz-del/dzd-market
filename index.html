@@ -251,7 +251,7 @@ padding:0 15px;
 type="text"
 id="productSearch"
 placeholder="🔍 Rechercher un produit..."
-onkeydown="alert('TEST')"
+
 style="
 width:100%;
 padding:12px;
@@ -906,8 +906,9 @@ Voir tous les produits →
 
 }
 
-document.getElementById("productSearch")
-.addEventListener("keydown", function(e){
+const productSearch = document.getElementById("productSearch");
+
+productSearch.onkeydown = function(e){
 
   if(e.key === "Enter"){
 
@@ -917,7 +918,7 @@ document.getElementById("productSearch")
 
   }
 
-});
+};
 
 </script>
 
