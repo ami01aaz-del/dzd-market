@@ -183,6 +183,34 @@ text-align:center;
 opacity:0.9;
 }
 
+.categories-scroll{
+display:flex;
+gap:10px;
+overflow-x:auto;
+padding:12px 0;
+margin-top:12px;
+scrollbar-width:none;
+}
+
+.categories-scroll::-webkit-scrollbar{
+display:none;
+}
+
+.category-chip{
+background:#162033;
+color:white;
+padding:10px 16px;
+border-radius:999px;
+white-space:nowrap;
+text-decoration:none;
+font-size:14px;
+border:1px solid #1e293b;
+}
+
+.category-chip:hover{
+background:#1e293b;
+}
+
 </style>
 </head>
 
@@ -241,6 +269,38 @@ margin-top:8px;
 text-align:left;
 ">
 </div>
+
+</div>
+
+<div class="categories-scroll">
+
+<a href="/products.html" class="category-chip">
+📱 Téléphones
+</a>
+
+<a href="/products.html" class="category-chip">
+💻 PC
+</a>
+
+<a href="/products.html" class="category-chip">
+🎮 Gaming
+</a>
+
+<a href="/products.html" class="category-chip">
+📺 TV
+</a>
+
+<a href="/products.html" class="category-chip">
+⌚ Smartwatch
+</a>
+
+<a href="/gold-dzd.html" class="category-chip">
+🪙 Gold
+</a>
+
+<a href="/eur-dzd.html" class="category-chip">
+💱 Devises
+</a>
 
 </div>
 
