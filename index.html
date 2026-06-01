@@ -247,13 +247,14 @@ margin:15px auto 0;
 padding:0 15px;
 ">
 
+<div style="display:flex;gap:10px;">
+
 <input
 type="text"
 id="productSearch"
 placeholder="🔍 Rechercher un produit..."
-
 style="
-width:100%;
+flex:1;
 padding:12px;
 border:none;
 border-radius:10px;
@@ -262,6 +263,23 @@ font-size:16px;
 color:white;
 "
 />
+
+<button
+id="searchButton"
+style="
+padding:12px 18px;
+border:none;
+border-radius:10px;
+background:#38bdf8;
+color:white;
+font-weight:bold;
+cursor:pointer;
+"
+>
+🔍
+</button>
+
+</div>
 
 </div>
 
@@ -906,15 +924,21 @@ Voir tous les produits →
 
 }
 
-  document.getElementById("productSearch")
-.addEventListener("keydown", function(e){
+  document.getElementById("searchButton")
+.addEventListener("click", function(){
 
-  alert(
-    "key=" + e.key +
-    " code=" + e.code +
-    " keyCode=" + e.keyCode +
-    " which=" + e.which
-  );
+  const value =
+  document.getElementById("productSearch")
+  .value
+  .trim();
+
+  if(value !== ""){
+
+    window.location.href =
+    "/products.html?search=" +
+    encodeURIComponent(value);
+
+  }
 
 });
 
