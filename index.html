@@ -268,14 +268,6 @@ color:white;
 "
 />
 
-<div
-id="searchResults"
-style="
-margin-top:8px;
-text-align:left;
-">
-</div>
-
 </div>
 
 <div class="categories-scroll">
@@ -919,77 +911,7 @@ Voir tous les produits →
 
 }
 
-document
-.getElementById("productSearch")
-.addEventListener("input", async function(){
 
-const search = this.value.trim();
-
-const resultsContainer =
-document.getElementById("searchResults");
-
-if(search.length < 2){
-
-resultsContainer.innerHTML = "";
-return;
-
-}
-
-const { data, error } = await supabaseClient
-.from("products")
-.select("title,slug")
-.ilike("title", `%${search}%`)
-.limit(5);
-
-if(error){
-
-console.log(error);
-return;
-
-}
-
-resultsContainer.innerHTML = "";
-
-if(data.length === 0){
-
-resultsContainer.innerHTML = `
-<div style="
-padding:10px;
-background:#162033;
-border-radius:8px;
-margin-bottom:5px;
-color:#94a3b8;
-">
-Aucun produit trouvé
-</div>
-`;
-
-return;
-
-}
-
-data.forEach(product => {
-
-resultsContainer.innerHTML += `
-<a
-href="/product.html?slug=${product.slug}"
-style="
-display:block;
-padding:10px;
-background:#162033;
-border-radius:8px;
-margin-bottom:5px;
-color:white;
-text-decoration:none;
-"
->
-📦 ${product.title}
-</a>
-`;
-
-});
-
-});
 
 document.getElementById("productSearch")
 .addEventListener("keydown", function(e){
@@ -1009,6 +931,7 @@ document.getElementById("productSearch")
 
 </script>
 
+  <script src="/prices.js"></script>
   
 </body>
 </html>
