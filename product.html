@@ -510,6 +510,20 @@ document
 .getElementById("confirmButton")
 .addEventListener("click", confirmPrice);
 
+const storageKey =
+"confirmed_" + data.slug;
+
+if(localStorage.getItem(storageKey)){
+
+document.getElementById("confirmButton").disabled = true;
+
+document.getElementById("confirmButton").innerText =
+"✓ Prix confirmé";
+
+document.getElementById("confirmButton").style.opacity = "0.7";
+
+}
+
 }
 
 async function loadRelatedProducts(category,currentSlug){
