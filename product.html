@@ -261,6 +261,21 @@ Chargement...
 
 <div id="confirmations" class="meta"></div>
 
+<button
+id="confirmButton"
+style="
+margin-top:12px;
+padding:10px 16px;
+border:none;
+border-radius:10px;
+background:#22c55e;
+color:white;
+font-weight:bold;
+cursor:pointer;
+">
+✓ Confirmer ce prix
+</button>
+
 </div>
 
 </div>
@@ -398,6 +413,8 @@ categoryNames[data.category] || data.category;
 const displayStatus =
 statusNames[data.status] || data.status;
 
+window.currentProduct = data;
+
 document.title =
 data.title + " Prix en Algérie | DZD Market";
 
@@ -489,6 +506,10 @@ ${data.brand || "Marque"}
 
 loadRelatedProducts(data.category, data.slug);
 
+document
+.getElementById("confirmButton")
+.addEventListener("click", confirmPrice);
+
 }
 
 async function loadRelatedProducts(category,currentSlug){
@@ -532,6 +553,51 @@ ${p.brand || ""}
 `;
 
 });
+
+}
+
+async function confirmPrice(){
+
+const product = window.currentProduct;
+
+if(!product) return;
+
+const storageKey =
+"confirmed_" + product.slug;
+
+if(localStorage.getItem(storageKey)){
+
+alert("Vous avez déjà confirmé ce prix.");
+return;
+
+}
+
+const newCount =
+(product.confirmations || 0) + 1;
+
+const { error } = await client
+.from("products")
+.update({
+confirmations:newCount
+})
+.eq("id", product.id);
+
+if(error){
+
+alert("Erreur.");
+return;
+
+}
+
+localStorage.setItem(storageKey,"yes");
+
+document.getElementById("confirmations").innerText =
+"✓ Confirmé par " + newCount + " utilisateurs";
+
+document.getElementById("confirmButton").disabled = true;
+
+document.getElementById("confirmButton").innerText =
+"✓ Merci pour votre confirmation";
 
 }
 
