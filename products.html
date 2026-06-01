@@ -185,6 +185,9 @@ const client = supabase.createClient(
 );
 let allProducts = [];
 
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get("search");
+
 async function loadProducts(){
 
 const { data, error } = await client
@@ -198,7 +201,15 @@ return;
 }
 allProducts = data
 
-displayProducts(data);
+let filtered = data;
+
+if (searchQuery && searchQuery.trim() !== "") {
+  filtered = data.filter(p =>
+    p.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+}
+
+displayProducts(filtered);
 
 }
 
