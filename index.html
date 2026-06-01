@@ -985,13 +985,11 @@ text-decoration:none;
 
 });
 
-const searchInput = document.getElementById("searchInput");
+const searchInput = document.getElementById("productSearch");
 
 if (searchInput) {
   searchInput.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
-
-      e.preventDefault();
 
       const value = this.value.trim();
 
@@ -1001,7 +999,7 @@ if (searchInput) {
       }
     }
   });
-  }
+}
 
 </script>
 
