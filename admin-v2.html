@@ -525,7 +525,11 @@ async function saveProductChanges(){
 
 async function uploadImage(file){
 
-  const fileName = `${Date.now()}-${file.name}`;
+  const product = productsData.find(p => p.id == currentProductId);
+
+const slug = product?.slug || "product";
+
+const fileName = `${slug}-${Date.now()}.jpg`;
 
   const { data, error } = await client.storage
     .from("product-images")
