@@ -259,6 +259,8 @@ Chargement...
 
 <div id="category" class="meta"></div>
 
+<div id="confirmations" class="meta"></div>
+
 </div>
 
 </div>
@@ -438,6 +440,9 @@ document.getElementById("brand").innerText =
 
 document.getElementById("category").innerText =
 "Catégorie : " + (displayCategory || "-");
+
+document.getElementById("confirmations").innerText =
+"✓ Confirmé par " + (data.confirmations || 0) + " utilisateurs";
 
 document.getElementById("description").innerText =
 data.description || "Aucune description disponible.";
