@@ -94,4 +94,9 @@
 <loc>https://dzdmarket.vercel.app/gold-dzd.html</loc>
 </url>
 
+  <url>
+<loc>https://dzdmarket.vercel.app/products.html</loc>
+<priority>0.8</priority>
+</url>
+
 </urlset>
