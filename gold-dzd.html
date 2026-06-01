@@ -568,10 +568,10 @@ const price =
 Number(goldItem.value);
 
 document.getElementById("square").innerText =
-formatPrice(price);
+Number(price).toLocaleString('fr-FR');
 
 document.getElementById("official").innerText =
-formatPrice(price);
+Number(price).toLocaleString('fr-FR');
 
 window.price = price;
 
