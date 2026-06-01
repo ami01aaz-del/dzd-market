@@ -7,6 +7,12 @@
 <title>Produit - DZD Market</title>
 <meta name="description" content="Prix des produits en Algérie sur DZD Market">
 
+<meta property="og:site_name" content="DZD Market">
+<meta property="og:locale" content="fr_FR">
+
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0f172a">
+
 <style>
 
 *{
@@ -418,11 +424,58 @@ window.currentProduct = data;
 document.title =
 data.title + " Prix en Algérie | DZD Market";
 
+const setMeta = (property, content) => {
+
+let tag =
+document.querySelector(
+`meta[property="${property}"]`
+);
+
+if(!tag){
+
+tag = document.createElement("meta");
+tag.setAttribute("property", property);
+document.head.appendChild(tag);
+
+}
+
+tag.setAttribute("content", content);
+
+};
+
+setMeta("og:title",
+data.title + " | DZD Market");
+
+setMeta("og:description",
+data.description || data.title);
+
+setMeta("og:image",
+data.image_url || "");
+
+setMeta("og:type",
+"product");
+
+let canonical =
+document.querySelector('link[rel="canonical"]');
+
+if(!canonical){
+
+canonical = document.createElement("link");
+canonical.rel = "canonical";
+document.head.appendChild(canonical);
+
+}
+
+canonical.href =
+window.location.origin +
+"/product.html?slug=" +
+data.slug;
+
 document
 .querySelector('meta[name="description"]')
 .setAttribute(
 "content",
-data.description || data.title
+`${data.title} - Prix actuel en Algérie : ${Number(data.price).toLocaleString()} DZD. ${data.description || ""}`
 );
 
 document.getElementById("loading").style.display = "none";
@@ -440,6 +493,9 @@ document.getElementById("image");
 imageElement.src =
 data.image_url ||
 "https://via.placeholder.com/800x600?text=DZD+Market";
+
+imageElement.alt =
+data.title + " prix en Algérie";
 
 imageElement.onerror = function(){
 this.src =
