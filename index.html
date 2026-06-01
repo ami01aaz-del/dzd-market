@@ -985,11 +985,13 @@ text-decoration:none;
 
 });
 
-const searchInput = document.getElementById("productSearch");
+const productSearch = document.getElementById("productSearch");
 
-if (searchInput) {
-  searchInput.addEventListener("keydown", function(e) {
+if (productSearch) {
+  productSearch.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
+
+      e.preventDefault();
 
       const value = this.value.trim();
 
