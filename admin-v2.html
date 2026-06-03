@@ -489,8 +489,22 @@ function closeModal(){
 async function saveProductChanges(){
 
   let imageUrl = productsData.find(p => p.id == currentProductId)?.image_url || "";
+  
+  const fileInput = document.getElementById("imageFile");
+
+let oldImageUrl = productsData.find(p => p.id == currentProductId)?.image_url;
 
   const fileInput = document.getElementById("imageFile");
+  
+  if (oldImageUrl && fileInput.files.length > 0) {
+
+  const oldPath = oldImageUrl.split("/storage/v1/object/public/product-images/")[1];
+
+  await client.storage
+    .from("product-images")
+    .remove([oldPath]);
+
+}
 
  if(fileInput && fileInput.files.length > 0){
   const uploaded = await uploadImage(fileInput.files[0]);
