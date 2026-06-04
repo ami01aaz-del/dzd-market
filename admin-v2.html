@@ -146,6 +146,15 @@ background:#1f2937;
 <button onclick="addProduct()">➕ Add Product</button>
 </div>
 
+<div style="margin-bottom:15px;">
+  <input
+    type="text"
+    id="searchProduct"
+    placeholder="Search product..."
+    onkeyup="searchProducts()"
+  >
+</div>
+
 <table>
 <thead>
 <tr>
@@ -563,6 +572,36 @@ const fileName = `${slug}-${Date.now()}.jpg`;
     .getPublicUrl("products/" + fileName);
 
   return urlData.publicUrl;
+}
+
+function searchProducts(){
+
+  const term = document
+    .getElementById("searchProduct")
+    .value
+    .toLowerCase();
+
+  const filtered = productsData.filter(product =>
+
+    (product.title || "")
+      .toLowerCase()
+      .includes(term)
+
+    ||
+
+    (product.brand || "")
+      .toLowerCase()
+      .includes(term)
+
+    ||
+
+    (product.category || "")
+      .toLowerCase()
+      .includes(term)
+
+  );
+
+  renderProducts(filtered);
 }
 
 init();
