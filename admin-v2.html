@@ -534,32 +534,39 @@ async function saveProductChanges(){
   let imageUrl = productsData.find(p => p.id == currentProductId)?.image_url || "";
 
   const fileInput = document.getElementById("imageFile");
-  
+
   const oldImageUrl = imageUrl;
 
- if(fileInput && fileInput.files.length > 0){
+  // 🔥 إذا المستخدم رفع صورة جديدة
+  if(fileInput && fileInput.files.length > 0){
 
-  if(
-    oldImageUrl &&
-    oldImageUrl.includes("/storage/v1/object/public/product-images/")
-  ){
+    // حذف الصورة القديمة
+    if(oldImageUrl){
 
-    const oldPath = oldImageUrl.split(
-      "/storage/v1/object/public/product-images/"
-    )[1];
+      try {
+        const url = new URL(oldImageUrl);
+        const oldPath = url.pathname.split("/object/public/product-images/")[1];
 
-    await client.storage
-      .from("product-images")
-      .remove([oldPath]);
+        if(oldPath){
+          await client.storage
+            .from("product-images")
+            .remove([oldPath]);
+        }
+
+      } catch (err){
+        console.log("Old image delete error:", err);
+      }
+    }
+
+    // رفع الصورة الجديدة
+    const uploaded = await uploadImage(fileInput.files[0]);
+
+    if(uploaded){
+      imageUrl = uploaded;
+    }
   }
 
-  const uploaded = await uploadImage(fileInput.files[0]);
-
-  if(uploaded){
-    imageUrl = uploaded;
-  }
-}
-
+  // تحديث المنتج
   const { error } = await client
     .from("products")
     .update({
@@ -580,6 +587,9 @@ async function saveProductChanges(){
 
   closeModal();
   await loadProducts();
+
+  alert("Product updated ✅");
+}
 
   alert("Product updated ✅");
 }
