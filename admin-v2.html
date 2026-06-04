@@ -491,9 +491,27 @@ async function saveProductChanges(){
   let imageUrl = productsData.find(p => p.id == currentProductId)?.image_url || "";
 
   const fileInput = document.getElementById("imageFile");
+  
+  const oldImageUrl = imageUrl;
 
  if(fileInput && fileInput.files.length > 0){
+
+  if(
+    oldImageUrl &&
+    oldImageUrl.includes("/storage/v1/object/public/product-images/")
+  ){
+
+    const oldPath = oldImageUrl.split(
+      "/storage/v1/object/public/product-images/"
+    )[1];
+
+    await client.storage
+      .from("product-images")
+      .remove([oldPath]);
+  }
+
   const uploaded = await uploadImage(fileInput.files[0]);
+
   if(uploaded){
     imageUrl = uploaded;
   }
