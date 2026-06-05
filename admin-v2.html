@@ -465,6 +465,12 @@ async function deleteProduct(id){
     try {
       const url = new URL(product.image_url);
       const path = url.pathname.split("/product-images/")[1];
+      
+      const path = url.pathname.split(
+  "/object/public/product-images/"
+)[1];
+
+alert(path);
 
       if(path){
 
