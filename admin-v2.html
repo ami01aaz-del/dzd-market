@@ -494,7 +494,6 @@ async function deleteProduct(id){
   }
 
   await loadProducts();
-}
 
   alert("Product deleted successfully ✅");
 }
@@ -553,7 +552,7 @@ async function saveProductChanges(){
 
       try {
         const url = new URL(oldImageUrl);
-        const oldPath = url.pathname.split("/object/public/product-images/")[1];
+        const oldPath = url.pathname.split("/product-images/")[1];
 
         if(oldPath){
           await client.storage
