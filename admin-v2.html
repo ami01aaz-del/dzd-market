@@ -467,10 +467,15 @@ async function deleteProduct(id){
       const path = url.pathname.split("/product-images/")[1];
 
       if(path){
-        await client.storage
-          .from("product-images")
-          .remove([path]);
-      }
+
+  const { data, error: storageError } = await client.storage
+    .from("product-images")
+    .remove([path]);
+
+  console.log("DELETE PATH:", path);
+  console.log("STORAGE ERROR:", storageError);
+  console.log("STORAGE DATA:", data);
+}
 
     } catch(err){
       console.log("Image delete error:", err);
