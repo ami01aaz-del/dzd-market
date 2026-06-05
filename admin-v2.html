@@ -458,29 +458,23 @@ async function deleteProduct(id){
   const confirmDelete = confirm("Are you sure?");
   if(!confirmDelete) return;
 
-  // حذف الصورة من Storage
+  // 1. حذف الصورة من Storage
   if(product?.image_url){
 
     try {
-
       const url = new URL(product.image_url);
 
-      // استخراج المسار الصحيح
+      // هذا هو الحل الصحيح 100%
       const path = url.pathname.split("/product-images/")[1];
 
-      console.log("PATH =", path);
+      console.log("DELETE PATH:", path);
 
       if(path){
-
-        const { error: storageError } = await client.storage
+        const { error } = await client.storage
           .from("product-images")
           .remove([path]);
 
-        if(storageError){
-          console.log("DELETE ERROR =", storageError.message);
-        } else {
-          console.log("IMAGE DELETED SUCCESSFULLY");
-        }
+        console.log("STORAGE DELETE ERROR:", error);
       }
 
     } catch(err){
@@ -488,7 +482,7 @@ async function deleteProduct(id){
     }
   }
 
-  // حذف المنتج من قاعدة البيانات
+  // 2. حذف المنتج من قاعدة البيانات
   const { error } = await client
     .from("products")
     .delete()
@@ -500,6 +494,7 @@ async function deleteProduct(id){
   }
 
   await loadProducts();
+}
 
   alert("Product deleted successfully ✅");
 }
