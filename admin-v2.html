@@ -472,10 +472,12 @@ async function deleteProduct(id){
     .from("product-images")
     .remove([path]);
 
-  console.log("DELETE PATH:", path);
-  console.log("STORAGE ERROR:", storageError);
-  console.log("STORAGE DATA:", data);
-}
+  alert(
+    "PATH: " + path +
+    "\nERROR: " + JSON.stringify(storageError) +
+    "\nDATA: " + JSON.stringify(data)
+  );
+      }
 
     } catch(err){
       console.log("Image delete error:", err);
